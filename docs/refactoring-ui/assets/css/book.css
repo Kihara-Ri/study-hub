@@ -1028,3 +1028,14 @@ body.is-locked { overflow: hidden; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
+
+/* ---- 小屏与触控优化 ---- */
+@media (max-width: 960px) {
+  .hero__cover { order: 0; margin-inline: auto; }           /* 先看到书名和按钮，封面放后面 */
+  .toolbtn, .toolbtn--icon, .nav-toggle { min-width: 42px; min-height: 42px; }
+  .brand { min-height: 42px; }
+  .chapnav__link { padding-block: 13px; }                   /* 抽屉里的章节行：点击区域 ≥ 44px */
+  .secnav a { padding-block: 11px; }
+  .chapnav__no, .kicker, .livefig__no { font-size: 12px; }  /* 过小的标签字号上调 */
+  .sec__live, .chapter__play-label, .fig__badge { font-size: 11.5px; }
+}

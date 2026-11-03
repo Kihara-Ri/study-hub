@@ -12,14 +12,6 @@
 <link rel="stylesheet" href="assets/css/demos.css">
 <link rel="stylesheet" href="assets/css/live.css">
 <script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
-<style>
-#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
-  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
-  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
-  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
-#backhome:hover{border-color:#e0457b;color:#c93a6b}
-@media print{#backhome{display:none}}
-</style>
 </head>
 <body class="page page--home">
 <a class="skip-link" href="#main">跳到正文</a>
@@ -34,6 +26,7 @@
   </a>
   <p class="topbar__where">封面</p>
   <div class="topbar__tools">
+    <a class="toolbtn hub-back" href="../index.html" aria-label="返回选书" title="返回选书"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span class="toolbtn__label">选书</span></a>
     <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
       <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
       <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
@@ -212,6 +205,5 @@
 </main>
 <script>window.RUI_PAGE = {kind:'home'};window.RUI_CHAPTERS = [{"num": "01", "slug": "starting-from-scratch", "title": "从零开始", "n_sections": 5, "n_figs": 29, "minutes": 9, "n_demos": 2}, {"num": "02", "slug": "hierarchy-is-everything", "title": "层级就是一切", "n_sections": 8, "n_figs": 32, "minutes": 9, "n_demos": 2}, {"num": "03", "slug": "layout-and-spacing", "title": "布局与间距", "n_sections": 6, "n_figs": 39, "minutes": 10, "n_demos": 2}, {"num": "04", "slug": "designing-text", "title": "文字设计", "n_sections": 8, "n_figs": 40, "minutes": 11, "n_demos": 2}, {"num": "05", "slug": "working-with-color", "title": "色彩的运用", "n_sections": 7, "n_figs": 50, "minutes": 12, "n_demos": 1}, {"num": "06", "slug": "creating-depth", "title": "营造层次感", "n_sections": 5, "n_figs": 32, "minutes": 7, "n_demos": 1}, {"num": "07", "slug": "working-with-images", "title": "图片的运用", "n_sections": 4, "n_figs": 24, "minutes": 6, "n_demos": 1}, {"num": "08", "slug": "finishing-touches", "title": "收尾打磨", "n_sections": 6, "n_figs": 33, "minutes": 6, "n_demos": 1}, {"num": "09", "slug": "leveling-up", "title": "持续进阶", "n_sections": 1, "n_figs": 4, "minutes": 2, "n_demos": 1}];</script>
 <script src="assets/js/book.js"></script>
-<a id="backhome" href="../index.html">← 返回选书</a>
 </body>
 </html>

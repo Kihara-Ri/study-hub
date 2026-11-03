@@ -80,6 +80,16 @@ def build_jp(outdir: Path, password: str):
     (outdir / "index.html").write_text(html, encoding="utf-8")
 
 
+def build_jp_plain(outdir: Path):
+    """不加密：直接拷贝站点文件（去掉本地预览用的 serve.py / artifact.html）。"""
+    if outdir.exists():
+        shutil.rmtree(outdir)
+    shutil.copytree(SRC["jp"], outdir, ignore=shutil.ignore_patterns("serve.py", "artifact.html"))
+    p = outdir / "index.html"
+    h = p.read_text(encoding="utf-8").replace("<nav>", '<nav>\n    <a href="../index.html">选书</a>', 1)
+    p.write_text(h, encoding="utf-8")
+
+
 def jp_meta() -> str:
     idx = json.load(open(SRC["jp"] / "data/index.json", encoding="utf-8"))
     nl = sum(i["nl"] for i in idx)
@@ -96,14 +106,24 @@ def copy_rui(outdir: Path):
         shutil.rmtree(outdir)
     shutil.copytree(SRC["refactoring-ui"], outdir,
                     ignore=shutil.ignore_patterns("404.html", "robots.txt"))
+    grid = ('<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1"></rect>'
+            '<rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect>'
+            '<rect x="9" y="9" width="5" height="5" rx="1"></rect></svg>')
     for p in outdir.rglob("*.html"):
         depth = len(p.relative_to(OUT).parts) - 1  # 到 docs 根需要退几级
-        back = f'<a id="backhome" href="{"../" * depth}index.html">← 返回选书</a>'
+        href = "../" * depth + "index.html"
         h = p.read_text(encoding="utf-8")
-        if 'id="backhome"' in h:
+        if "hub-back" in h or 'id="backhome"' in h:
             continue
-        h = h.replace("</head>", "<style>" + wb.BACK_CSS + "</style>\n</head>", 1)
-        h = h.replace("</body>", back + "\n</body>", 1) if "</body>" in h else h + back
+        tools = '<div class="topbar__tools">'
+        if tools in h:  # 放进顶栏工具区：小屏只显示图标
+            link = (f'<a class="toolbtn hub-back" href="{href}" aria-label="返回选书" title="返回选书">'
+                    f'{grid}<span class="toolbtn__label">选书</span></a>')
+            h = h.replace(tools, tools + "\n    " + link, 1)
+        else:           # 没有顶栏的页面才用悬浮胶囊
+            back = f'<a id="backhome" href="{href}">← 返回选书</a>'
+            h = h.replace("</head>", "<style>" + wb.BACK_CSS + "</style>\n</head>", 1)
+            h = h.replace("</body>", back + "\n</body>", 1) if "</body>" in h else h + back
         p.write_text(h, encoding="utf-8")
 
 
@@ -123,12 +143,13 @@ def card(href, cls, ico, title, meta, desc, tag):
             f'<p class="meta">{meta}</p><p>{desc}</p><span class="tag">{tag}</span></a>')
 
 
-def landing(fr_meta: str, updated: str) -> str:
+def landing(fr_meta: str, updated: str, jp_locked: bool) -> str:
     locked = LOCK_SVG + "需要访问密码"
+    jp_tag = locked if jp_locked else "✓ 直接打开"
     sections = [
         ("日语", [card("jp-shadowing/", "jp", "耳", "影子跟读 · 中级日语口语", jp_meta(),
                       "74 课生活对话，逐句点播、变速、单句循环、停顿跟读；每句带注音与中文，每课挑出可迁移的地道表达，并有跨课表达库。",
-                      locked)]),
+                      jp_tag)]),
         ("语言课程", [
             card("korean/", "kr", "가", "零起点韩语", "5 章 · 22 节 · 953 词条 · 605 例句",
                  "从字母和发音起步，到陈述、疑问、敬语、时态和句子连接。每个词、每个例句都能点读。", locked),
@@ -143,6 +164,10 @@ def landing(fr_meta: str, updated: str) -> str:
                       "可交互阅读版：343 条术语注解、52 则小知识、互动字母表与词卡、百位名人卡片墙；全文搜索、阅读进度、深色模式。",
                       "✓ 直接打开 · 可交互")]),
     ]
+    notice = ("日语跟读与韩语课程的内容整理自正式出版的教材，版权归原作者及出版方所有，仅供个人学习使用，所以加了访问密码，请勿转发或转载。"
+              if jp_locked else
+              "韩语课程的内容整理自正式出版的教材，版权归原作者及出版方所有，所以加了访问密码。"
+              "日语跟读的文稿与音频同样来自正式出版的教材，版权归原作者及出版方所有，请仅用于个人学习，勿转发或商用。")
     body = "".join(f'<section><h2>{name}</h2><div class="grid">{"".join(cs)}</div></section>' for name, cs in sections)
     return f"""<!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8">
@@ -181,7 +206,7 @@ footer{{margin-top:52px;color:#a2988d;font-size:12.5px;line-height:1.9;border-to
 <p class="lead">自己在学的几门语言和几本书，放在同一个地方。浏览器里直接打开，进度和收藏只存在本机，不需要注册。</p>
 {body}
 <footer>
-日语跟读与韩语课程的内容整理自正式出版的教材，版权归原作者及出版方所有，仅供个人学习使用，所以加了访问密码，请勿转发或转载。<br>
+{notice}<br>
 阿拉伯语、法语课程为自编教材；韩/阿/法发音由 edge-tts 合成。<br>
 <a href="about.html" style="color:#9a7b52">关于内容来源与已知限制 →</a><span style="float:right;color:#b3a89c">更新于 {updated}</span>
 </footer>
@@ -189,12 +214,13 @@ footer{{margin-top:52px;color:#a2988d;font-size:12.5px;line-height:1.9;border-to
 """
 
 
-def about() -> str:
+def about(jp_locked: bool) -> str:
+    jp_note = ("文本与音频在仓库里都是密文，仅在你输入密码后于浏览器本地解密。" if jp_locked else
+               "当前站点<b>没有</b>为日语部分设置密码，文稿与音频是公开可下载的。")
     extra = """<h2>日语跟读：整理自一套正式出版的教材</h2>
 <p>文稿由教材配套音频经 AI 语音识别、再由大模型校正标点与同音字、分场并翻译而成；每句时间点由识别结果对齐得到，
 少数句子的时间点是估算值（页面上带小点标记）。地道表达卡片由大模型挑选并撰写说明，<b>未经人工校对</b>。</p>
-<div class="note">课文与音频的<b>版权归原作者及出版方所有</b>。文本与音频在仓库里都是密文，仅在你输入密码后于浏览器本地解密。
-请勿转发、转载或用于商业用途。</div>
+<div class="note">课文与音频的<b>版权归原作者及出版方所有</b>。""" + jp_note + """请勿转发、转载或用于商业用途。</div>
 
 <h2>Refactoring UI 中文版</h2>
 <p>中文翻译与互动实验的静态站，构建自同一仓库外的源稿。</p>
@@ -204,7 +230,8 @@ def about() -> str:
     s = s.replace("这套学习台里的三本书，来路不一样，这里说清楚。", "这里的几本书，来路不一样，这里说清楚。")
     s = s.replace("语言学习台", "学习台")
     s = s.replace("<li>韩语课程数据在服务器上以 AES-256-GCM 加密存放，密码只在浏览器本地解密，不发送到服务器。</li>",
-                  "<li>韩语课程数据与日语跟读的文本、音频以 AES-256-GCM 加密存放，密码只在浏览器本地解密，不发送到服务器。</li>")
+                  ("<li>韩语课程数据与日语跟读的文本、音频以 AES-256-GCM 加密存放，密码只在浏览器本地解密，不发送到服务器。</li>" if jp_locked else
+                   "<li>韩语课程数据以 AES-256-GCM 加密存放，密码只在浏览器本地解密，不发送到服务器。</li>"))
     return s
 
 
@@ -222,6 +249,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--password", default=os.environ.get("HUB_PASSWORD"))
     ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--lock-jp", action="store_true", help="给日语跟读加密（默认不加密）")
     a = ap.parse_args()
     if not a.password:
         sys.exit("缺少密码：设置环境变量 HUB_PASSWORD 或传 --password")
@@ -232,8 +260,8 @@ def main():
             shutil.rmtree(p) if p.is_dir() else p.unlink()
     out.mkdir(parents=True, exist_ok=True)
 
-    print("→ 日语跟读（加密）…")
-    build_jp(out / "jp-shadowing", a.password)
+    print("→ 日语跟读（" + ("加密" if a.lock_jp else "不加密") + "）…")
+    (build_jp if a.lock_jp else (lambda o, _p: build_jp_plain(o)))(out / "jp-shadowing", a.password)
     print("→ 韩语（加密）…")
     wb.lock_korean(a.password, str(out / "korean"))
     print("→ 阿拉伯语 / 法语 / 阿拉伯文化…")
@@ -244,8 +272,8 @@ def main():
     copy_rui(out / "refactoring-ui")
 
     print("→ 落地页…")
-    (out / "index.html").write_text(landing(wb._french_meta(), wb._today()), encoding="utf-8")
-    (out / "about.html").write_text(about(), encoding="utf-8")
+    (out / "index.html").write_text(landing(wb._french_meta(), wb._today(), a.lock_jp), encoding="utf-8")
+    (out / "about.html").write_text(about(a.lock_jp), encoding="utf-8")
     (out / "404.html").write_text(NOT_FOUND, encoding="utf-8")
     (out / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")

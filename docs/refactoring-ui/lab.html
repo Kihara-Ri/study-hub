@@ -12,14 +12,6 @@
 <link rel="stylesheet" href="assets/css/demos.css">
 <link rel="stylesheet" href="assets/css/live.css">
 <script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
-<style>
-#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
-  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
-  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
-  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
-#backhome:hover{border-color:#e0457b;color:#c93a6b}
-@media print{#backhome{display:none}}
-</style>
 </head>
 <body class="page page--lab">
 <a class="skip-link" href="#main">跳到正文</a>
@@ -34,6 +26,7 @@
   </a>
   <p class="topbar__where">互动实验室</p>
   <div class="topbar__tools">
+    <a class="toolbtn hub-back" href="../index.html" aria-label="返回选书" title="返回选书"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1"></rect><rect x="9" y="2" width="5" height="5" rx="1"></rect><rect x="2" y="9" width="5" height="5" rx="1"></rect><rect x="9" y="9" width="5" height="5" rx="1"></rect></svg><span class="toolbtn__label">选书</span></a>
     <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
       <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
       <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
@@ -205,6 +198,5 @@
 <script src="assets/js/demos/image-overlay.js"></script>
 <script src="assets/js/demos/polish.js"></script>
 <script src="assets/js/demos/quiz.js"></script>
-<a id="backhome" href="../index.html">← 返回选书</a>
 </body>
 </html>

@@ -5,7 +5,7 @@
 | 路径 | 内容 | 访问 |
 |---|---|---|
 | `/` | 总落地页（日语 / 语言课程 / 设计 / 文化） | 公开 |
-| `/jp-shadowing/` | 日语影子跟读：74 课、逐句播放、表达库 | 密码（文本与音频均为密文） |
+| `/jp-shadowing/` | 日语影子跟读：74 课、逐句播放、表达库 | 公开（构建时加 `--lock-jp` 可改为密码加密） |
 | `/korean/` | 零起点韩语 | 密码（课文为密文） |
 | `/arabic/` `/french/` | 自编阿拉伯语 / 法语课程 | 公开 |
 | `/arabic-culture/` | 阿拉伯文化背景知识（可交互阅读版） | 公开 |
@@ -15,7 +15,7 @@
 
 - 有：`build.py`（组装脚本）、`legacy_books.py`（韩/阿/法/文化书的拷贝与加密逻辑）、`docs/`（构建产物）。
 - 没有：原书 PDF、原始音频、识别文稿、各书的源码与源数据。这些留在服务器 `~/dsh-workspace/` 下各自的目录，
-  其中受版权保护的内容只以密文形式出现在 `docs/`。
+  其中韩语课文以密文形式出现在 `docs/`；日语跟读目前是公开明文。
 - **密码不在仓库里。** 构建时通过环境变量 `HUB_PASSWORD` 传入。
 
 ## 重新构建与发布
@@ -29,7 +29,7 @@
 | Refactoring UI | `refactoring-ui-book/site/` |
 
 ```bash
-HUB_PASSWORD='你的密码' python3 build.py      # 生成 docs/
+HUB_PASSWORD='你的密码' python3 build.py      # 生成 docs/（密码用于韩语；加 --lock-jp 则日语也加密）
 HUB_PASSWORD='你的密码' ./deploy.sh "说明"    # 构建 + 提交 + 推送
 ```
 
