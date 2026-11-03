@@ -1035,7 +1035,10 @@ body.is-locked { overflow: hidden; }
   .toolbtn, .toolbtn--icon, .nav-toggle { min-width: 42px; min-height: 42px; }
   .brand { min-height: 42px; }
   .chapnav__link { padding-block: 13px; }                   /* 抽屉里的章节行：点击区域 ≥ 44px */
-  .secnav a { padding-block: 11px; }
+  .secnav a { padding-block: 12px; }
   .chapnav__no, .kicker, .livefig__no { font-size: 12px; }  /* 过小的标签字号上调 */
   .sec__live, .chapter__play-label, .fig__badge { font-size: 11.5px; }
+}
+@media (max-width: 440px) {
+  .brand__text { display: none; }                          /* 顶栏放不下时只留 RUI 标记，避免书名被截成省略号 */
 }
