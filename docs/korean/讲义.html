@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>韩语讲义</title>
+<style>
+#gate{position:fixed;inset:0;background:linear-gradient(160deg,#fdf6ef,#f7e8ef 60%,#eef6f7);
+  display:flex;align-items:center;justify-content:center;z-index:9999;padding:24px}
+#gate .gc{background:#fff;border-radius:18px;box-shadow:0 18px 50px rgba(90,60,40,.16);
+  padding:38px 34px;max-width:400px;width:100%;text-align:center}
+#gate h2{margin:0 0 6px;font-size:24px;color:#2b2620}
+#gate .sub{color:#8a7f74;font-size:13.5px;line-height:1.7;margin:0 0 22px}
+#gate input{width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #e6ded2;border-radius:10px;
+  font-size:15px;outline:none;background:#fdfaf6}
+#gate input:focus{border-color:#e0457b;background:#fff}
+#gate button{margin-top:14px;width:100%;padding:12px;border:none;border-radius:10px;cursor:pointer;
+  background:linear-gradient(135deg,#e0457b,#c93a6b);color:#fff;font-size:15px;font-weight:600}
+#gate button:disabled{opacity:.6;cursor:default}
+#gate .err{color:#c0392b;font-size:13px;min-height:20px;margin:10px 0 0}
+#gate .gback{margin:6px 0 0;text-align:center}
+#gate .gback a{color:#a2988d;font-size:13px;text-decoration:none}
+#gate .gback a:hover{color:#c93a6b}
+#gate .lockico{line-height:1;margin-bottom:8px}
+</style></head>
+<body>
+<div id="gate"><div class="gc">
+  <div class="lockico"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#c93a6b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.2" fill="#c93a6b" stroke="none"/></svg></div>
+  <h2>韩语讲义</h2>
+  <p class="sub">讲义含全书正文，请输入访问密码。</p>
+  <input id="pw" type="password" placeholder="输入访问密码" autocomplete="current-password">
+  <button id="go">进入</button>
+  <p class="err" id="err"></p>
+  <p class="gback"><a href="../index.html">← 返回选书</a></p>
+</div></div>
+
+<script>
+(function () {
+  var KEY = 'kr-handout-unlocked';
+  var gate = document.getElementById('gate');
+  var input = document.getElementById('pw');
+  var btn = document.getElementById('go');
+  var err = document.getElementById('err');
+
+  function b64(s) {
+    var bin = atob(s), out = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+
+  async function decrypt(pw) {
+    var meta = await (await fetch('assets/handout.enc')).json();
+    var enc = new TextEncoder();
+    var base = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
+    var key = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: b64(meta.salt), iterations: meta.iter, hash: 'SHA-256' },
+      base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+    var pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(meta.iv) }, key, b64(meta.ct));
+    return new TextDecoder().decode(pt);
+  }
+
+  async function enter(pw) {
+    btn.disabled = true; err.textContent = '';
+    try {
+      var html = await decrypt(pw);
+      sessionStorage.setItem(KEY, pw);
+      document.open(); document.write(html); document.close();
+    } catch (e) {
+      err.textContent = '密码不对，或者这个环境不支持解密（请用 https 访问）';
+      btn.disabled = false;
+    }
+  }
+
+  btn.onclick = function () { enter(input.value); };
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') btn.onclick(); });
+  input.focus();
+  var saved = sessionStorage.getItem(KEY);
+  if (saved) enter(saved);
+})();
+</script>
+</body></html>

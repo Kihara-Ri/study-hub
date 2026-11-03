@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>营造层次感 · 第 6 章 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/book.css">
+<link rel="stylesheet" href="../assets/css/demos.css">
+<link rel="stylesheet" href="../assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--chapter" data-chapter="06">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">第 6 章 / 共 9 章</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="章节目录">
+  <div class="rail__head">
+    <p class="kicker">CONTENTS</p>
+    <p class="rail__count">9 章 · 284 幅插图</p>
+  </div>
+  <a class="rail__home" href="../index.html">← 封面与目录</a>
+  <ol class="chapnav"><li class="chapnav__item">
+<a class="chapnav__link" href="01.html">
+  <span class="chapnav__no">01</span>
+  <span class="chapnav__title">从零开始</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="01"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="02.html">
+  <span class="chapnav__no">02</span>
+  <span class="chapnav__title">层级就是一切</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="02"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="03.html">
+  <span class="chapnav__no">03</span>
+  <span class="chapnav__title">布局与间距</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="03"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="04.html">
+  <span class="chapnav__no">04</span>
+  <span class="chapnav__title">文字设计</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="04"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="05.html">
+  <span class="chapnav__no">05</span>
+  <span class="chapnav__title">色彩的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="05"></b></span>
+</a></li><li class="chapnav__item is-current">
+<a class="chapnav__link" href="06.html" aria-current="page">
+  <span class="chapnav__no">06</span>
+  <span class="chapnav__title">营造层次感</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="06"></b></span>
+</a><ol class="secnav"><li><a href="#s1" data-spy="s1"><span>6.1</span>模拟光源<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s2" data-spy="s2"><span>6.2</span>用阴影传达高度</a></li><li><a href="#s3" data-spy="s3"><span>6.3</span>阴影可以分成两层<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s4" data-spy="s4"><span>6.4</span>扁平设计也能有层次感<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s5" data-spy="s5"><span>6.5</span>让元素重叠出层次<em class="secnav__live" aria-label="可玩"></em></a></li></ol></li><li class="chapnav__item">
+<a class="chapnav__link" href="07.html">
+  <span class="chapnav__no">07</span>
+  <span class="chapnav__title">图片的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="07"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="08.html">
+  <span class="chapnav__no">08</span>
+  <span class="chapnav__title">收尾打磨</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="08"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="09.html">
+  <span class="chapnav__no">09</span>
+  <span class="chapnav__title">持续进阶</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="09"></b></span>
+</a></li></ol>
+  <div class="rail__foot">
+    <a href="../lab.html">互动实验室</a>
+    <a href="../style.html">设计说明</a>
+    <a href="../notice.html">版权</a>
+  </div>
+</aside>
+<main class="main" id="main">
+<article class="chapter">
+  <header class="chapter__head">
+    <p class="kicker">CHAPTER 06 · CREATING DEPTH</p>
+    <h1 class="chapter__title">营造层次感</h1>
+    <p class="chapter__lede">阴影、景深与光源。界面是平的，但观感可以有前后关系。</p>
+    <ul class="chapter__meta">
+      <li><b>5</b> 节</li>
+      <li><b>32</b> 幅插图</li>
+      <li><b>7</b> 分钟</li>
+      <li><b>1</b> 个互动实验</li><li><b>4</b> 个可玩示例</li>
+    </ul>
+  </header>
+  <nav class="chapter__play" aria-label="本章可玩示例"><span class="chapter__play-label">本章可玩</span><a href="#fig-06-12">光从上方来：凸起与内凹</a><a href="#fig-06-23">双层阴影：一层离地，一层贴地</a><a href="#fig-06-26">扁平设计也能分出远近</a><a href="#fig-06-28">让卡片跨在两种背景的交界上</a></nav>
+  <div class="chapter__body">
+<section class="sec" id="s1">
+<h2 class="sec__h"><a class="sec__no" href="#s1">6.1</a><span>模拟光源</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>你有没有注意过，界面里有些元素看起来像是从页面上浮起来的，另一些则像是凹进背景里的？</p><figure class="fig" id="fig-06-1">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="1" data-caption="图 6.1" aria-label="放大查看插图 1">
+<img src="../assets/img/p172-01-740.webp" srcset="../assets/img/p172-01-740.webp 740w, ../assets/img/p172-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="642" alt="营造层次感 · 图 6.1 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.1</span>
+</button>
+</figure><p>做出这种效果，乍看很复杂，其实你只需要懂一条基本规律。</p><h3 class="sub" id="s1-1"><a class="sub__anchor" href="#s1-1" aria-hidden="true">#</a>光从上方来</h3><p>看看这扇门上的门板：</p><figure class="fig" id="fig-06-2">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="2" data-caption="图 6.2" aria-label="放大查看插图 2">
+<img src="../assets/img/p173-01-740.webp" srcset="../assets/img/p173-01-740.webp 740w, ../assets/img/p173-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="268" alt="营造层次感 · 图 6.2 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.2</span>
+</button>
+</figure><p>即便你看到的只是一张平面照片，也很容易看出门板是凸起的。为什么？</p><p>注意看门板上沿是不是更亮？因为它朝向上方天空，接收到的光更多。同样，下沿更暗，因为它<em>背</em>对天空，接收到的光<em>更少</em>。</p><figure class="fig" id="fig-06-3">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="3" data-caption="图 6.3" aria-label="放大查看插图 3">
+<img src="../assets/img/p173-02-740.webp" srcset="../assets/img/p173-02-740.webp 740w, ../assets/img/p173-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="259" alt="营造层次感 · 图 6.3 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.3</span>
+</button>
+</figure><p>这两条边只可能以那种方式斜着，前提是门板本身凸起——我们的大脑就是这么判断的。</p><p>再看这个柜子上的门板：</p><figure class="fig" id="fig-06-4">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="4" data-caption="图 6.4" aria-label="放大查看插图 4">
+<img src="../assets/img/p174-01-740.webp" srcset="../assets/img/p174-01-740.webp 740w, ../assets/img/p174-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="409" alt="营造层次感 · 图 6.4 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.4</span>
+</button>
+</figure><p>这次你一眼就能看出门板是<em>内凹</em>的，因为上沿有一道阴影，说明上方的边檐挡住了光，而下沿更亮，说明它朝上倾斜。</p><figure class="fig" id="fig-06-5">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="5" data-caption="图 6.5" aria-label="放大查看插图 5">
+<img src="../assets/img/p174-02-740.webp" srcset="../assets/img/p174-02-740.webp 740w, ../assets/img/p174-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="259" alt="营造层次感 · 图 6.5 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.5</span>
+</button>
+</figure><p>想让你的设计也有同样的层次感，你要做的只是模仿现实世界里光对物体的影响。</p><h3 class="sub" id="s1-2"><a class="sub__anchor" href="#s1-2" aria-hidden="true">#</a>在界面里模拟光</h3><p>如果你想让元素看起来凸起或内凹，先想清楚你希望它是什么<em>剖面</em>，再模仿光源会如何作用于这个形状。</p><p><strong>凸起的元素</strong></p><p>举个例子，假设你有个按钮，想让它从页面上浮起来，上下两条边都是平直的：</p><figure class="fig" id="fig-06-6">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="6" data-caption="图 6.6" aria-label="放大查看插图 6">
+<img src="../assets/img/p175-01-740.webp" srcset="../assets/img/p175-01-740.webp 740w, ../assets/img/p175-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="468" alt="营造层次感 · 图 6.6 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.6</span>
+</button>
+</figure><p>因为上下两边都是平的，你不可能同时看到它们。人看屏幕时视线通常略微向下，所以最自然的做法是：露出一点上沿，把下沿藏起来。</p><p>上沿朝上，就让它比按钮正面稍亮一点，通常用一条上边框，或者带一点垂直偏移的内阴影来实现：</p><figure class="fig" id="fig-06-7">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="7" data-caption="图 6.7" aria-label="放大查看插图 7">
+<img src="../assets/img/p176-01-740.webp" srcset="../assets/img/p176-01-740.webp 740w, ../assets/img/p176-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="244" alt="营造层次感 · 图 6.7 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.7</span>
+</button>
+</figure><p>想达到最佳效果，浅色要手动挑，不要用半透明白——直接叠一层白，会把底下颜色的饱和度吸走。</p><p>接下来还要考虑一件事：凸起的元素会挡住一部分光，让它下方的区域照不到光。</p><p>做法是加一层小范围、深色的阴影，垂直方向略微偏移<em>（你只希望阴影出现在元素下方）</em>：</p><figure class="fig" id="fig-06-8">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="8" data-caption="图 6.8" aria-label="放大查看插图 8">
+<img src="../assets/img/p176-02-740.webp" srcset="../assets/img/p176-02-740.webp 740w, ../assets/img/p176-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="244" alt="营造层次感 · 图 6.8 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.8</span>
+</button>
+</figure><p>模糊半径别太夸张，几个像素就够。这类阴影的边缘应该相当锐利——看看墙上插座或窗框下沿投出的影子，现实里就是这样。</p><p><strong>内凹的元素</strong></p><p>假设你在做一个“凹槽”组件，希望它看起来像是陷进了页面里。</p><figure class="fig" id="fig-06-9">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="9" data-caption="图 6.9" aria-label="放大查看插图 9">
+<img src="../assets/img/p177-01-740.webp" srcset="../assets/img/p177-01-740.webp 740w, ../assets/img/p177-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="284" alt="营造层次感 · 图 6.9 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.9</span>
+</button>
+</figure><p>视线略微向下，你能看到的只有下沿。下沿朝向天空，所以给它稍浅一点的颜色，用一条下边框，或者带负垂直偏移的内阴影：</p><figure class="fig" id="fig-06-10">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="10" data-caption="图 6.10" aria-label="放大查看插图 10">
+<img src="../assets/img/p177-02-740.webp" srcset="../assets/img/p177-02-740.webp 740w, ../assets/img/p177-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="284" alt="营造层次感 · 图 6.10 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.10</span>
+</button>
+</figure><p>凹槽上方的区域会挡住一部分光，让光线到不了凹槽最顶部，所以再加一层小范围、深色的内阴影，垂直方向略微正向偏移，确保它不会从底部透出来：</p><figure class="fig" id="fig-06-11">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="11" data-caption="图 6.11" aria-label="放大查看插图 11">
+<img src="../assets/img/p178-01-740.webp" srcset="../assets/img/p178-01-740.webp 740w, ../assets/img/p178-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="284" alt="营造层次感 · 图 6.11 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.11</span>
+</button>
+</figure><p>这套处理方式对所有需要内凹效果的元素都适用，比如输入框和复选框：</p><figure class="fig fig--live" id="fig-06-12">
+<div class="livefig" data-live="06-12">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="06" data-fig="12" data-caption="图 6.12" aria-label="放大查看原书插图 12">
+<img src="../assets/img/p178-02-740.webp" srcset="../assets/img/p178-02-740.webp 740w, ../assets/img/p178-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="462" alt="营造层次感 · 图 6.12 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 6.12</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">光从上方来：凸起与内凹</span>
+<span class="livefig__hint">切剖面、调光强，看边框和阴影往哪边跑</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><h3 class="sub" id="s1-3"><a class="sub__anchor" href="#s1-3" aria-hidden="true">#</a>别玩过头</h3><p>一旦明白了怎么在界面里模拟光，你很容易一调就是几个小时，反复微调，看自己能多接近现实。</p><p>这玩起来确实有趣，但落到实际项目里，出来的界面往往又乱又不清楚。从现实里借一点视觉线索来增加层次感是好事，但没必要追求照片级的真实。</p>
+</div>
+</section><section class="sec" id="s2">
+<h2 class="sec__h"><a class="sec__no" href="#s2">6.2</a><span>用阴影传达高度</span></h2>
+<div class="sec__body">
+<p>阴影不只是个花哨的装饰——用得恰当，它能让你把元素放到虚拟的 z 轴上，做出有意义的层次感。</p><p>模糊半径小、范围小的阴影，让元素只比背景稍微高一点；模糊半径大、范围大的阴影，则让元素离用户更近：</p><figure class="fig" id="fig-06-13">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="13" data-caption="图 6.13" aria-label="放大查看插图 13">
+<img src="../assets/img/p180-01-740.webp" srcset="../assets/img/p180-01-740.webp 740w, ../assets/img/p180-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="548" alt="营造层次感 · 图 6.13 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.13</span>
+</button>
+</figure><p>元素离用户越近，就越能抓住他们的注意力。</p><p>按钮这类元素可以用小阴影：你希望用户注意到它，但不希望它抢走整个页面的注意力：</p><figure class="fig" id="fig-06-14">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="14" data-caption="图 6.14" aria-label="放大查看插图 14">
+<img src="../assets/img/p181-01-740.webp" srcset="../assets/img/p181-01-740.webp 740w, ../assets/img/p181-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="277" alt="营造层次感 · 图 6.14 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.14</span>
+</button>
+</figure><p>下拉菜单这类需要比其他界面元素悬浮得更高的东西，适合中等阴影：</p><figure class="fig" id="fig-06-15">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="15" data-caption="图 6.15" aria-label="放大查看插图 15">
+<img src="../assets/img/p181-02-740.webp" srcset="../assets/img/p181-02-740.webp 740w, ../assets/img/p181-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="504" alt="营造层次感 · 图 6.15 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.15</span>
+</button>
+</figure><p>大阴影很适合弹窗，那种你特别想抓住用户注意力的地方：</p><figure class="fig" id="fig-06-16">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="16" data-caption="图 6.16" aria-label="放大查看插图 16">
+<img src="../assets/img/p182-01-740.webp" srcset="../assets/img/p182-01-740.webp 740w, ../assets/img/p182-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="662" alt="营造层次感 · 图 6.16 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.16</span>
+</button>
+</figure><h3 class="sub" id="s2-1"><a class="sub__anchor" href="#s2-1" aria-hidden="true">#</a>建立一套高度体系</h3><p>跟颜色、字体、间距和尺寸一样，把阴影定成固定的一组，能加快你的工作速度，也让设计保持一致。</p><p>阴影不需要很多种——五档通常就够了。</p><p>先定下最小的阴影和最大的阴影，再把中间的按大致线性递增补齐：</p><figure class="fig" id="fig-06-17">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="17" data-caption="图 6.17" aria-label="放大查看插图 17">
+<img src="../assets/img/p183-01-740.webp" srcset="../assets/img/p183-01-740.webp 740w, ../assets/img/p183-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="250" alt="营造层次感 · 图 6.17 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.17</span>
+</button>
+</figure><h3 class="sub" id="s2-2"><a class="sub__anchor" href="#s2-2" aria-hidden="true">#</a>把阴影和交互结合起来</h3><p>阴影不只能静态地把元素放在 z 轴上，它也是给用户提供交互视觉提示的好办法。</p><p>举个例子，假设你有个列表，用户能拖着每一项给它排序。用户点住某项时给它加一层阴影，它就像从列表里弹了出来，也清楚地告诉用户可以拖：</p><figure class="fig" id="fig-06-18">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="18" data-caption="图 6.18" aria-label="放大查看插图 18">
+<img src="../assets/img/p183-02-740.webp" srcset="../assets/img/p183-02-740.webp 740w, ../assets/img/p183-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="272" alt="营造层次感 · 图 6.18 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.18</span>
+</button>
+</figure><p>同样，用户点击按钮时，换成更小的阴影，或者干脆去掉阴影，按钮就像被按进了页面里：</p><figure class="fig" id="fig-06-19">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="19" data-caption="图 6.19" aria-label="放大查看插图 19">
+<img src="../assets/img/p184-01-740.webp" srcset="../assets/img/p184-01-740.webp 740w, ../assets/img/p184-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="295" alt="营造层次感 · 图 6.19 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.19</span>
+</button>
+</figure><p>这样有目的地用阴影，是决定某个元素该用哪种阴影的好办法。别去想阴影本身，去想你想让这个元素待在 z 轴的哪个位置，再相应地给它配阴影。</p>
+<div class="demo-slot" data-demo="shadow"></div>
+</div>
+</section><section class="sec" id="s3">
+<h2 class="sec__h"><a class="sec__no" href="#s3">6.3</a><span>阴影可以分成两层</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>你有没有端详过某个网站上特别漂亮的阴影，然后发现它其实用了<em>两层</em>阴影？</p><figure class="fig" id="fig-06-20">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="20" data-caption="图 6.20" aria-label="放大查看插图 20">
+<img src="../assets/img/p186-01-740.webp" srcset="../assets/img/p186-01-740.webp 740w, ../assets/img/p186-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="424" alt="营造层次感 · 图 6.20 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.20</span>
+</button>
+</figure><p>这种看似疯狂的做法自有它的道理，而且道理很简单。</p><p>别人把两层阴影叠在一起时，并不是随便试到好看为止，而是每层阴影各干一件事。</p><p>第一层阴影更大更柔和，垂直偏移明显，模糊半径也大。它模拟的是直射光打在物体背后投出的影子。</p><figure class="fig" id="fig-06-21">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="21" data-caption="图 6.21" aria-label="放大查看插图 21">
+<img src="../assets/img/p187-01-740.webp" srcset="../assets/img/p187-01-740.webp 740w, ../assets/img/p187-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="373" alt="营造层次感 · 图 6.21 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.21</span>
+</button>
+</figure><p>第二层阴影更紧更暗，垂直偏移更小，模糊半径也更小。它模拟的是物体<em>下方</em>连环境光都难以照到的阴影区域。</p><figure class="fig" id="fig-06-22">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="22" data-caption="图 6.22" aria-label="放大查看插图 22">
+<img src="../assets/img/p187-02-740.webp" srcset="../assets/img/p187-02-740.webp 740w, ../assets/img/p187-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="373" alt="营造层次感 · 图 6.22 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.22</span>
+</button>
+</figure><p>这样用两层阴影，比只用一层可控得多——你可以让大阴影保持细腻柔和，同时让靠近元素边缘的阴影依然清晰。</p><figure class="fig fig--live" id="fig-06-23">
+<div class="livefig" data-live="06-23">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="06" data-fig="23" data-caption="图 6.23" aria-label="放大查看原书插图 23">
+<img src="../assets/img/p188-01-740.webp" srcset="../assets/img/p188-01-740.webp 740w, ../assets/img/p188-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="751" alt="营造层次感 · 图 6.23 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 6.23</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">双层阴影：一层离地，一层贴地</span>
+<span class="livefig__hint">分别调大阴影和小阴影，再对比单层与双层</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><h3 class="sub" id="s3-1"><a class="sub__anchor" href="#s3-1" aria-hidden="true">#</a>高度不同，内层阴影也不同</h3><p>物体离表面越远，由于缺少环境光形成的那层小而暗的阴影就会慢慢消失<em>（不信就拿桌上的东西试试）</em>。</p><p>所以，如果你要在自己的项目里用这种双层阴影，记得高度越高的阴影，那层小阴影就要越轻微。</p><figure class="fig" id="fig-06-24">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="24" data-caption="图 6.24" aria-label="放大查看插图 24">
+<img src="../assets/img/p189-01-740.webp" srcset="../assets/img/p189-01-740.webp 740w, ../assets/img/p189-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="300" alt="营造层次感 · 图 6.24 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.24</span>
+</button>
+</figure><p>高度最低的那档，它应该相当明显；高度最高时，几乎<em>（或完全）</em>看不见。</p>
+</div>
+</section><section class="sec" id="s4">
+<h2 class="sec__h"><a class="sec__no" href="#s4">6.4</a><span>扁平设计也能有层次感</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>大多数人说起“扁平设计”，指的是不用阴影、渐变，以及任何模仿现实世界光线效果的做法。</p><figure class="fig" id="fig-06-25">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="25" data-caption="图 6.25" aria-label="放大查看插图 25">
+<img src="../assets/img/p190-01-740.webp" srcset="../assets/img/p190-01-740.webp 740w, ../assets/img/p190-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="618" alt="营造层次感 · 图 6.25 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.25</span>
+</button>
+</figure><p>但最有效的扁平设计同样能传达层次感，只是方式不同。</p><h3 class="sub" id="s4-1"><a class="sub__anchor" href="#s4-1" aria-hidden="true">#</a>用颜色做出层次感</h3><p>一般来说<em>（同一种颜色的不同色阶尤其如此）</em>，浅色的物体感觉离我们更近，深色的物体感觉更远。</p><p>把元素做得比背景浅一点，它就像从页面上浮起来；做得比背景深一点，它就像凹槽一样陷进去：</p><figure class="fig fig--live" id="fig-06-26">
+<div class="livefig" data-live="06-26">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="06" data-fig="26" data-caption="图 6.26" aria-label="放大查看原书插图 26">
+<img src="../assets/img/p191-01-740.webp" srcset="../assets/img/p191-01-740.webp 740w, ../assets/img/p191-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="618" alt="营造层次感 · 图 6.26 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 6.26</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">扁平设计也能分出远近</span>
+<span class="livefig__hint">让卡片比背景浅或深，再加一条实心阴影</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>这在非扁平的设计里同样适用——颜色只是你工具箱里又一件传达远近的工具。</p><h3 class="sub" id="s4-2"><a class="sub__anchor" href="#s4-2" aria-hidden="true">#</a>用实心阴影</h3><p>扁平设计里还有一种传达层次感的办法：用不模糊的短阴影，只在垂直方向偏移。</p><figure class="fig" id="fig-06-27">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="27" data-caption="图 6.27" aria-label="放大查看插图 27">
+<img src="../assets/img/p192-01-740.webp" srcset="../assets/img/p192-01-740.webp 740w, ../assets/img/p192-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="426" alt="营造层次感 · 图 6.27 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.27</span>
+</button>
+</figure><p>想在不牺牲扁平风格的前提下，让卡片或按钮稍稍离开页面，这招很好用。</p>
+</div>
+</section><section class="sec" id="s5">
+<h2 class="sec__h"><a class="sec__no" href="#s5">6.5</a><span>让元素重叠出层次</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>制造层次感最有效的办法之一，是让不同元素相互重叠，让设计看起来有多层。</p><p>比如，与其把卡片完全包在另一个元素里，不如让它偏移出去，横跨两种不同背景的交界处：</p><figure class="fig fig--live" id="fig-06-28">
+<div class="livefig" data-live="06-28">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="06" data-fig="28" data-caption="图 6.28" aria-label="放大查看原书插图 28">
+<img src="../assets/img/p194-01-740.webp" srcset="../assets/img/p194-01-740.webp 740w, ../assets/img/p194-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="686" alt="营造层次感 · 图 6.28 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 6.28</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">让卡片跨在两种背景的交界上</span>
+<span class="livefig__hint">拖动上移量，看卡片从「装在区块里」变成「浮在交界处」</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>你也可以让元素比它的父容器更高，这样两边都会重叠出去：</p><figure class="fig" id="fig-06-29">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="29" data-caption="图 6.29" aria-label="放大查看插图 29">
+<img src="../assets/img/p195-01-740.webp" srcset="../assets/img/p195-01-740.webp 740w, ../assets/img/p195-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="388" alt="营造层次感 · 图 6.29 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.29</span>
+</button>
+</figure><p>重叠也能给更小的组件增加层次感，比如这个轮播图上的控件：</p><figure class="fig" id="fig-06-30">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="30" data-caption="图 6.30" aria-label="放大查看插图 30">
+<img src="../assets/img/p195-02-740.webp" srcset="../assets/img/p195-02-740.webp 740w, ../assets/img/p195-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="256" alt="营造层次感 · 图 6.30 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.30</span>
+</button>
+</figure><h3 class="sub" id="s5-1"><a class="sub__anchor" href="#s5-1" aria-hidden="true">#</a>图片重叠</h3><p>这套办法用在图片上效果也很好，但稍不留神，重叠的图片之间就容易互相干扰。</p><figure class="fig" id="fig-06-31">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="31" data-caption="图 6.31" aria-label="放大查看插图 31">
+<img src="../assets/img/p196-01-740.webp" srcset="../assets/img/p196-01-740.webp 740w, ../assets/img/p196-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="327" alt="营造层次感 · 图 6.31 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.31</span>
+</button>
+</figure><p>避免这个问题有个简单的技巧：给图片加一圈“隐形边框”——颜色和背景一致——这样图片之间总会留出一点缝隙：</p><figure class="fig" id="fig-06-32">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="06" data-fig="32" data-caption="图 6.32" aria-label="放大查看插图 32">
+<img src="../assets/img/p196-02-740.webp" srcset="../assets/img/p196-02-740.webp 740w, ../assets/img/p196-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="370" alt="营造层次感 · 图 6.32 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 6.32</span>
+</button>
+</figure><p>你依然能看出层次感，却不会有任何难看的冲突。</p>
+</div>
+</section>
+  </div>
+  <footer class="chapter__foot">
+    <div class="readmark">
+      <button class="btn btn--mark" type="button" data-mark-read="06">标记本章已读</button>
+      <p class="readmark__hint" data-read-hint>读完点一下，首页会记住你的进度。</p>
+    </div>
+    <nav class="pager" aria-label="章节翻页">
+      <a class="pager__link pager__link--prev" href="05.html"><span>← 上一章</span><strong>05 色彩的运用</strong></a><a class="pager__link pager__link--next" href="07.html"><span>下一章 →</span><strong>07 图片的运用</strong></a>
+    </nav>
+    <p class="chapter__copyright">非官方中文翻译 · 译文与插图版权归 Adam Wathan &amp; Steve Schoger 所有 · <a href="../notice.html">版权与授权说明</a></p>
+  </footer>
+</article>
+</main>
+<aside class="toc" aria-label="本页目录">
+  <div class="toc__inner">
+    <p class="kicker">ON THIS PAGE</p>
+    <ol class="toc__list"><li><a href="#s1" data-spy="s1">6.1</a></li><li><a href="#s2" data-spy="s2">6.2</a></li><li><a href="#s3" data-spy="s3">6.3</a></li><li><a href="#s4" data-spy="s4">6.4</a></li><li><a href="#s5" data-spy="s5">6.5</a></li></ol>
+    <div class="toc__progress">
+      <div class="toc__progress-row"><span>本章已读</span><b data-chapter-percent>0%</b></div>
+      <div class="toc__bar"><i data-chapter-progress></i></div>
+    </div>
+    <p class="toc__hint">快捷键：<kbd>Ctrl K</kbd> 搜索 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 字体 · <kbd>Esc</kbd> 关闭</p>
+  </div>
+</aside>
+</div>
+<script>window.RUI_PAGE = {kind:'chapter', chapter:'06', title:'营造层次感'};window.RUI_DEMOS = {"shadow": {"chapter": "06", "title": "阴影与高度", "desc": "调整光源、模糊与层数，让卡片「浮」起来或「贴」下去。", "hint": "拖动参数，观察卡片与背景的关系"}};</script>
+<script src="../assets/js/book.js"></script>
+<script src="../assets/js/demo-runtime.js"></script>
+<script src="../assets/js/demos/shadow.js"></script>
+<script src="../assets/js/live-runtime.js"></script>
+<script src="../assets/js/live/06.js"></script>
+<a id="backhome" href="../../index.html">← 返回选书</a>
+</body>
+</html>

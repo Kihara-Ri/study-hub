@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>层级就是一切 · 第 2 章 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/book.css">
+<link rel="stylesheet" href="../assets/css/demos.css">
+<link rel="stylesheet" href="../assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--chapter" data-chapter="02">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">第 2 章 / 共 9 章</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="章节目录">
+  <div class="rail__head">
+    <p class="kicker">CONTENTS</p>
+    <p class="rail__count">9 章 · 284 幅插图</p>
+  </div>
+  <a class="rail__home" href="../index.html">← 封面与目录</a>
+  <ol class="chapnav"><li class="chapnav__item">
+<a class="chapnav__link" href="01.html">
+  <span class="chapnav__no">01</span>
+  <span class="chapnav__title">从零开始</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="01"></b></span>
+</a></li><li class="chapnav__item is-current">
+<a class="chapnav__link" href="02.html" aria-current="page">
+  <span class="chapnav__no">02</span>
+  <span class="chapnav__title">层级就是一切</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="02"></b></span>
+</a><ol class="secnav"><li><a href="#s1" data-spy="s1"><span>2.1</span>不是所有元素都同等重要<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s2" data-spy="s2"><span>2.2</span>大小不是一切<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s3" data-spy="s3"><span>2.3</span>不要在彩色背景上用灰色文字</a></li><li><a href="#s4" data-spy="s4"><span>2.4</span>用弱化来强调</a></li><li><a href="#s5" data-spy="s5"><span>2.5</span>标签是万不得已的选择</a></li><li><a href="#s6" data-spy="s6"><span>2.6</span>把视觉层级和文档层级分开</a></li><li><a href="#s7" data-spy="s7"><span>2.7</span>平衡字重与对比度</a></li><li><a href="#s8" data-spy="s8"><span>2.8</span>语义是次要的<em class="secnav__live" aria-label="可玩"></em></a></li></ol></li><li class="chapnav__item">
+<a class="chapnav__link" href="03.html">
+  <span class="chapnav__no">03</span>
+  <span class="chapnav__title">布局与间距</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="03"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="04.html">
+  <span class="chapnav__no">04</span>
+  <span class="chapnav__title">文字设计</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="04"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="05.html">
+  <span class="chapnav__no">05</span>
+  <span class="chapnav__title">色彩的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="05"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="06.html">
+  <span class="chapnav__no">06</span>
+  <span class="chapnav__title">营造层次感</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="06"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="07.html">
+  <span class="chapnav__no">07</span>
+  <span class="chapnav__title">图片的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="07"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="08.html">
+  <span class="chapnav__no">08</span>
+  <span class="chapnav__title">收尾打磨</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="08"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="09.html">
+  <span class="chapnav__no">09</span>
+  <span class="chapnav__title">持续进阶</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="09"></b></span>
+</a></li></ol>
+  <div class="rail__foot">
+    <a href="../lab.html">互动实验室</a>
+    <a href="../style.html">设计说明</a>
+    <a href="../notice.html">版权</a>
+  </div>
+</aside>
+<main class="main" id="main">
+<article class="chapter">
+  <header class="chapter__head">
+    <p class="kicker">CHAPTER 02 · HIERARCHY IS EVERYTHING</p>
+    <h1 class="chapter__title">层级就是一切</h1>
+    <p class="chapter__lede">界面上的每个元素都在争夺注意力。用尺寸、字重与颜色，把视线安排到正确的位置。</p>
+    <ul class="chapter__meta">
+      <li><b>8</b> 节</li>
+      <li><b>32</b> 幅插图</li>
+      <li><b>9</b> 分钟</li>
+      <li><b>2</b> 个互动实验</li><li><b>3</b> 个可玩示例</li>
+    </ul>
+  </header>
+  <nav class="chapter__play" aria-label="本章可玩示例"><span class="chapter__play-label">本章可玩</span><a href="#fig-02-2">同一张仪表盘，两种层级</a><a href="#fig-02-5">字号不是唯一的层级工具</a><a href="#fig-02-29">三个操作，只有一个该实心</a></nav>
+  <div class="chapter__body">
+<section class="sec" id="s1">
+<h2 class="sec__h"><a class="sec__no" href="#s1">2.1</a><span>不是所有元素都同等重要</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>如果你把视觉设计理解成“把东西修饰得好看”，那就不难理解为啥没有天生的艺术细胞就做不好它。但事实上，让一个东西“好看”的最大因素之一，和表面的修饰毫无关系。</p><p><em>视觉层级</em>指的是界面里的各个元素相比之下显得有多重要，而它是你手里最有效的工具，能让一个东西看起来“是设计过的”。</p><p>当界面里的所有东西都在抢夺注意力，整个界面就会显得嘈杂混乱，像一整面内容糊在墙上，根本看不出什么才是重点：</p><figure class="fig" id="fig-02-1">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="1" data-caption="图 2.1" aria-label="放大查看插图 1">
+<img src="../assets/img/p036-01-740.webp" srcset="../assets/img/p036-01-740.webp 740w, ../assets/img/p036-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="460" alt="层级就是一切 · 图 2.1 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.1</span>
+</button>
+</figure><p>当你刻意弱化次要和第三级信息，并且努力突出最重要的元素时，结果会立刻顺眼很多——哪怕配色方案、字体选择和布局都没变：</p><figure class="fig fig--live" id="fig-02-2">
+<div class="livefig" data-live="02-2">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="02" data-fig="2" data-caption="图 2.2" aria-label="放大查看原书插图 2">
+<img src="../assets/img/p037-01-740.webp" srcset="../assets/img/p037-01-740.webp 740w, ../assets/img/p037-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="460" alt="层级就是一切 · 图 2.2 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 2.2</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">同一张仪表盘，两种层级</span>
+<span class="livefig__hint">切「全部同级」，看信息怎么糊成一片</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>那具体该怎么做？接下来的几章里，我们会介绍一系列具体策略，帮你把层级引入自己的设计。</p>
+<div class="demo-slot" data-demo="hierarchy"></div>
+</div>
+</section><section class="sec" id="s2">
+<h2 class="sec__h"><a class="sec__no" href="#s2">2.2</a><span>大小不是一切</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>过度依赖字号来控制层级是个错误——它常常导致主要内容的字太大，次要内容的字又太小。</p><figure class="fig" id="fig-02-3">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="3" data-caption="图 2.3" aria-label="放大查看插图 3">
+<img src="../assets/img/p038-01-740.webp" srcset="../assets/img/p038-01-740.webp 740w, ../assets/img/p038-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="550" alt="层级就是一切 · 图 2.3 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.3</span>
+</button>
+</figure><p>别把重活全交给字号，试着用字重或颜色来达到同样的效果。</p><p>比如把主要元素加粗，你就能用一个更合理的字号，而且往往能更好地传达它的重要性：</p><figure class="fig" id="fig-02-4">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="4" data-caption="图 2.4" aria-label="放大查看插图 4">
+<img src="../assets/img/p039-01-740.webp" srcset="../assets/img/p039-01-740.webp 740w, ../assets/img/p039-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="404" alt="层级就是一切 · 图 2.4 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.4</span>
+</button>
+</figure><p>同理，给辅助文字用一个更柔和的颜色而不是极小的字号，既能明确它是次要的，又不怎么牺牲可读性：</p><figure class="fig fig--live" id="fig-02-5">
+<div class="livefig" data-live="02-5">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="02" data-fig="5" data-caption="图 2.5" aria-label="放大查看原书插图 5">
+<img src="../assets/img/p039-02-740.webp" srcset="../assets/img/p039-02-740.webp 740w, ../assets/img/p039-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="374" alt="层级就是一切 · 图 2.5 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 2.5</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">字号不是唯一的层级工具</span>
+<span class="livefig__hint">改标题字号和字重，再把辅助文字调灰</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>尽量只保留两到三种颜色：</p><ul><li>一种深色，用于主要内容（比如文章标题）</li><li>一种灰色，用于次要内容（比如文章的发布日期）</li><li>一种更浅的灰色，用于第三级内容（比如页脚的版权声明）</li></ul><p>同理，做界面时通常两种字重就够了：</p><ul><li>一种常规字重（视字体而定，400 或 500），用于大部分文字</li><li>一种更重的字重（600 或 700），用于你想强调的文字</li></ul><figure class="fig" id="fig-02-6">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="6" data-caption="图 2.6" aria-label="放大查看插图 6">
+<img src="../assets/img/p040-01-740.webp" srcset="../assets/img/p040-01-740.webp 740w, ../assets/img/p040-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="500" alt="层级就是一切 · 图 2.6 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.6</span>
+</button>
+</figure><p>做界面时避开 400 以下的字重——它们在大标题上还行，但字号一小就太难读了。如果你想用更轻的字重来弱化某些文字，不如改用更浅的颜色或更小的字号。</p>
+</div>
+</section><section class="sec" id="s3">
+<h2 class="sec__h"><a class="sec__no" href="#s3">2.3</a><span>不要在彩色背景上用灰色文字</span></h2>
+<div class="sec__body">
+<p>把文字调成浅灰是在白色背景上弱化它的好办法，但放在彩色背景上就很难看。</p><figure class="fig" id="fig-02-7">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="7" data-caption="图 2.7" aria-label="放大查看插图 7">
+<img src="../assets/img/p042-01-740.webp" srcset="../assets/img/p042-01-740.webp 740w, ../assets/img/p042-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="615" alt="层级就是一切 · 图 2.7 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.7</span>
+</button>
+</figure><p>因为在白底上用灰色，我们真正看到的效果是<em>对比度降低</em>。</p><p>真正有助于建立层级的是让文字颜色更接近背景色，而不是把它变成浅灰。</p><figure class="fig" id="fig-02-8">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="8" data-caption="图 2.8" aria-label="放大查看插图 8">
+<img src="../assets/img/p043-01-740.webp" srcset="../assets/img/p043-01-740.webp 740w, ../assets/img/p043-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="330" alt="层级就是一切 · 图 2.8 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.8</span>
+</button>
+</figure><p>你可能会觉得，最简单的做法是用白色文字再降低不透明度：</p><figure class="fig" id="fig-02-9">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="9" data-caption="图 2.9" aria-label="放大查看插图 9">
+<img src="../assets/img/p043-02-740.webp" srcset="../assets/img/p043-02-740.webp 740w, ../assets/img/p043-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="330" alt="层级就是一切 · 图 2.9 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.9</span>
+</button>
+</figure><p>这<em>确实</em>降低了对比度，但结果往往是文字显得发闷、发白，有时候甚至像被禁用了一样。</p><p>更糟的是，如果把这种办法用在图片或图案上，背景会透过文字显出来：</p><figure class="fig" id="fig-02-10">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="10" data-caption="图 2.10" aria-label="放大查看插图 10">
+<img src="../assets/img/p044-01-740.webp" srcset="../assets/img/p044-01-740.webp 740w, ../assets/img/p044-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="250" alt="层级就是一切 · 图 2.10 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.10</span>
+</button>
+</figure><p>更好的做法是基于背景色<em>手动挑一个新颜色</em>。</p><p>选一个色相相同的颜色，然后调饱和度和明度，直到你自己看着顺眼：</p><figure class="fig" id="fig-02-11">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="11" data-caption="图 2.11" aria-label="放大查看插图 11">
+<img src="../assets/img/p044-02-740.webp" srcset="../assets/img/p044-02-740.webp 740w, ../assets/img/p044-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="330" alt="层级就是一切 · 图 2.11 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.11</span>
+</button>
+</figure><p>这样手动挑颜色，就能轻松降低对比度，同时不显得文字褪色。</p>
+</div>
+</section><section class="sec" id="s4">
+<h2 class="sec__h"><a class="sec__no" href="#s4">2.4</a><span>用弱化来强调</span></h2>
+<div class="sec__body">
+<p>有时候你会遇到这种情况：界面里的主要内容不够突出，但又没什么能加上去让它更醒目的东西。</p><p>比如这个处于激活状态的导航项，尽管你换了种颜色想让它“跳出来”，但和未激活的项比起来，它还是不够突出：</p><figure class="fig" id="fig-02-12">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="12" data-caption="图 2.12" aria-label="放大查看插图 12">
+<img src="../assets/img/p046-01-740.webp" srcset="../assets/img/p046-01-740.webp 740w, ../assets/img/p046-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="150" alt="层级就是一切 · 图 2.12 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.12</span>
+</button>
+</figure><p>遇到这种情况时，别再去想办法强调那个你想突出的元素，而是想想怎么<em>弱化</em>和它抢注意力的那些元素。</p><p>在这个例子里，你可以给未激活的项一个更柔和的颜色，让它们更往后退：</p><figure class="fig" id="fig-02-13">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="13" data-caption="图 2.13" aria-label="放大查看插图 13">
+<img src="../assets/img/p046-02-740.webp" srcset="../assets/img/p046-02-740.webp 740w, ../assets/img/p046-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="150" alt="层级就是一切 · 图 2.13 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.13</span>
+</button>
+</figure><p>这个思路也可以用在界面里更大的区块上。比如侧边栏让你觉得在跟主内容区抢戏，那就别给它背景色——让内容直接落在页面背景上：</p><figure class="fig" id="fig-02-14">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="14" data-caption="图 2.14" aria-label="放大查看插图 14">
+<img src="../assets/img/p047-01-740.webp" srcset="../assets/img/p047-01-740.webp 740w, ../assets/img/p047-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="420" alt="层级就是一切 · 图 2.14 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.14</span>
+</button>
+</figure>
+<div class="demo-slot" data-demo="emphasis"></div>
+</div>
+</section><section class="sec" id="s5">
+<h2 class="sec__h"><a class="sec__no" href="#s5">2.5</a><span>标签是万不得已的选择</span></h2>
+<div class="sec__body">
+<p>先别急着替无障碍出头——这里说的不是表单。</p><p>向用户展示数据时（尤其是来自数据库的数据），很容易掉进一个陷阱：用最朴素的<em>标签：值</em>格式把它摆出来。</p><figure class="fig" id="fig-02-15">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="15" data-caption="图 2.15" aria-label="放大查看插图 15">
+<img src="../assets/img/p048-01-740.webp" srcset="../assets/img/p048-01-740.webp 740w, ../assets/img/p048-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="250" alt="层级就是一切 · 图 2.15 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.15</span>
+</button>
+</figure><p>这种做法的问题在于，它让数据很难呈现出任何层级，每一处数据都被赋予了同样的分量。</p><h3 class="sub" id="s5-1"><a class="sub__anchor" href="#s5-1" aria-hidden="true">#</a>你可能根本不需要标签</h3><p>很多时候，光看格式就能知道一条数据是什么。</p><p>比如 <em>janedoe@example.com</em> 是邮箱地址，<em>(555) 765-4321</em> 是电话号码，<em>$19.99</em> 是价格。</p><p>格式不够用的时候，上下文往往够了。在员工名录里看到某个人名字下方写着<em>“Customer Support”</em>，你不需要任何标签就能反应过来，那是他所在的部门。</p><figure class="fig" id="fig-02-16">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="16" data-caption="图 2.16" aria-label="放大查看插图 16">
+<img src="../assets/img/p049-01-740.webp" srcset="../assets/img/p049-01-740.webp 740w, ../assets/img/p049-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="250" alt="层级就是一切 · 图 2.16 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.16</span>
+</button>
+</figure><p>当你不用标签也能展示数据时，强调重要信息或身份信息就变得容易多了，界面既更好用，也更有“设计感”。</p><h3 class="sub" id="s5-2"><a class="sub__anchor" href="#s5-2" aria-hidden="true">#</a>把标签和值合起来</h3><p>即使某条数据不加标签就说不清楚，你也常常可以通过给值本身补上说明文字，来避免多加一个标签。</p><p>比如在电商界面里展示库存，别写“In stock: 12”，试试“12 left in stock”这种写法。</p><figure class="fig" id="fig-02-17">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="17" data-caption="图 2.17" aria-label="放大查看插图 17">
+<img src="../assets/img/p049-02-740.webp" srcset="../assets/img/p049-02-740.webp 740w, ../assets/img/p049-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="224" alt="层级就是一切 · 图 2.17 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.17</span>
+</button>
+</figure><p>如果你在做一个房产应用，“Bedrooms: 3”可以直接变成“3 bedrooms”。</p><figure class="fig" id="fig-02-18">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="18" data-caption="图 2.18" aria-label="放大查看插图 18">
+<img src="../assets/img/p050-01-740.webp" srcset="../assets/img/p050-01-740.webp 740w, ../assets/img/p050-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="585" alt="层级就是一切 · 图 2.18 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.18</span>
+</button>
+</figure><p>当你能把标签和值合成一个整体时，给每条数据赋予有意义的样式就变得容易得多，而且不必牺牲清晰度。</p><h3 class="sub" id="s5-3"><a class="sub__anchor" href="#s5-3" aria-hidden="true">#</a>标签是次要的</h3><p>有时候你<em>确实</em>需要标签，比如你要展示多条同类数据、并且它们需要便于快速扫读时，就像仪表盘那样。</p><p>这种情况下就加上标签，但把它当作辅助内容。真正要紧的是数据本身，标签只是为了让信息更清楚。</p><figure class="fig" id="fig-02-19">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="19" data-caption="图 2.19" aria-label="放大查看插图 19">
+<img src="../assets/img/p051-01-740.webp" srcset="../assets/img/p051-01-740.webp 740w, ../assets/img/p051-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="241" alt="层级就是一切 · 图 2.19 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.19</span>
+</button>
+</figure><p>通过把标签调小、降低对比度、用更轻的字重，或者三者结合，来弱化它。</p><h3 class="sub" id="s5-4"><a class="sub__anchor" href="#s5-4" aria-hidden="true">#</a>什么时候该强调标签</h3><p>如果你设计的界面里，用户明确是在<em>找</em>标签，那强调标签而不是数据可能更合理。</p><p>信息密集的页面经常是这样，比如产品的技术规格页。</p><p>如果用户想查一部手机的尺寸，他大概会在页面上扫视“depth”这样的词，而不是“7.6mm”。</p><figure class="fig" id="fig-02-20">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="20" data-caption="图 2.20" aria-label="放大查看插图 20">
+<img src="../assets/img/p051-02-740.webp" srcset="../assets/img/p051-02-740.webp 740w, ../assets/img/p051-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="170" alt="层级就是一切 · 图 2.20 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.20</span>
+</button>
+</figure><p>这种情况下也别把数据弱化得<em>太</em>狠，它依然是重要信息。给标签用深一点的颜色、给值用稍微浅一点的颜色，通常就够了。</p>
+</div>
+</section><section class="sec" id="s6">
+<h2 class="sec__h"><a class="sec__no" href="#s6">2.6</a><span>把视觉层级和文档层级分开</span></h2>
+<div class="sec__body">
+<p>做网页时使用语义化标签很重要，这意味着当你决定给界面某一部分加标题时，常用的是 h1、h2、h3 这类标题标签。</p><p>浏览器默认会给各级标题元素依次分配更小的字号，所以 h1 相当大，h6 相当小。这对文章、文档这类文档式内容有帮助，但在应用界面里，它容易诱导你做出糟糕的决定。</p><p>用 h1 标签给页面加上<em>Manage Account</em>这样的标题，从语义上完全说得通，但因为我们已经习惯认为 h1 就该很大，很容易掉进把这类标题做得过大的陷阱。</p><figure class="fig" id="fig-02-21">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="21" data-caption="图 2.21" aria-label="放大查看插图 21">
+<img src="../assets/img/p054-01-740.webp" srcset="../assets/img/p054-01-740.webp 740w, ../assets/img/p054-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="390" alt="层级就是一切 · 图 2.21 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.21</span>
+</button>
+</figure><p>很多时候，区块标题更像是<em>标签</em>而不是标题——它们是辅助内容，不该抢走所有注意力。</p><p>通常那个区块里的<em>内容</em>才是重点，而不是标题。这意味着很多时候标题其实应该相当小：</p><figure class="fig" id="fig-02-22">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="22" data-caption="图 2.22" aria-label="放大查看插图 22">
+<img src="../assets/img/p055-01-740.webp" srcset="../assets/img/p055-01-740.webp 740w, ../assets/img/p055-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="390" alt="层级就是一切 · 图 2.22 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.22</span>
+</button>
+</figure><p>做到极致的话，你甚至可以在标记里保留区块标题以满足无障碍需求，但在视觉上<em>完全隐藏</em>它们，因为内容本身已经说明了一切。</p><p>别让所用的标签影响你如何给它设计样式——按语义来选标签，然后根据需要自由地给它设计样式，以做出最好的视觉层级。</p>
+</div>
+</section><section class="sec" id="s7">
+<h2 class="sec__h"><a class="sec__no" href="#s7">2.7</a><span>平衡字重与对比度</span></h2>
+<div class="sec__body">
+<p>粗体比常规体显得更突出，原因是粗体覆盖的面积更大——同样一块地方，用在文字上的像素比用在背景上的多。</p><figure class="fig" id="fig-02-23">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="23" data-caption="图 2.23" aria-label="放大查看插图 23">
+<img src="../assets/img/p056-01-740.webp" srcset="../assets/img/p056-01-740.webp 740w, ../assets/img/p056-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="340" alt="层级就是一切 · 图 2.23 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.23</span>
+</button>
+</figure><p>这有什么值得说的？因为面积和层级之间的关系，对界面里其他元素同样有影响。</p><h3 class="sub" id="s7-1"><a class="sub__anchor" href="#s7-1" aria-hidden="true">#</a>用对比度补偿字重</h3><p>理解这层关系很重要的一个场景，就是处理图标。</p><p>和粗体文字一样，图标<em>（尤其是实心图标）</em>通常相当“重”，覆盖的面积很大。结果就是，把图标放在文字旁边时，图标往往显得更突出。</p><figure class="fig" id="fig-02-24">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="24" data-caption="图 2.24" aria-label="放大查看插图 24">
+<img src="../assets/img/p057-01-740.webp" srcset="../assets/img/p057-01-740.webp 740w, ../assets/img/p057-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="400" alt="层级就是一切 · 图 2.24 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.24</span>
+</button>
+</figure><p>和文字不同，你没法改变图标的“字重”，所以要想平衡，就得用别的办法弱化它。</p><p>一个简单有效的办法是给图标一个更柔和的颜色，降低它的对比度。</p><figure class="fig" id="fig-02-25">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="25" data-caption="图 2.25" aria-label="放大查看插图 25">
+<img src="../assets/img/p057-02-740.webp" srcset="../assets/img/p057-02-740.webp 740w, ../assets/img/p057-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="390" alt="层级就是一切 · 图 2.25 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.25</span>
+</button>
+</figure><p>任何需要平衡不同重量元素的地方都适用。降低对比度就像加了一个配重，让更重的元素显得更轻，尽管它的重量并没有改变。</p><h3 class="sub" id="s7-2"><a class="sub__anchor" href="#s7-2" aria-hidden="true">#</a>用字重补偿对比度</h3><p>就像降低对比度能弱化重的元素一样，增加字重是给低对比度元素稍加突出的好办法。</p><p>当 1px 的细边框用柔和颜色太不明显、但把颜色加深又让设计显得生硬嘈杂时，这一招很有用。</p><figure class="fig" id="fig-02-26">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="26" data-caption="图 2.26" aria-label="放大查看插图 26">
+<img src="../assets/img/p058-01-740.webp" srcset="../assets/img/p058-01-740.webp 740w, ../assets/img/p058-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="595" alt="层级就是一切 · 图 2.26 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.26</span>
+</button>
+</figure><p>把边框加粗一点，让它在不失去柔和感的前提下更醒目：</p><figure class="fig" id="fig-02-27">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="27" data-caption="图 2.27" aria-label="放大查看插图 27">
+<img src="../assets/img/p059-01-740.webp" srcset="../assets/img/p059-01-740.webp 740w, ../assets/img/p059-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="595" alt="层级就是一切 · 图 2.27 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.27</span>
+</button>
+</figure>
+</div>
+</section><section class="sec" id="s8">
+<h2 class="sec__h"><a class="sec__no" href="#s8">2.8</a><span>语义是次要的</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>当一个页面上有多个用户可执行的操作时，很容易掉进一个陷阱：纯粹按语义来设计这些操作。</p><figure class="fig" id="fig-02-28">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="28" data-caption="图 2.28" aria-label="放大查看插图 28">
+<img src="../assets/img/p060-01-740.webp" srcset="../assets/img/p060-01-740.webp 740w, ../assets/img/p060-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="332" alt="层级就是一切 · 图 2.28 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.28</span>
+</button>
+</figure><p>语义是按钮设计的重要一环，但这不意味着你可以不管层级。</p><p>页面上的每个操作都处在一座重要性金字塔的某个位置上。大多数页面只有一个真正的主要操作，几个不太重要的次要操作，以及少数很少用到的第三级操作。</p><p>设计这些操作时，把它们在层级中的位置传达出来很重要。</p><ul><li><strong>主要操作应当一眼可见。</strong> 实心、高对比度的背景色在这里非常好用。</li></ul><ul><li><strong>次要操作应当清晰但不抢眼。</strong> 描边样式或对比度更低的背景色都是很好的选择。</li><li><strong>第三级操作应当能被发现，但不打扰人。</strong> 通常最好的做法是把它们做成链接的样子。</li></ul><figure class="fig fig--live" id="fig-02-29">
+<div class="livefig" data-live="02-29">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="02" data-fig="29" data-caption="图 2.29" aria-label="放大查看原书插图 29">
+<img src="../assets/img/p061-01-740.webp" srcset="../assets/img/p061-01-740.webp 740w, ../assets/img/p061-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="332" alt="层级就是一切 · 图 2.29 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 2.29</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">三个操作，只有一个该实心</span>
+<span class="livefig__hint">在「按语义」和「按层级」之间切换，再点删除</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>如果你按层级优先的思路来设计页面上的操作，得到的界面会清爽得多，传达信息也更清楚：</p><figure class="fig" id="fig-02-30">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="30" data-caption="图 2.30" aria-label="放大查看插图 30">
+<img src="../assets/img/p061-02-740.webp" srcset="../assets/img/p061-02-740.webp 740w, ../assets/img/p061-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="361" alt="层级就是一切 · 图 2.30 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.30</span>
+</button>
+</figure><h3 class="sub" id="s8-1"><a class="sub__anchor" href="#s8-1" aria-hidden="true">#</a>破坏性操作</h3><p>破坏性强或后果严重，并不自动意味着按钮就该又大又红又粗。</p><p>如果破坏性操作不是页面上的主要操作，把它按次要或第三级按钮来处理可能更好。</p><figure class="fig" id="fig-02-31">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="31" data-caption="图 2.31" aria-label="放大查看插图 31">
+<img src="../assets/img/p062-01-740.webp" srcset="../assets/img/p062-01-740.webp 740w, ../assets/img/p062-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="171" alt="层级就是一切 · 图 2.31 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.31</span>
+</button>
+</figure><p>再配上一个确认步骤——那一步里破坏性操作才是主要操作——把又大又红又粗的样式用在那里。</p><figure class="fig" id="fig-02-32">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="02" data-fig="32" data-caption="图 2.32" aria-label="放大查看插图 32">
+<img src="../assets/img/p062-02-740.webp" srcset="../assets/img/p062-02-740.webp 740w, ../assets/img/p062-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="386" alt="层级就是一切 · 图 2.32 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 2.32</span>
+</button>
+</figure>
+</div>
+</section>
+  </div>
+  <footer class="chapter__foot">
+    <div class="readmark">
+      <button class="btn btn--mark" type="button" data-mark-read="02">标记本章已读</button>
+      <p class="readmark__hint" data-read-hint>读完点一下，首页会记住你的进度。</p>
+    </div>
+    <nav class="pager" aria-label="章节翻页">
+      <a class="pager__link pager__link--prev" href="01.html"><span>← 上一章</span><strong>01 从零开始</strong></a><a class="pager__link pager__link--next" href="03.html"><span>下一章 →</span><strong>03 布局与间距</strong></a>
+    </nav>
+    <p class="chapter__copyright">非官方中文翻译 · 译文与插图版权归 Adam Wathan &amp; Steve Schoger 所有 · <a href="../notice.html">版权与授权说明</a></p>
+  </footer>
+</article>
+</main>
+<aside class="toc" aria-label="本页目录">
+  <div class="toc__inner">
+    <p class="kicker">ON THIS PAGE</p>
+    <ol class="toc__list"><li><a href="#s1" data-spy="s1">2.1</a></li><li><a href="#s2" data-spy="s2">2.2</a></li><li><a href="#s3" data-spy="s3">2.3</a></li><li><a href="#s4" data-spy="s4">2.4</a></li><li><a href="#s5" data-spy="s5">2.5</a></li><li><a href="#s6" data-spy="s6">2.6</a></li><li><a href="#s7" data-spy="s7">2.7</a></li><li><a href="#s8" data-spy="s8">2.8</a></li></ol>
+    <div class="toc__progress">
+      <div class="toc__progress-row"><span>本章已读</span><b data-chapter-percent>0%</b></div>
+      <div class="toc__bar"><i data-chapter-progress></i></div>
+    </div>
+    <p class="toc__hint">快捷键：<kbd>Ctrl K</kbd> 搜索 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 字体 · <kbd>Esc</kbd> 关闭</p>
+  </div>
+</aside>
+</div>
+<script>window.RUI_PAGE = {kind:'chapter', chapter:'02', title:'层级就是一切'};window.RUI_DEMOS = {"hierarchy": {"chapter": "02", "title": "层级三要素", "desc": "尺寸、字重、颜色——拖动三个变量，观察视线如何被重新排序。", "hint": "拖动三个变量，再用「眯眼测试」验证"}, "emphasis": {"chapter": "02", "title": "强调与弱化", "desc": "想突出一个按钮，不一定要让它更亮。试试用弱化周围元素来建立强调。", "hint": "切换策略，比较两种强调方式"}};</script>
+<script src="../assets/js/book.js"></script>
+<script src="../assets/js/demo-runtime.js"></script>
+<script src="../assets/js/demos/hierarchy.js"></script>
+<script src="../assets/js/demos/emphasis.js"></script>
+<script src="../assets/js/live-runtime.js"></script>
+<script src="../assets/js/live/02.js"></script>
+<a id="backhome" href="../../index.html">← 返回选书</a>
+</body>
+</html>

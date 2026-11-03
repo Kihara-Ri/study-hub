@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>图片的运用 · 第 7 章 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/book.css">
+<link rel="stylesheet" href="../assets/css/demos.css">
+<link rel="stylesheet" href="../assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--chapter" data-chapter="07">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">第 7 章 / 共 9 章</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="章节目录">
+  <div class="rail__head">
+    <p class="kicker">CONTENTS</p>
+    <p class="rail__count">9 章 · 284 幅插图</p>
+  </div>
+  <a class="rail__home" href="../index.html">← 封面与目录</a>
+  <ol class="chapnav"><li class="chapnav__item">
+<a class="chapnav__link" href="01.html">
+  <span class="chapnav__no">01</span>
+  <span class="chapnav__title">从零开始</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="01"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="02.html">
+  <span class="chapnav__no">02</span>
+  <span class="chapnav__title">层级就是一切</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="02"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="03.html">
+  <span class="chapnav__no">03</span>
+  <span class="chapnav__title">布局与间距</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="03"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="04.html">
+  <span class="chapnav__no">04</span>
+  <span class="chapnav__title">文字设计</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="04"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="05.html">
+  <span class="chapnav__no">05</span>
+  <span class="chapnav__title">色彩的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="05"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="06.html">
+  <span class="chapnav__no">06</span>
+  <span class="chapnav__title">营造层次感</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="06"></b></span>
+</a></li><li class="chapnav__item is-current">
+<a class="chapnav__link" href="07.html" aria-current="page">
+  <span class="chapnav__no">07</span>
+  <span class="chapnav__title">图片的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="07"></b></span>
+</a><ol class="secnav"><li><a href="#s1" data-spy="s1"><span>7.1</span>用好照片</a></li><li><a href="#s2" data-spy="s2"><span>7.2</span>文字需要稳定的对比度<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s3" data-spy="s3"><span>7.3</span>每张图都有它该有的尺寸<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s4" data-spy="s4"><span>7.4</span>当心用户上传的内容<em class="secnav__live" aria-label="可玩"></em></a></li></ol></li><li class="chapnav__item">
+<a class="chapnav__link" href="08.html">
+  <span class="chapnav__no">08</span>
+  <span class="chapnav__title">收尾打磨</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="08"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="09.html">
+  <span class="chapnav__no">09</span>
+  <span class="chapnav__title">持续进阶</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="09"></b></span>
+</a></li></ol>
+  <div class="rail__foot">
+    <a href="../lab.html">互动实验室</a>
+    <a href="../style.html">设计说明</a>
+    <a href="../notice.html">版权</a>
+  </div>
+</aside>
+<main class="main" id="main">
+<article class="chapter">
+  <header class="chapter__head">
+    <p class="kicker">CHAPTER 07 · WORKING WITH IMAGES</p>
+    <h1 class="chapter__title">图片的运用</h1>
+    <p class="chapter__lede">截图、插画、头像与背景图——图片不是装饰，它们需要和文字争夺同一条基线。</p>
+    <ul class="chapter__meta">
+      <li><b>4</b> 节</li>
+      <li><b>24</b> 幅插图</li>
+      <li><b>6</b> 分钟</li>
+      <li><b>1</b> 个互动实验</li><li><b>4</b> 个可玩示例</li>
+    </ul>
+  </header>
+  <nav class="chapter__play" aria-label="本章可玩示例"><span class="chapter__play-label">本章可玩</span><a href="#fig-07-4">背景图上的文字，加一层蒙版</a><a href="#fig-07-11">小图标别放大，装进形状里</a><a href="#fig-07-20">用户上传的图，裁进固定尺寸</a><a href="#fig-07-22">背景色渗过来时，别急着加边框</a></nav>
+  <div class="chapter__body">
+<section class="sec" id="s1">
+<h2 class="sec__h"><a class="sec__no" href="#s1">7.1</a><span>用好照片</span></h2>
+<div class="sec__body">
+<p>照片不行，整个设计就毁了，哪怕其他部分都做得很好。</p><figure class="fig" id="fig-07-1">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="1" data-caption="图 7.1" aria-label="放大查看插图 1">
+<img src="../assets/img/p200-01-740.webp" srcset="../assets/img/p200-01-740.webp 740w, ../assets/img/p200-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="524" alt="图片的运用 · 图 7.1 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.1</span>
+</button>
+</figure><p>如果你的设计需要摄影图片，而你又不是什么摄影高手，只有两条路：</p><ol><li><strong>请一位专业摄影师。</strong></li></ol><p>如果你需要非常特定的照片，就交给专业人士。拍出好照片靠的不只是昂贵的相机，还有布光、构图、色彩——这些技能要练很多年。</p><ol><li><strong>用好图库里的照片。</strong></li></ol><p>如果你需要的照片比较通用，图库资源多的是，花钱就能买到很好的照片。甚至还有 Unsplash 这样的网站，免费提供漂亮的摄影图片。</p><p>不管怎样，都别用占位图做设计，然后指望回头用手机随便拍几张替换上去。这从来行不通。</p>
+</div>
+</section><section class="sec" id="s2">
+<h2 class="sec__h"><a class="sec__no" href="#s2">7.2</a><span>文字需要稳定的对比度</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>有没有试过往一张大主视觉图上放标题，结果发现无论文字用什么颜色，都还是看不清？</p><figure class="fig" id="fig-07-2">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="2" data-caption="图 7.2" aria-label="放大查看插图 2">
+<img src="../assets/img/p202-01-740.webp" srcset="../assets/img/p202-01-740.webp 740w, ../assets/img/p202-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="470" alt="图片的运用 · 图 7.2 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.2</span>
+</button>
+</figure><p>因为问题不在文字，而在图片。</p><h3 class="sub" id="s2-1"><a class="sub__anchor" href="#s2-1" aria-hidden="true">#</a>背景图片的麻烦</h3><p>照片的动态范围可以很大，有很多很亮的区域，也有很多很暗的区域。白字在暗处看着很清楚，一到亮处就消失了。深色文字在亮处很清楚，一到暗处就没了。</p><figure class="fig" id="fig-07-3">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="3" data-caption="图 7.3" aria-label="放大查看插图 3">
+<img src="../assets/img/p203-01-740.webp" srcset="../assets/img/p203-01-740.webp 740w, ../assets/img/p203-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="230" alt="图片的运用 · 图 7.3 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.3</span>
+</button>
+</figure><p>要解决这个问题，你得<em>降低</em>图片的动态范围，让文字和背景之间的对比度更稳定。</p><h3 class="sub" id="s2-2"><a class="sub__anchor" href="#s2-2" aria-hidden="true">#</a>加一层蒙版</h3><p>提高文字整体对比度的一个办法，是在背景图上叠一层半透明蒙版。</p><figure class="fig fig--live" id="fig-07-4">
+<div class="livefig" data-live="07-4">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="07" data-fig="4" data-caption="图 7.4" aria-label="放大查看原书插图 4">
+<img src="../assets/img/p203-02-740.webp" srcset="../assets/img/p203-02-740.webp 740w, ../assets/img/p203-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="478" alt="图片的运用 · 图 7.4 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 7.4</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">背景图上的文字，加一层蒙版</span>
+<span class="livefig__hint">换蒙版颜色和浓度，看白字在亮处还看得清吗</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>黑色蒙版能压暗亮部，让浅色文字更突出；白色蒙版能提亮暗部，让深色文字更突出。</p><h3 class="sub" id="s2-3"><a class="sub__anchor" href="#s2-3" aria-hidden="true">#</a>降低图片对比度</h3><p>用蒙版要付出一个代价：你把<em>整张</em>图片都调亮或调暗了，而不只是有问题的那些区域。</p><p>想要更精细的控制，另一个办法是降低图片本身的对比度：</p><figure class="fig" id="fig-07-5">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="5" data-caption="图 7.5" aria-label="放大查看插图 5">
+<img src="../assets/img/p204-01-740.webp" srcset="../assets/img/p204-01-740.webp 740w, ../assets/img/p204-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="522" alt="图片的运用 · 图 7.5 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.5</span>
+</button>
+</figure><p>降低对比度会改变整张图片给人的明暗感受，所以记得调整亮度来补偿。</p><h3 class="sub" id="s2-4"><a class="sub__anchor" href="#s2-4" aria-hidden="true">#</a>给图片着色</h3><p>让文字在图片上更突出的另一个办法，是给图片加上单一的颜色。</p><p>有些修图软件自带这个功能，如果你的软件没有，可以分三步做出这个效果：</p><ol><li><strong>降低图片对比度</strong>，让明暗先平衡一些。</li><li><strong>降低图片饱和度</strong>，去掉原有的颜色。</li><li><strong>叠一层纯色填充</strong>，用“multiply”混合模式。</li></ol><figure class="fig" id="fig-07-6">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="6" data-caption="图 7.6" aria-label="放大查看插图 6">
+<img src="../assets/img/p205-01-740.webp" srcset="../assets/img/p205-01-740.webp 740w, ../assets/img/p205-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="522" alt="图片的运用 · 图 7.6 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.6</span>
+</button>
+</figure><p>这也是让背景图和现有品牌色更搭的好办法。</p><h3 class="sub" id="s2-5"><a class="sub__anchor" href="#s2-5" aria-hidden="true">#</a>给文字加阴影</h3><p>如果你想保留背景图更多明暗变化，文字阴影是个好办法，可以只在你最需要的地方提高对比度。</p><p>你要的是更像一层淡淡的光晕，而不是真正的阴影，所以用大的模糊半径，不要加任何偏移。</p><figure class="fig" id="fig-07-7">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="7" data-caption="图 7.7" aria-label="放大查看插图 7">
+<img src="../assets/img/p206-01-740.webp" srcset="../assets/img/p206-01-740.webp 740w, ../assets/img/p206-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="492" alt="图片的运用 · 图 7.7 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.7</span>
+</button>
+</figure><p>降低整张图片的对比度仍然是个好主意，但配合文字阴影之后，就可以少降一些。</p>
+<div class="demo-slot" data-demo="image-overlay"></div>
+</div>
+</section><section class="sec" id="s3">
+<h2 class="sec__h"><a class="sec__no" href="#s3">7.3</a><span>每张图都有它该有的尺寸</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>大家都知道，把位图放大到超过原始尺寸是坏主意——图片立刻就会发虚，失去清晰度。</p><figure class="fig" id="fig-07-8">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="8" data-caption="图 7.8" aria-label="放大查看插图 8">
+<img src="../assets/img/p208-01-740.webp" srcset="../assets/img/p208-01-740.webp 740w, ../assets/img/p208-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="108" alt="图片的运用 · 图 7.8 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.8</span>
+</button>
+</figure><p>但缩放上的坑不止这一处，哪怕你觉得自己已经很稳妥了。</p><h3 class="sub" id="s3-1"><a class="sub__anchor" href="#s3-1" aria-hidden="true">#</a>别放大图标</h3><p>如果你在做的东西正需要一些大图标<em>（比如落地页上的“功能”区块）</em>，你可能会下意识地打开最喜欢的 SVG 图标集，把尺寸调到够用为止。</p><p>它们毕竟是矢量图，放大之后质量不会变差，对吧？</p><figure class="fig" id="fig-07-9">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="9" data-caption="图 7.9" aria-label="放大查看插图 9">
+<img src="../assets/img/p208-02-740.webp" srcset="../assets/img/p208-02-740.webp 740w, ../assets/img/p208-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="230" alt="图片的运用 · 图 7.9 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.9</span>
+</button>
+</figure><p>矢量图放大的确不会降低质量，但那些按 16–24 像素画出来的图标，放大到原尺寸的 3 倍或 4 倍之后，怎么看都不专业。它们细节不够，而且总显得格外“笨重”。</p><figure class="fig" id="fig-07-10">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="10" data-caption="图 7.10" aria-label="放大查看插图 10">
+<img src="../assets/img/p209-01-740.webp" srcset="../assets/img/p209-01-740.webp 740w, ../assets/img/p209-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="165" alt="图片的运用 · 图 7.10 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.10</span>
+</button>
+</figure><p>如果你手头只有小图标，试试把它们装进另一个形状里，再给这个形状一个背景色：</p><figure class="fig fig--live" id="fig-07-11">
+<div class="livefig" data-live="07-11">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="07" data-fig="11" data-caption="图 7.11" aria-label="放大查看原书插图 11">
+<img src="../assets/img/p209-02-740.webp" srcset="../assets/img/p209-02-740.webp 740w, ../assets/img/p209-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="165" alt="图片的运用 · 图 7.11 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 7.11</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">小图标别放大，装进形状里</span>
+<span class="livefig__hint">同一尺寸拖一下，对比直接放大与装进圆形状</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>这样图标本身就能更接近它该有的尺寸，同时又能占满更大的空间。</p><figure class="fig" id="fig-07-12">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="12" data-caption="图 7.12" aria-label="放大查看插图 12">
+<img src="../assets/img/p209-03-740.webp" srcset="../assets/img/p209-03-740.webp 740w, ../assets/img/p209-03-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="230" alt="图片的运用 · 图 7.12 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.12</span>
+</button>
+</figure><h3 class="sub" id="s3-2"><a class="sub__anchor" href="#s3-2" aria-hidden="true">#</a>别缩小截图</h3><p>假设你想在同一个功能页上放一张应用的截图。</p><p>如果你截了一张全尺寸的图，再缩小 70% 让它塞进去，最后得到的是一张硬要把过多细节塞进极小空间的图。</p><figure class="fig" id="fig-07-13">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="13" data-caption="图 7.13" aria-label="放大查看插图 13">
+<img src="../assets/img/p210-01-740.webp" srcset="../assets/img/p210-01-740.webp 740w, ../assets/img/p210-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="514" alt="图片的运用 · 图 7.13 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.13</span>
+</button>
+</figure><p>应用里 16 像素的字，到了截图里就变成 4 像素，访客只能把眼睛凑到离屏幕两英寸的地方使劲看，想弄清楚那堆文字到底写了什么。</p><p>如果你要在设计里放一张细节丰富的截图，就在更小的屏幕尺寸下截图<em>（比如平板布局）</em>，并且给它留出足够大的空间，这样就不必缩得太小：</p><figure class="fig" id="fig-07-14">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="14" data-caption="图 7.14" aria-label="放大查看插图 14">
+<img src="../assets/img/p211-01-740.webp" srcset="../assets/img/p211-01-740.webp 740w, ../assets/img/p211-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="404" alt="图片的运用 · 图 7.14 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.14</span>
+</button>
+</figure><p>或者考虑只截一部分，这样用更小的空间就能展示，也不必缩放：</p><figure class="fig" id="fig-07-15">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="15" data-caption="图 7.15" aria-label="放大查看插图 15">
+<img src="../assets/img/p211-02-740.webp" srcset="../assets/img/p211-02-740.webp 740w, ../assets/img/p211-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="405" alt="图片的运用 · 图 7.15 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.15</span>
+</button>
+</figure><p>如果实在要把整个应用的截图塞进很小的空间，试试画个简化版界面，去掉细节，把小字换成简单的线条：</p><figure class="fig" id="fig-07-16">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="16" data-caption="图 7.16" aria-label="放大查看插图 16">
+<img src="../assets/img/p212-01-740.webp" srcset="../assets/img/p212-01-740.webp 740w, ../assets/img/p212-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="405" alt="图片的运用 · 图 7.16 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.16</span>
+</button>
+</figure><p>这样依然能传达整体的设计，又不会引诱访客去辨认那些细节。</p><h3 class="sub" id="s3-3"><a class="sub__anchor" href="#s3-3" aria-hidden="true">#</a>图标也别缩小</h3><p>按 16 像素画的图标放大后会显得笨重，同样，本来用于大尺寸的图标缩小后也会变得毛糙、发虚。</p><p>最极端的例子是 favicon，也就是浏览器标签页里标题旁边那个小图标。</p><p>把一个按 128 像素画的 logo 缩到 favicon 的尺寸，浏览器拼命想在 16 像素见方的小格子里渲染出全部细节，结果只会是一团糊：</p><figure class="fig" id="fig-07-17">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="17" data-caption="图 7.17" aria-label="放大查看插图 17">
+<img src="../assets/img/p213-01-740.webp" srcset="../assets/img/p213-01-740.webp 740w, ../assets/img/p213-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="160" alt="图片的运用 · 图 7.17 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.17</span>
+</button>
+</figure><p>更好的做法是按目标尺寸重画一版极简的 logo，把取舍握在自己手里，而不是交给浏览器：</p><figure class="fig" id="fig-07-18">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="18" data-caption="图 7.18" aria-label="放大查看插图 18">
+<img src="../assets/img/p213-02-740.webp" srcset="../assets/img/p213-02-740.webp 740w, ../assets/img/p213-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="160" alt="图片的运用 · 图 7.18 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.18</span>
+</button>
+</figure>
+</div>
+</section><section class="sec" id="s4">
+<h2 class="sec__h"><a class="sec__no" href="#s4">7.4</a><span>当心用户上传的内容</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>一旦要依赖用户上传的图片，你就没法从容地调对比度、细抠颜色，或者裁出完美的构图。</p><p>你总会在某种程度上受制于用户，但还是有<em>几件</em>事可以做，保证他们上传的内容不会彻底毁掉你的设计。</p><h3 class="sub" id="s4-1"><a class="sub__anchor" href="#s4-1" aria-hidden="true">#</a>控制形状和尺寸</h3><p>按图片原始宽高比展示用户上传的图，很容易把布局搞乱，尤其是屏幕上同时有很多图的时候。</p><figure class="fig" id="fig-07-19">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="19" data-caption="图 7.19" aria-label="放大查看插图 19">
+<img src="../assets/img/p214-01-740.webp" srcset="../assets/img/p214-01-740.webp 740w, ../assets/img/p214-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="420" alt="图片的运用 · 图 7.19 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.19</span>
+</button>
+</figure><p>与其让用户随意破坏页面结构，不如把他们的图片居中放进固定尺寸的容器里，超出部分裁掉。</p><figure class="fig fig--live" id="fig-07-20">
+<div class="livefig" data-live="07-20">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="07" data-fig="20" data-caption="图 7.20" aria-label="放大查看原书插图 20">
+<img src="../assets/img/p215-01-740.webp" srcset="../assets/img/p215-01-740.webp 740w, ../assets/img/p215-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="360" alt="图片的运用 · 图 7.20 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 7.20</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">用户上传的图，裁进固定尺寸</span>
+<span class="livefig__hint">切填充方式和焦点，看网格什么时候被撑乱</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>现在用 CSS 做这件事很简单：把图片设成背景图，再把 <code>background-size</code> 属性设为 <code>cover</code>。</p><figure class="fig" id="fig-07-21">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="21" data-caption="图 7.21" aria-label="放大查看插图 21">
+<img src="../assets/img/p215-02-740.webp" srcset="../assets/img/p215-02-740.webp 740w, ../assets/img/p215-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="421" alt="图片的运用 · 图 7.21 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.21</span>
+</button>
+</figure><h3 class="sub" id="s4-2"><a class="sub__anchor" href="#s4-2" aria-hidden="true">#</a>防止背景渗色</h3><p>当用户提供的图片背景色和你的界面背景色相近时，图片和背景会渗到一起，图片就失去了形状。</p><figure class="fig fig--live" id="fig-07-22">
+<div class="livefig" data-live="07-22">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="07" data-fig="22" data-caption="图 7.22" aria-label="放大查看原书插图 22">
+<img src="../assets/img/p216-01-740.webp" srcset="../assets/img/p216-01-740.webp 740w, ../assets/img/p216-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="346" alt="图片的运用 · 图 7.22 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 7.22</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">背景色渗过来时，别急着加边框</span>
+<span class="livefig__hint">把照片背景调得跟界面一样，再试三种补救</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>别急着用边框解决，试试加一层轻微的内阴影：</p><figure class="fig" id="fig-07-23">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="23" data-caption="图 7.23" aria-label="放大查看插图 23">
+<img src="../assets/img/p216-02-740.webp" srcset="../assets/img/p216-02-740.webp 740w, ../assets/img/p216-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="346" alt="图片的运用 · 图 7.23 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.23</span>
+</button>
+</figure><p>边框经常和图片里的颜色打架，而大多数人几乎注意不到那层阴影的存在。</p><p>如果你不喜欢内阴影带来的轻微“凹陷”感，用半透明的内边框也很好。</p><figure class="fig" id="fig-07-24">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="07" data-fig="24" data-caption="图 7.24" aria-label="放大查看插图 24">
+<img src="../assets/img/p217-01-740.webp" srcset="../assets/img/p217-01-740.webp 740w, ../assets/img/p217-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="346" alt="图片的运用 · 图 7.24 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 7.24</span>
+</button>
+</figure>
+</div>
+</section>
+  </div>
+  <footer class="chapter__foot">
+    <div class="readmark">
+      <button class="btn btn--mark" type="button" data-mark-read="07">标记本章已读</button>
+      <p class="readmark__hint" data-read-hint>读完点一下，首页会记住你的进度。</p>
+    </div>
+    <nav class="pager" aria-label="章节翻页">
+      <a class="pager__link pager__link--prev" href="06.html"><span>← 上一章</span><strong>06 营造层次感</strong></a><a class="pager__link pager__link--next" href="08.html"><span>下一章 →</span><strong>08 收尾打磨</strong></a>
+    </nav>
+    <p class="chapter__copyright">非官方中文翻译 · 译文与插图版权归 Adam Wathan &amp; Steve Schoger 所有 · <a href="../notice.html">版权与授权说明</a></p>
+  </footer>
+</article>
+</main>
+<aside class="toc" aria-label="本页目录">
+  <div class="toc__inner">
+    <p class="kicker">ON THIS PAGE</p>
+    <ol class="toc__list"><li><a href="#s1" data-spy="s1">7.1</a></li><li><a href="#s2" data-spy="s2">7.2</a></li><li><a href="#s3" data-spy="s3">7.3</a></li><li><a href="#s4" data-spy="s4">7.4</a></li></ol>
+    <div class="toc__progress">
+      <div class="toc__progress-row"><span>本章已读</span><b data-chapter-percent>0%</b></div>
+      <div class="toc__bar"><i data-chapter-progress></i></div>
+    </div>
+    <p class="toc__hint">快捷键：<kbd>Ctrl K</kbd> 搜索 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 字体 · <kbd>Esc</kbd> 关闭</p>
+  </div>
+</aside>
+</div>
+<script>window.RUI_PAGE = {kind:'chapter', chapter:'07', title:'图片的运用'};window.RUI_DEMOS = {"image-overlay": {"chapter": "07", "title": "图上文字", "desc": "在照片上放文字，用遮罩、渐变或模糊找回可读性。", "hint": "切换方案，比较文字可读性"}};</script>
+<script src="../assets/js/book.js"></script>
+<script src="../assets/js/demo-runtime.js"></script>
+<script src="../assets/js/demos/image-overlay.js"></script>
+<script src="../assets/js/live-runtime.js"></script>
+<script src="../assets/js/live/07.js"></script>
+<a id="backhome" href="../../index.html">← 返回选书</a>
+</body>
+</html>

@@ -1,0 +1,611 @@
+/* ============================================================================
+ * anno.css —— 注释交互层样式（术语标注 / 脚注卡片 / 小知识 tips / 术语表面板）
+ * ----------------------------------------------------------------------------
+ * 依赖 assets/style.css 的设计变量（--bg / --bg2 / --card / --ink / --line /
+ * --pink / --teal / --green / --amber / --radius / --font / --ar），深浅色自动
+ * 跟随 html[data-theme="dark"] 与 prefers-color-scheme，不另写深色变量。
+ * 所有选择器都带 anno- / ap- / at- / ac- 前缀或本层专属 id，不覆盖阅读器既有
+ * 样式；打印时只保留术语虚线、脚注角标与文末注释列表。
+ * ==========================================================================*/
+
+/* ---- 本层专属变量：术语点线下划线（体感可见但不抢正文） ---- */
+:root { --anno-line: rgba(47, 127, 143, .42); }
+[data-theme="dark"] { --anno-line: rgba(95, 179, 194, .52); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --anno-line: rgba(95, 179, 194, .52); }
+}
+
+/* ============================ 1. 顶栏入口按钮 ============================ */
+#btnAnno {
+  font-size: 16px; font-weight: 700; line-height: 1;
+  color: var(--teal); letter-spacing: 0;
+  font-family: var(--font);
+}
+#btnAnno:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-soft); }
+#btnAnno[aria-expanded="true"] {
+  background: var(--teal); border-color: var(--teal); color: var(--bg);
+}
+#btnAnno .anno-entry-dot {
+  display: block; width: 5px; height: 5px; margin-top: 2px;
+  border-radius: 50%; background: currentColor; opacity: .55;
+}
+
+/* ============================ 2. 正文术语标注 ============================ */
+.anno {
+  cursor: pointer;
+  border-bottom: 1px dotted var(--anno-line);
+  border-radius: 2px;
+  /* 不改变行高/字距，避免正文抖动 */
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.anno:hover {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+  background: var(--teal-soft);
+}
+.anno:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+  border-bottom-color: var(--teal);
+}
+.anno.anno-on {
+  background: var(--teal-soft);
+  border-bottom-style: solid;
+  border-bottom-color: var(--teal);
+}
+
+/* 悬停短提示（桌面；不接收指针事件，避免抢 hover） */
+.anno-hover {
+  position: fixed; z-index: 93;
+  box-sizing: border-box;
+  max-width: min(280px, calc(100vw - 16px));
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  font-family: var(--font);
+  font-size: 12.5px; line-height: 1.6;
+  text-align: left;
+  pointer-events: none;
+  animation: annoFade .12s ease;
+  overflow-wrap: break-word;
+}
+.anno-hover[hidden], .anno-card[hidden], .anno-scrim[hidden] { display: none !important; }
+
+/* ============================ 3. 术语 / 脚注弹卡 ============================ */
+.anno-card {
+  position: fixed; z-index: 92;
+  box-sizing: border-box;
+  width: 344px;
+  max-width: calc(100vw - 20px);
+  max-height: min(72vh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 13px 15px 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+  animation: annoPop .14s ease;
+}
+@keyframes annoPop {
+  from { opacity: 0; transform: translateY(5px) scale(.99); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes annoFade { from { opacity: 0; } to { opacity: 1; } }
+
+.ac-top {
+  display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap;
+}
+.ac-name {
+  flex: 1 1 auto; min-width: 0;
+  margin: 0; padding-top: 1px;
+  font-family: var(--font);
+  font-size: 17px; font-weight: 800; line-height: 1.45;
+  color: var(--ink);
+  letter-spacing: .01em;
+  overflow-wrap: break-word;
+}
+.ac-x {
+  flex: none; width: 26px; height: 26px; margin: -2px -3px 0 0;
+  display: grid; place-items: center;
+  border: 1px solid transparent; border-radius: 50%;
+  background: transparent; color: var(--ink3);
+  font: inherit; font-size: 15px; line-height: 1;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.ac-x:hover { background: var(--pink-soft); border-color: var(--pink); color: var(--pink); }
+.ac-x:focus-visible { outline: 2px solid var(--pink); outline-offset: 1px; }
+
+.ac-short {
+  margin: 8px 0 0;
+  font-family: var(--font);
+  font-size: 13.5px; line-height: 1.78;
+  color: var(--ink2);
+  overflow-wrap: break-word;
+}
+.ac-short.muted { color: var(--ink3); }
+.ac-long {
+  margin: 9px 0 0; padding-top: 9px;
+  border-top: 1px dashed var(--line);
+  font-family: var(--font);
+  font-size: 13.5px; line-height: 1.82;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+.ac-long[hidden] { display: none !important; }
+.ac-foot {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px;
+  margin-top: 10px;
+}
+.ac-more {
+  flex: none;
+  padding: 3px 11px;
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  background: var(--teal-soft);
+  color: var(--teal);
+  font: inherit; font-size: 12px; font-weight: 700; line-height: 1.7;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.ac-more:hover { background: var(--teal); color: var(--bg); }
+.ac-more:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.ac-alias {
+  flex: 1 1 120px; min-width: 0;
+  font-family: var(--font);
+  font-size: 11.5px; line-height: 1.6; color: var(--ink3);
+  overflow-wrap: break-word;
+}
+.ac-src {
+  margin: 7px 0 0;
+  font-family: var(--font);
+  font-size: 11.5px; line-height: 1.6; color: var(--ink3);
+}
+.ac-note {
+  margin: 8px 0 0;
+  font-family: var(--font);
+  font-size: 13.5px; line-height: 1.85;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+.ac-hint {
+  margin: 8px 0 0;
+  padding: 7px 9px;
+  border: 1px dashed var(--line2);
+  border-radius: 9px;
+  background: var(--bg2);
+  font-family: var(--font);
+  font-size: 11.5px; line-height: 1.65; color: var(--ink3);
+}
+
+/* 手机（≤600px）：弹卡改底部抽屉 + 半透明遮罩 */
+.anno-scrim {
+  position: fixed; inset: 0; z-index: 91;
+  background: rgba(28, 22, 16, .34);
+  animation: annoFade .14s ease;
+}
+html[data-theme="dark"] .anno-scrim { background: rgba(0, 0, 0, .56); }
+.anno-card.sheet {
+  left: 10px !important; right: 10px; top: auto !important; bottom: 10px;
+  width: auto; max-width: none; max-height: 74vh;
+  padding: 15px 17px 14px;
+  border-radius: 20px;
+  box-shadow: 0 -8px 40px rgba(60, 40, 20, .18), var(--shadow-lg);
+  animation: annoSheet .18s ease;
+}
+@keyframes annoSheet {
+  from { opacity: .4; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+.anno-card.sheet .ac-name { font-size: 18px; }
+.anno-card.sheet .ac-short,
+.anno-card.sheet .ac-note { font-size: 14px; }
+
+/* ============================ 4. kind 徽标 ============================ */
+.anno-badge {
+  display: inline-flex; align-items: center; flex: none;
+  padding: 1px 8px;
+  border: 1px solid var(--line2);
+  border-radius: 999px;
+  background: var(--bg2);
+  color: var(--ink2);
+  font-family: var(--font);
+  font-size: 10.5px; font-weight: 700; line-height: 1.7;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+.anno-badge.k-term   { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); }
+.anno-badge.k-person { border-color: var(--pink); background: var(--pink-soft); color: var(--pink); }
+.anno-badge.k-place  { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+.anno-badge.k-book   { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); }
+.anno-badge.k-quran  { border-color: var(--pink); border-style: dashed; background: var(--pink-soft); color: var(--pink); }
+.anno-badge.k-event  { border-color: var(--amber); border-style: dashed; background: var(--amber-soft); color: var(--amber); }
+.anno-badge.k-grammar{ border-color: var(--teal); border-style: dotted; background: var(--teal-soft); color: var(--teal); }
+.anno-badge.k-islam  { border-color: var(--pink); border-style: dashed; background: var(--pink-soft); color: var(--pink); }
+.anno-badge.k-language { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); }
+.anno-badge.k-history  { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); }
+.anno-badge.k-geography{ border-color: var(--green); background: var(--green-soft); color: var(--green); }
+.anno-badge.k-literature { border-color: var(--amber); border-style: dotted; background: var(--amber-soft); color: var(--amber); }
+.anno-badge.k-reading  { border-color: var(--teal); border-style: dotted; background: var(--teal-soft); color: var(--teal); }
+.anno-badge.k-note   { border-color: var(--pink); background: var(--pink-soft); color: var(--pink); }
+.anno-badge.k-other  { border-color: var(--line2); background: var(--bg2); color: var(--ink2); }
+
+/* ============================ 5. 脚注角标（fn-ref） ============================ */
+/* lead 在 assemble 里生成：<span class="fn-ref" data-fn="41" tabindex="0" role="button">注41</span>
+ * 芯片视觉由 assets/style.css 提供（粉色药丸 + 上标），这里不覆盖字号/内边距/行高，
+ * 只补 bidi 隔离与行内间距，保证在 RTL 段落里不被 bidi 甩位。
+ * （anno.js 会兜底补 tabindex/role/title。） */
+.fn-ref {
+  unicode-bidi: isolate;
+  letter-spacing: 0;
+  text-indent: 0;
+  white-space: nowrap;
+}
+.anno-card .ac-note .ar,
+.anno-card .ac-note [dir="rtl"] { font-family: var(--ar); }
+
+/* ============================ 6. 小知识 tips ============================ */
+.anno-tip {
+  box-sizing: border-box;
+  margin: 22px 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  overflow: hidden;
+  text-align: left;
+  break-inside: avoid;
+}
+.anno-tip.at-v1 {
+  border-inline-start: 3px solid var(--teal);
+  background:
+    linear-gradient(90deg, var(--teal-soft) 0%, transparent 34%),
+    var(--card);
+}
+.at-head {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  width: 100%;
+  margin: 0; padding: 12px 15px;
+  border: 0; background: none;
+  font-family: var(--font); color: var(--ink);
+  text-align: left; cursor: pointer;
+}
+.at-head:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; border-radius: 12px; }
+.at-head:hover .at-title { color: var(--teal); }
+.at-ico { flex: none; font-size: 14px; line-height: 1; }
+.at-label {
+  flex: none;
+  font-size: 11.5px; font-weight: 800; line-height: 1.6;
+  letter-spacing: .08em; color: var(--teal);
+}
+.at-title {
+  flex: 1 1 auto; min-width: 0;
+  font-size: 14px; font-weight: 700; line-height: 1.55;
+  color: var(--ink);
+  transition: color .15s ease;
+  overflow-wrap: break-word;
+}
+.at-chev {
+  flex: none; margin-inline-start: auto;
+  font-size: 11px; line-height: 1; color: var(--ink3);
+  transition: transform .16s ease;
+}
+.at-head[aria-expanded="true"] .at-chev { transform: rotate(180deg); }
+.at-body {
+  padding: 0 15px 14px;
+  font-family: var(--font);
+  font-size: 13.8px; line-height: 1.88;
+  color: var(--ink2);
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+.at-body[hidden] { display: none !important; }
+
+/* 变体 2：米色底、更小的 inline 折叠（同页第 2 条起） */
+.anno-tip.at-v2 {
+  margin: 16px 0;
+  border: 1px dashed var(--line2);
+  border-radius: 11px;
+  background: var(--bg2);
+}
+.anno-tip.at-v2 .at-head { padding: 8px 12px; gap: 6px; }
+.anno-tip.at-v2 .at-label { color: var(--ink3); font-size: 10.5px; }
+.anno-tip.at-v2 .at-title { font-size: 13px; font-weight: 700; }
+.anno-tip.at-v2 .at-ico { font-size: 12px; }
+.anno-tip.at-v2 .at-body { padding: 0 12px 11px; font-size: 12.8px; line-height: 1.82; }
+
+/* ============================ 7. 术语表全屏面板 ============================ */
+#annoPanel {
+  position: fixed; inset: 0; z-index: 96;
+  display: flex; justify-content: center;
+  background: var(--bg);
+  background-image:
+    radial-gradient(900px 460px at 10% -8%, rgba(47, 127, 143, .06), transparent 70%),
+    radial-gradient(820px 440px at 100% 0%, rgba(224, 69, 123, .05), transparent 70%);
+  overflow: hidden;
+  animation: annoFade .16s ease;
+}
+#annoPanel[hidden] { display: none !important; }
+html.anno-open, html.anno-open body { overflow: hidden !important; }
+
+.ap-inner {
+  display: flex; flex-direction: column;
+  width: 100%; max-width: 1000px; height: 100%; min-height: 0;
+}
+.ap-head {
+  display: flex; align-items: center; gap: 14px;
+  flex: none; padding: 18px 26px 10px;
+}
+.ap-hd-text { flex: 1 1 auto; min-width: 0; }
+.ap-title {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 21px; font-weight: 800; line-height: 1.35;
+  letter-spacing: .02em; color: var(--ink);
+}
+.ap-title::before {
+  content: ""; display: inline-block; width: 8px; height: 8px;
+  margin-inline-end: 9px; border-radius: 2px; vertical-align: 3px;
+  background: var(--teal); transform: rotate(45deg);
+}
+.ap-sub {
+  margin: 3px 0 0;
+  font-family: var(--font);
+  font-size: 12px; line-height: 1.6; color: var(--ink3);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ap-close {
+  width: 36px; height: 36px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink2);
+  font: inherit; font-size: 15px; line-height: 1; cursor: pointer;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.ap-close:hover { border-color: var(--pink); color: var(--pink); background: var(--pink-soft); }
+.ap-close:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+
+.ap-toolbar {
+  display: flex; align-items: center; gap: 12px;
+  flex: none; padding: 2px 26px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.ap-search { position: relative; flex: 1 1 auto; min-width: 0; max-width: 480px; }
+.ap-search .ap-sico {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  width: 15px; height: 15px; color: var(--ink3); pointer-events: none;
+}
+.ap-search input {
+  box-sizing: border-box;
+  width: 100%; padding: 9px 36px 9px 34px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--card); color: var(--ink);
+  font-family: var(--font); font-size: 13.5px; line-height: 1.6;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.ap-search input::placeholder { color: var(--ink3); }
+.ap-search input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-soft);
+}
+.ap-clear {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 26px; height: 26px; display: grid; place-items: center;
+  border: 0; border-radius: 50%; background: transparent; color: var(--ink3);
+  font: inherit; font-size: 14px; line-height: 1; cursor: pointer;
+}
+.ap-clear:hover { background: var(--pink-soft); color: var(--pink); }
+.ap-clear[hidden] { display: none !important; }
+.ap-count {
+  flex: none;
+  font-family: var(--font); font-size: 12px; color: var(--ink3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ap-body {
+  flex: 1 1 auto; min-height: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 26px 64px;
+}
+.ap-group { max-width: 920px; margin: 0 auto 26px; }
+.ap-group[hidden] { display: none !important; }
+.ap-ghead {
+  display: flex; align-items: center; gap: 8px;
+  margin: 0 0 10px;
+  font-family: var(--font);
+  font-size: 14px; font-weight: 800; line-height: 1.5; color: var(--ink);
+}
+.ap-gcount { font-size: 11.5px; font-weight: 500; color: var(--ink3); font-variant-numeric: tabular-nums; }
+.ap-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 8px; }
+.ap-item-wrap { min-width: 0; }
+.ap-item-wrap[hidden] { display: none !important; }
+.ap-item {
+  display: flex; align-items: center; gap: 8px;
+  box-sizing: border-box; width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--card); color: var(--ink);
+  font-family: var(--font); text-align: left; cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.ap-item:hover { border-color: var(--teal); background: var(--teal-soft); }
+.ap-item:focus-visible { outline: 2px solid var(--teal); outline-offset: -1px; }
+.ap-item[aria-expanded="true"] {
+  border-color: var(--teal); background: var(--teal-soft);
+  border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+}
+.ap-term {
+  flex: none; max-width: 46%;
+  font-size: 14.5px; font-weight: 700; line-height: 1.55; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ap-short {
+  flex: 1 1 auto; min-width: 0;
+  font-size: 12.5px; line-height: 1.6; color: var(--ink3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ap-arrow {
+  flex: none; margin-inline-start: auto;
+  font-size: 10px; line-height: 1; color: var(--ink3);
+  transition: transform .15s ease;
+}
+.ap-item[aria-expanded="true"] .ap-arrow { transform: rotate(180deg); }
+.ap-detail {
+  padding: 12px 14px 13px;
+  border: 1px solid var(--teal); border-top: 0;
+  border-radius: 0 0 12px 12px;
+  background: var(--bg2);
+}
+.ap-detail[hidden] { display: none !important; }
+.ap-long {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 13.5px; line-height: 1.82; color: var(--ink2);
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+.ap-alias {
+  margin: 9px 0 0; padding-top: 8px;
+  border-top: 1px dashed var(--line2);
+  font-family: var(--font);
+  font-size: 11.5px; line-height: 1.65; color: var(--ink3);
+  overflow-wrap: break-word;
+}
+.ap-empty {
+  max-width: 560px; margin: 8vh auto 0;
+  padding: 0 20px;
+  text-align: center;
+  font-family: var(--font); color: var(--ink3);
+}
+.ap-empty-ico { display: block; font-size: 34px; line-height: 1; margin-bottom: 14px; color: var(--line2); }
+.ap-empty h3 { margin: 0 0 8px; font-size: 16px; font-weight: 800; color: var(--ink2); }
+.ap-empty p { margin: 0 0 8px; font-size: 13px; line-height: 1.8; }
+.ap-empty code {
+  padding: 1px 5px; border-radius: 5px;
+  background: var(--bg2); border: 1px solid var(--line);
+  font-size: 12px;
+}
+.ap-nohit {
+  margin: 26px auto; padding: 22px 20px;
+  max-width: 520px;
+  border: 1px dashed var(--line2); border-radius: 12px;
+  background: var(--bg2);
+  text-align: center;
+  font-family: var(--font); font-size: 13px; line-height: 1.8; color: var(--ink3);
+}
+.ap-nohit[hidden] { display: none !important; }
+
+/* ============================ 8. 打印：文末注释列表 ============================ */
+.print-notes { display: none; }
+
+/* ============================ 9. 响应式 ============================ */
+@media (max-width: 819px) {
+  .ap-inner { max-width: none; }
+  .ap-head { padding: 12px 14px 8px; gap: 10px; }
+  .ap-title { font-size: 18px; }
+  .ap-toolbar { padding: 2px 14px 12px; gap: 8px; }
+  .ap-body { padding: 13px 14px 52px; }
+  .anno-card.sheet .ac-foot { margin-top: 12px; }
+}
+@media (max-width: 600px) {
+  .anno-card { width: calc(100vw - 20px); }
+  /* 手机 / 窄窗：只走底部抽屉，不显示桌面悬停短提示（避免鼠标模拟或触屏长按误弹） */
+  .anno-hover { display: none !important; }
+  .ap-search { max-width: none; }
+  .ap-count { display: none; }
+  .ap-item { flex-wrap: wrap; gap: 4px 8px; padding: 10px 12px; }
+  .ap-term { max-width: 100%; font-size: 14px; }
+  .ap-short { display: none; }
+  .ap-item .ap-arrow { position: absolute; right: 12px; }
+  .ap-item { position: relative; padding-right: 30px; }
+  .ap-ghead { font-size: 13px; }
+  .anno-tip { margin: 18px 0; }
+  .at-head { padding: 11px 13px; gap: 6px; flex-wrap: nowrap; }
+  /* 手机上让标题单行省略，避免 ▾ 被挤到第二行 */
+  .at-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .at-body { padding: 0 13px 13px; font-size: 13.4px; }
+  .anno-tip.at-v2 .at-head { padding: 8px 11px; }
+  .anno-tip.at-v2 .at-body { padding: 0 11px 10px; font-size: 12.8px; }
+}
+@media (max-width: 420px) {
+  #btnAnno { width: 30px; height: 30px; }
+  .ap-title { font-size: 17px; }
+  .ac-name { font-size: 16.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anno, .at-chev, .ap-arrow,
+  .anno-card, .anno-hover, #annoPanel, .anno-scrim, .anno-tip { animation: none !important; transition: none !important; }
+}
+
+/* ============================ 10. 打印（讲义模式） ============================ */
+@media print {
+  /* 交互元素全部隐藏（app.js 已隐藏 .topbar，这里再兜底） */
+  #btnAnno, #annoPanel, .anno-card, .anno-hover, .anno-scrim, .ap-close,
+  .at-chev, .ac-more, .ac-x, .ap-toolbar { display: none !important; }
+  html.anno-open, html.anno-open body { overflow: visible !important; }
+
+  /* 术语：保留为虚线下划线，不打印交互态 */
+  .anno {
+    color: inherit !important;
+    background: none !important;
+    border-bottom: 1px dotted #999 !important;
+    cursor: auto;
+  }
+  /* 脚注角标：正常上标、黑白可读；去掉 style.css 打印态加的方括号（正文已是「注41」） */
+  .fn-ref {
+    color: #000 !important;
+    background: none !important;
+    border-color: transparent !important;
+    font-weight: 600;
+  }
+  .fn-ref::before, .fn-ref::after { content: none !important; }
+  /* 小知识：打印为展开的正文卡片 */
+  .anno-tip, .anno-tip.at-v1, .anno-tip.at-v2 {
+    border: 1px solid #c9c2b8 !important;
+    border-inline-start: 2px solid #8a8a8a !important;
+    background: #fff !important;
+    color: #000 !important;
+    margin: 14px 0 !important;
+    border-radius: 0 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .anno-tip .at-head { padding: 8px 11px !important; cursor: default; }
+  .anno-tip .at-body {
+    display: block !important;
+    padding: 0 11px 10px !important;
+    color: #000 !important;
+    font-size: 10pt !important;
+  }
+  .anno-tip .at-ico,
+  .anno-tip .at-title,
+  .anno-tip .at-label,
+  .anno-tip .anno-badge { color: #000 !important; }
+
+  /* 文末注释列表（beforeprint 由 anno.js 动态插入 #content 末尾） */
+  .print-notes {
+    display: block !important;
+    margin-top: 20px; padding-top: 10px;
+    border-top: 1px solid #bbb;
+    font-family: var(--font);
+    font-size: 9pt; line-height: 1.7; color: #222;
+    break-inside: auto;
+  }
+  .print-notes .pn-title {
+    margin: 0 0 6px;
+    font-size: 10.5pt; font-weight: 700; color: #000;
+  }
+  .print-notes .pn-list { margin: 0; padding-left: 1.35em; }
+  .print-notes .pn-item { margin: 0 0 4px; }
+  .print-notes .pn-n { font-weight: 700; margin-inline-end: .35em; }
+  .print-notes .pn-t { overflow-wrap: break-word; word-break: break-word; }
+}

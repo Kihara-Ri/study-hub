@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>设计说明 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/book.css">
+<link rel="stylesheet" href="assets/css/demos.css">
+<link rel="stylesheet" href="assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--doc page--style">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">设计说明</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<main class="main main--doc" id="main">
+  <article class="doc">
+    <p class="kicker">COLOPHON · DESIGN NOTES</p>
+    <h1>这本书自己就是案例</h1>
+    <p class="doc__lede">这本书讲界面设计，所以它自己也得经得起看。下面是我们选的视觉语言，以及为什么。</p>
+
+    <h2>风格：瑞士编辑设计 × 蓝图批注</h2>
+    <p>整体取自瑞士国际主义（Swiss / International Typographic Style）：严格的网格、大号无衬线标题、编号小节、发丝线分隔、克制的红色强调。它像一本设计手册，而不是一张网页——这正好符合原书「手册」的气质。</p>
+    <p>互动实验的部分借了蓝图（Blueprint）的视觉语言：虚线框、角标、网格参考线、编号标签。读者一眼就能分清「这是书的内容」和「这是让你动手的地方」。</p>
+
+    <h2>颜色</h2>
+    <p>纸白背景降低长时间阅读的屏幕眩光；墨色正文保证对比度；瑞士红只出现在当前状态与关键操作上，不抢正文。</p>
+    <ul class="swatches"><li class="swatch"><span class="swatch__chip" style="background:#f7f5f0"></span><span class="swatch__name">纸白 Paper</span><span class="swatch__hex">#f7f5f0</span><span class="swatch__use">背景 / 主画布</span></li><li class="swatch"><span class="swatch__chip" style="background:#161514"></span><span class="swatch__name">墨 Ink</span><span class="swatch__hex">#161514</span><span class="swatch__use">正文 / 标题</span></li><li class="swatch"><span class="swatch__chip" style="background:#55514a"></span><span class="swatch__name">石墨 Graphite</span><span class="swatch__hex">#55514a</span><span class="swatch__use">次要文字 / 注释</span></li><li class="swatch"><span class="swatch__chip" style="background:#e2ddd2"></span><span class="swatch__name">细线 Rule</span><span class="swatch__hex">#e2ddd2</span><span class="swatch__use">分隔线 / 边框</span></li><li class="swatch"><span class="swatch__chip" style="background:#e03131"></span><span class="swatch__name">瑞士红 Swiss Red</span><span class="swatch__hex">#e03131</span><span class="swatch__use">强调 / 当前状态</span></li><li class="swatch"><span class="swatch__chip" style="background:#2f5d8a"></span><span class="swatch__name">蓝图蓝 Blueprint</span><span class="swatch__hex">#2f5d8a</span><span class="swatch__use">互动实验 / 批注</span></li></ul>
+
+    <h2>字体</h2>
+    <p>不加载网络字体：中文用系统黑体（Noto Sans CJK / PingFang SC / 微软雅黑），拉丁用 Helvetica / Arial 一脉。正文另外提供「宋体」阅读模式——在设置里可以随时切换，这也是原书「字重与对比度」一章的现场练习。</p>
+    <ul class="typescale"><li class="typescale__row"><span class="typescale__sample" style="font-size:clamp(38px, 5vw, 60px)">界面设计</span><span class="typescale__meta">章节标题 · 38–60px</span></li><li class="typescale__row"><span class="typescale__sample" style="font-size:27px">界面设计</span><span class="typescale__meta">小节标题 · 27px</span></li><li class="typescale__row"><span class="typescale__sample" style="font-size:18px">界面设计</span><span class="typescale__meta">小标题 · 18px</span></li><li class="typescale__row"><span class="typescale__sample" style="font-size:17px">界面设计</span><span class="typescale__meta">正文 · 17px（可调）</span></li><li class="typescale__row"><span class="typescale__sample" style="font-size:13px">界面设计</span><span class="typescale__meta">图注 · 13px</span></li><li class="typescale__row"><span class="typescale__sample" style="font-size:12px">界面设计</span><span class="typescale__meta">微标签 · 12px</span></li></ul>
+
+    <h2>间距</h2>
+    <p>所有间距来自 4 / 8 的倍数：4、8、12、16、24、32、48、64、96。章节之间用 96–128px 的留白，正文段落之间 24px，让「呼吸」成为默认而不是例外。</p>
+    <div class="spacingdemo">
+      <span style="width:4px"></span><span style="width:8px"></span><span style="width:16px"></span><span style="width:24px"></span><span style="width:32px"></span><span style="width:48px"></span><span style="width:64px"></span><span style="width:96px"></span>
+    </div>
+
+    <h2>动效</h2>
+    <p>动效只用来解释状态变化：滑块的实时反馈、实验面板的切换、灯箱的缩放。所有动画都尊重 <code>prefers-reduced-motion</code>。</p>
+
+    <h2>技术</h2>
+    <p>静态站点，没有前端框架：Python 把 Markdown 构建成 HTML，原生 JS 负责阅读器、13 个实验和 32 个实时重制界面。284 张插图转成 WebP 双尺寸，按需加载。全部代码在 <a href="https://github.com/Kihara-Ri/refactoring-ui-book" rel="noopener">GitHub</a>。</p>
+
+    <p class="doc__back"><a href="index.html">← 返回封面</a> · <a href="lab.html">去实验室</a></p>
+  </article>
+</main>
+<script>window.RUI_PAGE = {kind:'doc'};</script>
+<script src="assets/js/book.js"></script>
+<a id="backhome" href="../index.html">← 返回选书</a>
+</body>
+</html>

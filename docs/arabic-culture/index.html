@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbf7f2" id="themeColor">
+<title>阿拉伯文化背景知识基础教程 · 纯阅读版</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzJmN2Y4ZiIvPjx0ZXh0IHg9IjE2IiB5PSIyNCIgZm9udC1zaXplPSIyMSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZiZjdmMiIgZm9udC1mYW1pbHk9IktGR1FQQyBVdGhtYW4gVGFoYSBOYXNraCwgQW1pcmksIE5vdG8gTmFza2ggQXJhYmljLCBzZXJpZiI+2LY8L3RleHQ+PC9zdmc+">
+<meta name="description" content="《阿拉伯文化背景知识基础教程》（伊斯兰之家中文小组，2015）纯阅读版线上书：三编七章，含阿拉伯文引文、脚注与语法表。">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/learn.css">
+<link rel="stylesheet" href="assets/anno.css">
+<!-- 首屏前应用主题/字号，避免浅色闪一下（无网络请求，纯 localStorage） -->
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('acb.theme');
+    if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+    var f = localStorage.getItem('acb.fs');
+    if (f !== null) {
+      var n = parseInt(f, 10);
+      if (n >= 0 && n <= 3) document.documentElement.setAttribute('data-fs', String(n));
+    }
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<a class="skip" href="#content">跳到正文</a>
+
+<div class="app" id="app">
+
+  <!-- ======================= 左侧：目录树 ======================= -->
+  <aside class="sidebar" id="sidebar" aria-label="全书目录">
+    <div class="brand">
+      <div class="brand-top">
+        <a class="brand-mark" href="#/" aria-label="回到首页" title="回到首页">ض</a>
+        <div class="brand-text">
+          <h1 class="brand-title" id="brandTitle">阿拉伯文化背景知识基础教程</h1>
+          <p class="brand-sub" id="brandSub">纯阅读版</p>
+        </div>
+      </div>
+      <p class="brand-meta" id="brandMeta"></p>
+      <span class="demo-tag" id="demoTag" hidden>示例数据 · 开发中</span>
+    </div>
+
+    <div class="side-search">
+      <svg class="ss-ico" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
+           stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+      <input id="searchInput" type="search" placeholder="搜索全书…" autocomplete="off"
+             spellcheck="false" aria-label="搜索全书" enterkeyhint="search">
+      <button class="ss-clear" id="searchClear" type="button" aria-label="清除搜索" title="清除 (Esc)" hidden>×</button>
+    </div>
+
+    <div class="side-body">
+      <nav class="nav" id="nav" aria-label="目录树"></nav>
+      <div class="results" id="searchResults" hidden aria-live="polite"></div>
+    </div>
+
+    <div class="side-foot">
+      <div class="prog">
+        <div class="prog-head">
+          <span id="progLabel">已读 0%</span>
+          <span id="progCount" class="prog-count"></span>
+        </div>
+        <div class="bar" role="progressbar" aria-label="全书阅读进度" aria-valuemin="0" aria-valuemax="100"
+             aria-valuenow="0" id="progBarWrap"><i id="progBar"></i></div>
+      </div>
+      <div class="foot-actions">
+        <button class="icon-btn" id="themeBtn" type="button" title="主题：跟随系统" aria-label="切换主题">◐</button>
+        <div class="fs-group" id="fsGroup" role="group" aria-label="正文字号">
+          <button type="button" data-fs="0" title="小字号">A</button>
+          <button type="button" data-fs="1" title="标准字号">A</button>
+          <button type="button" data-fs="2" title="大字号">A</button>
+          <button type="button" data-fs="3" title="特大字号">A</button>
+        </div>
+        <button class="icon-btn" id="printBtn2" type="button" title="打印本页（讲义模式）" aria-label="打印本页">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 8V3.5h11V8"/><rect x="3.5" y="8" width="17" height="8.5" rx="2"/><path d="M6.5 14h11v6.5h-11z"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <!-- ======================= 右侧：正文 ======================= -->
+  <main class="main" id="main">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="hamburger" type="button" aria-label="打开目录" title="目录 (Esc 关闭)">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9"
+             stroke-linecap="round" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h16"/></svg>
+      </button>
+      <div class="crumb" id="crumb"></div>
+      <div class="spacer"></div>
+
+      <button class="pill prog-pill" id="progPill" type="button" title="全书阅读进度 · 点击看进度详情">
+        <span class="pp-dot" aria-hidden="true"></span><span id="progPillText">全书 0%</span>
+      </button>
+
+      <div class="top-actions"><a class="icon-btn ac-back" href="../index.html" title="返回选书" aria-label="返回选书" style="text-decoration:none">←</a>
+        <button class="lp-entry" id="btnLearn" type="button" aria-haspopup="dialog"
+                title="打开学习中心（字母表 · 词卡 · 自测 · 名人 · 我的）">互动</button>
+        <button class="icon-btn" id="themeBtn2" type="button" title="主题：跟随系统" aria-label="切换主题">◐</button>
+        <button class="icon-btn" id="printBtn" type="button" title="打印本页（讲义模式）" aria-label="打印本页">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 8V3.5h11V8"/><rect x="3.5" y="8" width="17" height="8.5" rx="2"/><path d="M6.5 14h11v6.5h-11z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="stage" id="stage">
+      <div class="paper" id="paper">
+        <article class="reader" id="content" tabindex="-1"></article>
+        <nav class="pager" id="pager" aria-label="翻页"></nav>
+        <footer class="book-foot" id="bookFoot"></footer>
+      </div>
+      <aside class="outline" id="outline" aria-label="本页小标题" hidden></aside>
+    </div>
+  </main>
+</div>
+
+<!-- 搜索命中条 -->
+<div class="hitbar" id="hitbar" hidden>
+  <span class="hb-count" id="hbCount">0 / 0</span>
+  <span class="hb-sep" aria-hidden="true"></span>
+  <button class="hb-btn" id="hbPrev" type="button" title="上一处 (↑)" aria-label="上一处">‹</button>
+  <button class="hb-btn" id="hbNext" type="button" title="下一处 (↓)" aria-label="下一处">›</button>
+  <button class="hb-btn hb-x" id="hbClose" type="button" title="清除高亮 (Esc)" aria-label="清除高亮">×</button>
+</div>
+
+<!-- 图片放大 -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="图片放大">
+  <figure class="lb-inner">
+    <img id="lbImg" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- 数据：优先真实数据（抽取管线生成），缺失时由 mock-book.js 兜底 -->
+<script src="assets/book.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/extras.js"></script>
+<!-- 术语/小知识数据（anno-data 生成；缺失时 anno.js 自动降级为空） -->
+<script src="assets/annotations.js"></script>
+<script src="assets/learn.js"></script>
+<script src="assets/anno.js"></script>
+</body>
+</html>

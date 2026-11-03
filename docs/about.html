@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于内容来源 · 学习台</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f7f8f'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E%E8%AF%AD%3C/text%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fbf7f2;color:#2b2620;line-height:1.85;
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:56px 26px 100px}
+h1{font-size:28px;margin:0 0 6px}
+.sub{color:#9a9086;font-size:13.5px;margin:0 0 34px}
+h2{font-size:18px;margin:38px 0 10px;padding-bottom:8px;border-bottom:1px solid #eee6db}
+p,li{font-size:15px;color:#4a443d}
+ul{padding-left:20px;margin:8px 0}
+li{margin:5px 0}
+.note{background:#fff;border:1px solid #ece4d9;border-left:4px solid #e0457b;border-radius:10px;
+  padding:14px 18px;margin:18px 0;font-size:14.5px;color:#6b6157}
+.note.blue{border-left-color:#2f7f8f}
+code{background:#f3ece4;padding:1px 6px;border-radius:5px;font-size:13px}
+a.back{display:inline-block;margin-top:40px;color:#c93a6b;text-decoration:none;font-size:14px}
+</style></head>
+<body><div class="wrap">
+<h1>关于内容来源</h1>
+<p class="sub">这里的几本书，来路不一样，这里说清楚。</p>
+
+<h2>韩语：整理自一本正式出版的教材</h2>
+<p>内容整理自 <b>《零起点标准韩语入门》</b>（张阳 编著，2019 年）。原书 330 页是扫描件，没有文字层，
+逐页用视觉模型读取后结构化，再经四个子智能体交叉校对（约 84 页抽样，修正了十余处转写与标音错误）。</p>
+<div class="note">课文、词汇、例句的<b>版权归原作者及出版方所有</b>。这里仅供个人学习使用，
+所以加了访问密码，不公开传播。请勿转发、转载或用于任何商业用途。</div>
+
+<h2>阿拉伯语：AI 自编，没有对应的教材</h2>
+<p>这套阿拉伯语课程<b>没有参考任何一本教材</b>，是把韩语学习台的教学结构（章节切分、每节五段式、
+间隔重复复习卡、12 周计划）搬过来，语言材料由 AI 从零撰写。共 5 章 26 节，约 889 个词条、655 个例句。</p>
+<div class="note blue">它<b>没有经过母语者或教材校对</b>。字母、标音、格与式、正偏组合这些标准语法大体可靠，
+但个别词汇用法、特殊复数、动词派生形式、方言对照可能有错。发现疑问请以权威教材为准。</div>
+
+<h2>法语：AI 自编，没有对应的教材</h2>
+<p>与阿拉伯语课程一样，法语课程<b>没有参考任何一本教材</b>，是沿用同一套教学结构（5 章 24 节、每节五段式、
+复习卡、12 周计划）由 AI 撰写的语言材料。</p>
+<div class="note blue">同样<b>没有经过母语者或教材校对</b>。字母、音标、冠词、三组动词变位、时态构成这些
+标准语法大体可靠，但个别词的阴阳性、不规则动词形式、连诵与省音的取舍可能有错。有疑问请以权威教材为准。</div>
+
+<h2>日语跟读：整理自一套正式出版的教材</h2>
+<p>文稿由教材配套音频经 AI 语音识别、再由大模型校正标点与同音字、分场并翻译而成；每句时间点由识别结果对齐得到，
+少数句子的时间点是估算值（页面上带小点标记）。地道表达卡片由大模型挑选并撰写说明，<b>未经人工校对</b>。</p>
+<div class="note">课文与音频的<b>版权归原作者及出版方所有</b>。文本与音频在仓库里都是密文，仅在你输入密码后于浏览器本地解密。
+请勿转发、转载或用于商业用途。</div>
+
+<h2>Refactoring UI 中文版</h2>
+<p>中文翻译与互动实验的静态站，构建自同一仓库外的源稿。</p>
+
+<h2>发音</h2>
+<p>全部音频由微软 edge-tts 语音合成生成（韩语 <code>ko-KR-SunHiNeural</code>，阿拉伯语
+<code>ar-SA-ZariyahNeural</code>，法语 <code>fr-FR-DeniseNeural</code>），不是真人录音。语速平稳、发音标准，但缺少真人语调的起伏，
+适合跟读，不适合当作语音范本。</p>
+
+<h2>学习数据</h2>
+<p>复习进度、错题、设置全部存在你自己浏览器的 <code>localStorage</code> 里，不上传任何服务器。
+换浏览器或清除站点数据就会丢失，可以在「统计」页导出备份。</p>
+
+<h2>技术说明</h2>
+<ul>
+<li>韩语课程数据与日语跟读的文本、音频以 AES-256-GCM 加密存放，密码只在浏览器本地解密，不发送到服务器。</li>
+<li>阿拉伯语、法语课程公开访问。</li>
+<li>《阿拉伯文化背景知识基础教程》阅读版公开访问，正文由 PDF 文字层程序化抽取（阿拉伯文按字体 cmap 重建），
+页面上标有「影印」的页面是原书扫描图（语音表、书法页无法可靠转文字）。</li>
+<li>页面是纯静态文件，托管在 GitHub Pages，不需要后端。</li>
+</ul>
+
+<a class="back" href="index.html">← 返回选书</a>
+</div></body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>持续进阶 · 第 9 章 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/book.css">
+<link rel="stylesheet" href="../assets/css/demos.css">
+<link rel="stylesheet" href="../assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--chapter" data-chapter="09">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">第 9 章 / 共 9 章</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="章节目录">
+  <div class="rail__head">
+    <p class="kicker">CONTENTS</p>
+    <p class="rail__count">9 章 · 284 幅插图</p>
+  </div>
+  <a class="rail__home" href="../index.html">← 封面与目录</a>
+  <ol class="chapnav"><li class="chapnav__item">
+<a class="chapnav__link" href="01.html">
+  <span class="chapnav__no">01</span>
+  <span class="chapnav__title">从零开始</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="01"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="02.html">
+  <span class="chapnav__no">02</span>
+  <span class="chapnav__title">层级就是一切</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="02"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="03.html">
+  <span class="chapnav__no">03</span>
+  <span class="chapnav__title">布局与间距</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="03"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="04.html">
+  <span class="chapnav__no">04</span>
+  <span class="chapnav__title">文字设计</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="04"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="05.html">
+  <span class="chapnav__no">05</span>
+  <span class="chapnav__title">色彩的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="05"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="06.html">
+  <span class="chapnav__no">06</span>
+  <span class="chapnav__title">营造层次感</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="06"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="07.html">
+  <span class="chapnav__no">07</span>
+  <span class="chapnav__title">图片的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="07"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="08.html">
+  <span class="chapnav__no">08</span>
+  <span class="chapnav__title">收尾打磨</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="08"></b></span>
+</a></li><li class="chapnav__item is-current">
+<a class="chapnav__link" href="09.html" aria-current="page">
+  <span class="chapnav__no">09</span>
+  <span class="chapnav__title">持续进阶</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="09"></b></span>
+</a><ol class="secnav"><li><a href="#s1" data-spy="s1"><span>9.1</span>持续进阶<em class="secnav__live" aria-label="可玩"></em></a></li></ol></li></ol>
+  <div class="rail__foot">
+    <a href="../lab.html">互动实验室</a>
+    <a href="../style.html">设计说明</a>
+    <a href="../notice.html">版权</a>
+  </div>
+</aside>
+<main class="main" id="main">
+<article class="chapter">
+  <header class="chapter__head">
+    <p class="kicker">CHAPTER 09 · LEVELING UP</p>
+    <h1 class="chapter__title">持续进阶</h1>
+    <p class="chapter__lede">把设计能力变成长期习惯：观察反直觉的决定，重建你喜欢的界面。</p>
+    <ul class="chapter__meta">
+      <li><b>1</b> 节</li>
+      <li><b>4</b> 幅插图</li>
+      <li><b>2</b> 分钟</li>
+      <li><b>1</b> 个互动实验</li><li><b>2</b> 个可玩示例</li>
+    </ul>
+  </header>
+  <nav class="chapter__play" aria-label="本章可玩示例"><span class="chapter__play-label">本章可玩</span><a href="#fig-09-1">把日期选择器反转过来</a><a href="#fig-09-4">重建练习：复刻这张卡片</a></nav>
+  <div class="chapter__body">
+<section class="sec" id="s1">
+<h2 class="sec__h"><a class="sec__no" href="#s1">9.1</a><span>持续进阶</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>希望读完这本书，你对自己做出漂亮东西的能力更有信心了，不再需要依赖设计师。虽然我们已经尽力把能想到的好点子都塞了进来，但永远还有更多东西可学。</p><p>下面两种做法最能帮你继续打磨技能，给工具箱添上新工具。</p><h3 class="sub" id="s1-1"><a class="sub__anchor" href="#s1-1" aria-hidden="true">#</a>留意那些你不会做出的决定</h3><p>每次遇到自己很喜欢的设计，问自己一句：</p><p><em>“这位设计师有没有做什么我根本想不到的事？”</em></p><p>也许是他们把日期选择器的背景色做了反转：</p><figure class="fig fig--live" id="fig-09-1">
+<div class="livefig" data-live="09-1">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="09" data-fig="1" data-caption="图 9.1" aria-label="放大查看原书插图 1">
+<img src="../assets/img/p250-01-740.webp" srcset="../assets/img/p250-01-740.webp 740w, ../assets/img/p250-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="366" alt="持续进阶 · 图 9.1 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 9.1</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">把日期选择器反转过来</span>
+<span class="livefig__hint">反转配色，换强调色与选中范围</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>……也许他们把按钮放进了文本输入框里，而不是放在外面：</p><figure class="fig" id="fig-09-2">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="09" data-fig="2" data-caption="图 9.2" aria-label="放大查看插图 2">
+<img src="../assets/img/p251-01-740.webp" srcset="../assets/img/p251-01-740.webp 740w, ../assets/img/p251-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="228" alt="持续进阶 · 图 9.2 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 9.2</span>
+</button>
+</figure><p>……或者只是给大标题用了两种不同的字体颜色：</p><figure class="fig" id="fig-09-3">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="09" data-fig="3" data-caption="图 9.3" aria-label="放大查看插图 3">
+<img src="../assets/img/p251-02-740.webp" srcset="../assets/img/p251-02-740.webp 740w, ../assets/img/p251-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="340" alt="持续进阶 · 图 9.3 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 9.3</span>
+</button>
+</figure><p>留意这些反直觉的决定，是发现新点子的好办法，你可以把它们用到自己的设计里。</p><h3 class="sub" id="s1-2"><a class="sub__anchor" href="#s1-2" aria-hidden="true">#</a>重建你最喜欢的界面</h3><p>要发现那些让设计显得精致的细节，最好的办法就是从头把那个设计重新做一遍，<em>不去偷看开发者工具</em>。</p><p>当你想弄明白自己的版本为什么和原版不一样时，你会自己摸索出这些技巧：“给标题减小行高”“给全大写文字加字距”“把多层阴影叠起来”。</p><figure class="fig fig--live" id="fig-09-4">
+<div class="livefig" data-live="09-4">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="09" data-fig="4" data-caption="图 9.4" aria-label="放大查看原书插图 4">
+<img src="../assets/img/p252-01-740.webp" srcset="../assets/img/p252-01-740.webp 740w, ../assets/img/p252-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="447" alt="持续进阶 · 图 9.4 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 9.4</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">重建练习：复刻这张卡片</span>
+<span class="livefig__hint">调行高、字距与阴影，复刻得一模一样</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>带着审慎的眼光持续研究那些启发你的作品，接下来很多年里你都会不断学到新的设计技巧。</p><p>— Adam Wathan &amp; Steve Schoger</p>
+<div class="demo-slot" data-demo="quiz"></div>
+</div>
+</section>
+  </div>
+  <footer class="chapter__foot">
+    <div class="readmark">
+      <button class="btn btn--mark" type="button" data-mark-read="09">标记本章已读</button>
+      <p class="readmark__hint" data-read-hint>读完点一下，首页会记住你的进度。</p>
+    </div>
+    <nav class="pager" aria-label="章节翻页">
+      <a class="pager__link pager__link--prev" href="08.html"><span>← 上一章</span><strong>08 收尾打磨</strong></a><a class="pager__link pager__link--next" href="../lab.html"><span>读完了 →</span><strong>去互动实验室</strong></a>
+    </nav>
+    <p class="chapter__copyright">非官方中文翻译 · 译文与插图版权归 Adam Wathan &amp; Steve Schoger 所有 · <a href="../notice.html">版权与授权说明</a></p>
+  </footer>
+</article>
+</main>
+<aside class="toc" aria-label="本页目录">
+  <div class="toc__inner">
+    <p class="kicker">ON THIS PAGE</p>
+    <ol class="toc__list"><li><a href="#s1" data-spy="s1">9.1</a></li></ol>
+    <div class="toc__progress">
+      <div class="toc__progress-row"><span>本章已读</span><b data-chapter-percent>0%</b></div>
+      <div class="toc__bar"><i data-chapter-progress></i></div>
+    </div>
+    <p class="toc__hint">快捷键：<kbd>Ctrl K</kbd> 搜索 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 字体 · <kbd>Esc</kbd> 关闭</p>
+  </div>
+</aside>
+</div>
+<script>window.RUI_PAGE = {kind:'chapter', chapter:'09', title:'持续进阶'};window.RUI_DEMOS = {"quiz": {"chapter": "09", "title": "全书测验", "desc": "6 道题，覆盖层级、间距、文字、颜色、深度与图片，检验你是否真的把这本书读进了手感里。", "hint": "选择答案，即时查看解析"}};</script>
+<script src="../assets/js/book.js"></script>
+<script src="../assets/js/demo-runtime.js"></script>
+<script src="../assets/js/demos/quiz.js"></script>
+<script src="../assets/js/live-runtime.js"></script>
+<script src="../assets/js/live/09.js"></script>
+<a id="backhome" href="../../index.html">← 返回选书</a>
+</body>
+</html>

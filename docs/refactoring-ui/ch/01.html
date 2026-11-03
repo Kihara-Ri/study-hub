@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从零开始 · 第 1 章 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/book.css">
+<link rel="stylesheet" href="../assets/css/demos.css">
+<link rel="stylesheet" href="../assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--chapter" data-chapter="01">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">第 1 章 / 共 9 章</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="章节目录">
+  <div class="rail__head">
+    <p class="kicker">CONTENTS</p>
+    <p class="rail__count">9 章 · 284 幅插图</p>
+  </div>
+  <a class="rail__home" href="../index.html">← 封面与目录</a>
+  <ol class="chapnav"><li class="chapnav__item is-current">
+<a class="chapnav__link" href="01.html" aria-current="page">
+  <span class="chapnav__no">01</span>
+  <span class="chapnav__title">从零开始</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="01"></b></span>
+</a><ol class="secnav"><li><a href="#s1" data-spy="s1"><span>1.1</span>从一个功能开始，而不是从布局开始<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s2" data-spy="s2"><span>1.2</span>细节留到后面<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s3" data-spy="s3"><span>1.3</span>别设计太多</a></li><li><a href="#s4" data-spy="s4"><span>1.4</span>选择一种个性<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s5" data-spy="s5"><span>1.5</span>限制你的选项<em class="secnav__live" aria-label="可玩"></em></a></li></ol></li><li class="chapnav__item">
+<a class="chapnav__link" href="02.html">
+  <span class="chapnav__no">02</span>
+  <span class="chapnav__title">层级就是一切</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="02"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="03.html">
+  <span class="chapnav__no">03</span>
+  <span class="chapnav__title">布局与间距</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="03"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="04.html">
+  <span class="chapnav__no">04</span>
+  <span class="chapnav__title">文字设计</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="04"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="05.html">
+  <span class="chapnav__no">05</span>
+  <span class="chapnav__title">色彩的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="05"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="06.html">
+  <span class="chapnav__no">06</span>
+  <span class="chapnav__title">营造层次感</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="06"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="07.html">
+  <span class="chapnav__no">07</span>
+  <span class="chapnav__title">图片的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="07"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="08.html">
+  <span class="chapnav__no">08</span>
+  <span class="chapnav__title">收尾打磨</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="08"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="09.html">
+  <span class="chapnav__no">09</span>
+  <span class="chapnav__title">持续进阶</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="09"></b></span>
+</a></li></ol>
+  <div class="rail__foot">
+    <a href="../lab.html">互动实验室</a>
+    <a href="../style.html">设计说明</a>
+    <a href="../notice.html">版权</a>
+  </div>
+</aside>
+<main class="main" id="main">
+<article class="chapter">
+  <header class="chapter__head">
+    <p class="kicker">CHAPTER 01 · STARTING FROM SCRATCH</p>
+    <h1 class="chapter__title">从零开始</h1>
+    <p class="chapter__lede">从灰度线框出发，先让功能真实可用，再谈风格。第一章把「设计」拆成任何人都能执行的步骤。</p>
+    <ul class="chapter__meta">
+      <li><b>5</b> 节</li>
+      <li><b>29</b> 幅插图</li>
+      <li><b>9</b> 分钟</li>
+      <li><b>2</b> 个互动实验</li><li><b>5</b> 个可玩示例</li>
+    </ul>
+  </header>
+  <nav class="chapter__play" aria-label="本章可玩示例"><span class="chapter__play-label">本章可玩</span><a href="#fig-01-2">搜索航班：从一个功能开始</a><a href="#fig-01-5">先别上色，先把层级做对</a><a href="#fig-01-13">字体决定个性</a><a href="#fig-01-19">圆角决定个性</a><a href="#fig-01-27">图标也要有尺寸阶梯</a></nav>
+  <div class="chapter__body">
+<section class="sec" id="s1">
+<h2 class="sec__h"><a class="sec__no" href="#s1">1.1</a><span>从一个功能开始，而不是从布局开始</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>着手设计一个新产品时，你会先设计什么？如果你先动手的是页面顶部的导航栏，那就错了。</p><p>做新设计时，最容易让自己陷入挫败和卡壳的做法，就是一上来就试图“设计整个应用”。大多数人说的“设计应用”，其实想的是它的<em>外壳</em>。</p><p><em>顶部导航还是侧边栏？</em></p><p><em>导航项放在左边还是右边？</em></p><p><em>页面内容要放进容器里，还是通栏铺满？</em></p><p><em>logo 该放在哪里？</em></p><figure class="fig" id="fig-01-1">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="1" data-caption="图 1.1" aria-label="放大查看插图 1">
+<img src="../assets/img/p008-01-740.webp" srcset="../assets/img/p008-01-740.webp 740w, ../assets/img/p008-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="224" alt="从零开始 · 图 1.1 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.1</span>
+</button>
+</figure><p>问题在于，一个“应用”其实是一堆<em>功能</em>的集合。在你设计出几个功能之前，你根本不掌握判断导航该怎么做的信息。难怪会让人抓狂。</p><p>别从外壳开始，从一个真实的功能开始。</p><p>比如你要做一个机票预订服务，可以先从“搜索航班”这个功能做起。</p><p>你的界面需要：</p><ul><li>出发城市的输入框</li><li>到达城市的输入框</li><li>出发日期的输入框</li><li>返程日期的输入框</li><li>一个执行搜索的按钮</li></ul><p>就先从它开始。</p><figure class="fig fig--live" id="fig-01-2">
+<div class="livefig" data-live="01-2">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="01" data-fig="2" data-caption="图 1.2" aria-label="放大查看原书插图 2">
+<img src="../assets/img/p009-01-740.webp" srcset="../assets/img/p009-01-740.webp 740w, ../assets/img/p009-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="477" alt="从零开始 · 图 1.2 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 1.2</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">搜索航班：从一个功能开始</span>
+<span class="livefig__hint">改字段、切外壳，看它怎么长成完整应用</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>说真的，其他那些东西你说不定根本用不上——Google 就是这么做的。</p><figure class="fig" id="fig-01-3">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="3" data-caption="图 1.3" aria-label="放大查看插图 3">
+<img src="../assets/img/p010-01-740.webp" srcset="../assets/img/p010-01-740.webp 740w, ../assets/img/p010-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="477" alt="从零开始 · 图 1.3 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.3</span>
+</button>
+</figure>
+</div>
+</section><section class="sec" id="s2">
+<h2 class="sec__h"><a class="sec__no" href="#s2">1.2</a><span>细节留到后面</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>在设计一个新功能的早期阶段，别纠结字体、阴影、图标这类底层细节，这点很重要。</p><p>这些东西最终都会有意义，但现在不重要。</p><p>如果你在浏览器或惯用的设计工具这种高保真环境里工作时，总是忍不住去抠细节，可以试试 Basecamp 的 Jason Fried 爱用的一个办法：拿一支粗头 Sharpie 马克笔，在纸上画。</p><figure class="fig" id="fig-01-4">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="4" data-caption="图 1.4" aria-label="放大查看插图 4">
+<img src="../assets/img/p012-01-740.webp" srcset="../assets/img/p012-01-740.webp 740w, ../assets/img/p012-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="289" alt="从零开始 · 图 1.4 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.4</span>
+</button>
+</figure><p>拿着 Sharpie，你根本没法在小细节上钻牛角尖，所以这是快速探索多种布局方案的好办法。</p><h3 class="sub" id="s2-1"><a class="sub__anchor" href="#s2-1" aria-hidden="true">#</a>先别上色</h3><p>即使你已经准备好在更高保真度下细化方案，也要忍住立刻引入颜色的冲动。</p><p>用灰度来设计，你就只能靠间距、对比度和大小来撑起整个画面。</p><figure class="fig fig--live" id="fig-01-5">
+<div class="livefig" data-live="01-5">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="01" data-fig="5" data-caption="图 1.5" aria-label="放大查看原书插图 5">
+<img src="../assets/img/p013-01-740.webp" srcset="../assets/img/p013-01-740.webp 740w, ../assets/img/p013-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="380" alt="从零开始 · 图 1.5 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 1.5</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">先别上色，先把层级做对</span>
+<span class="livefig__hint">在灰度里切换选中方案，再上色看品牌色落在哪</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>这样会难一点，但你会得到一个更清爽、层级分明的界面，之后加颜色也很容易。</p><figure class="fig" id="fig-01-6">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="6" data-caption="图 1.6" aria-label="放大查看插图 6">
+<img src="../assets/img/p013-02-740.webp" srcset="../assets/img/p013-02-740.webp 740w, ../assets/img/p013-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="380" alt="从零开始 · 图 1.6 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.6</span>
+</button>
+</figure><h3 class="sub" id="s2-2"><a class="sub__anchor" href="#s2-2" aria-hidden="true">#</a>别投入过多</h3><p>低保真设计的全部意义就在于快，好让你尽快开始做真正的东西。</p><p>草图和线框图都是一次性的——静态效果图对用户毫无价值。用它们来探索想法，做出决定之后就把它们丢掉。</p>
+<div class="demo-slot" data-demo="fidelity"></div>
+</div>
+</section><section class="sec" id="s3">
+<h2 class="sec__h"><a class="sec__no" href="#s3">1.3</a><span>别设计太多</span></h2>
+<div class="sec__body">
+<p>你不需要在设计阶段把应用里的每个功能都设计完再动手实现；事实上，不这么做反而更好。</p><figure class="fig" id="fig-01-7">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="7" data-caption="图 1.7" aria-label="放大查看插图 7">
+<img src="../assets/img/p016-01-740.webp" srcset="../assets/img/p016-01-740.webp 740w, ../assets/img/p016-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="480" alt="从零开始 · 图 1.7 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.7</span>
+</button>
+</figure><p>想清楚产品里每个功能之间如何交互、每个边界情况该长什么样，是极其困难的事，尤其是凭空想象的时候。</p><p><em>如果用户有 2000 个联系人，这个界面该长什么样？</em></p><p><em>这个表单里的错误提示该放在哪？</em></p><p><em>当有两个会议安排在同一时间时，这个日历该怎么显示？</em> 只靠设计工具和想象力去琢磨这些事，你就是在给自己找罪受。</p><h3 class="sub" id="s3-1"><a class="sub__anchor" href="#s3-1" aria-hidden="true">#</a>小步循环</h3><p>别一次性把所有东西都设计完，而是以短周期推进。先把下一个要做的功能设计成一个简单版本。</p><figure class="fig" id="fig-01-8">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="8" data-caption="图 1.8" aria-label="放大查看插图 8">
+<img src="../assets/img/p017-01-740.webp" srcset="../assets/img/p017-01-740.webp 740w, ../assets/img/p017-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="480" alt="从零开始 · 图 1.8 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.8</span>
+</button>
+</figure><p>基本设计让你满意之后，就<em>把它做出来</em>。</p><p>过程中你多半会遇到意料之外的复杂性，但这正是重点——在一个能实际使用的界面里修设计问题，比提前想象每一个边界情况容易得多。</p><p>在这个能跑的版本上反复迭代，直到再也找不出问题，然后再切回设计模式，开始做下一个功能。</p><figure class="fig" id="fig-01-9">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="9" data-caption="图 1.9" aria-label="放大查看插图 9">
+<img src="../assets/img/p018-01-740.webp" srcset="../assets/img/p018-01-740.webp 740w, ../assets/img/p018-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="200" alt="从零开始 · 图 1.9 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.9</span>
+</button>
+</figure><p>别在抽象层面把自己淹没。尽早做出真东西，这样就不用全凭想象力硬扛。</p><h3 class="sub" id="s3-2"><a class="sub__anchor" href="#s3-2" aria-hidden="true">#</a>当个悲观派</h3><p>别在设计里暗示你还没准备好实现的功能。</p><p>比如你正在给一个项目管理工具做评论系统。你知道总有一天用户应该能给评论附上文件，于是你在设计里加了一个附件区。</p><figure class="fig" id="fig-01-10">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="10" data-caption="图 1.10" aria-label="放大查看插图 10">
+<img src="../assets/img/p018-02-740.webp" srcset="../assets/img/p018-02-740.webp 740w, ../assets/img/p018-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="312" alt="从零开始 · 图 1.10 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.10</span>
+</button>
+</figure><p>等你深入实现之后才发现，支持附件的工作量比你预想的<em>大得多</em>。你现在根本抽不出时间做完，于是整个评论系统都被搁置，你转身去处理别的更优先的事。</p><p>问题在于，没有附件的评论系统也比完全没有评论系统强，但因为你在第一天就把它算了进去，结果什么都交付不了。</p><p>设计新功能时，<strong>要默认它很难做。</strong> 只设计一个能交付的最小可用版本，能大幅降低这种风险。</p><figure class="fig" id="fig-01-11">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="11" data-caption="图 1.11" aria-label="放大查看插图 11">
+<img src="../assets/img/p019-01-740.webp" srcset="../assets/img/p019-01-740.webp 740w, ../assets/img/p019-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="282" alt="从零开始 · 图 1.11 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.11</span>
+</button>
+</figure><p>如果某个功能里有一部分只是“锦上添花”，<strong>那就晚点再设计</strong>。先把简单版本做出来，你永远都有退路。</p>
+</div>
+</section><section class="sec" id="s4">
+<h2 class="sec__h"><a class="sec__no" href="#s4">1.4</a><span>选择一种个性</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>每个设计都有某种个性。银行网站想传达的可能是<em>安全</em>和<em>专业</em>，而一家新潮创业公司的设计则可能让人觉得<em>有趣</em>、<em>好玩</em>。</p><figure class="fig" id="fig-01-12">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="12" data-caption="图 1.12" aria-label="放大查看插图 12">
+<img src="../assets/img/p020-01-740.webp" srcset="../assets/img/p020-01-740.webp 740w, ../assets/img/p020-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="575" alt="从零开始 · 图 1.12 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.12</span>
+</button>
+</figure><p>表面上，给设计赋予某种个性听起来很抽象、很虚，但它在很大程度上由几个实实在在的因素决定。</p><h3 class="sub" id="s4-1"><a class="sub__anchor" href="#s4-1" aria-hidden="true">#</a>字体选择</h3><p>字体排版在很大程度上决定了一个设计给人的感觉。</p><p>如果你想要优雅或经典的观感，可以在设计里用衬线字体：</p><figure class="fig fig--live" id="fig-01-13">
+<div class="livefig" data-live="01-13">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="01" data-fig="13" data-caption="图 1.13" aria-label="放大查看原书插图 13">
+<img src="../assets/img/p021-01-740.webp" srcset="../assets/img/p021-01-740.webp 740w, ../assets/img/p021-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.13 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 1.13</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">字体决定个性</span>
+<span class="livefig__hint">切换衬线 / 无衬线 / 等宽，感受气质差异</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>想要活泼一点，可以用圆润的无衬线字体：</p><figure class="fig" id="fig-01-14">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="14" data-caption="图 1.14" aria-label="放大查看插图 14">
+<img src="../assets/img/p021-02-740.webp" srcset="../assets/img/p021-02-740.webp 740w, ../assets/img/p021-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.14 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.14</span>
+</button>
+</figure><p>如果你想要更朴素的观感，或者想让其他元素来提供个性，中性的无衬线字体是非常好的选择：</p><figure class="fig" id="fig-01-15">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="15" data-caption="图 1.15" aria-label="放大查看插图 15">
+<img src="../assets/img/p022-01-740.webp" srcset="../assets/img/p022-01-740.webp 740w, ../assets/img/p022-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.15 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.15</span>
+</button>
+</figure><h3 class="sub" id="s4-2"><a class="sub__anchor" href="#s4-2" aria-hidden="true">#</a>颜色</h3><p>关于色彩心理学的科学理论有很多，但实践中你真正要做的，就是留意不同颜色给你的感受。</p><p>蓝色安全、熟悉——从来没人抱怨过蓝色：</p><figure class="fig" id="fig-01-16">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="16" data-caption="图 1.16" aria-label="放大查看插图 16">
+<img src="../assets/img/p022-02-740.webp" srcset="../assets/img/p022-02-740.webp 740w, ../assets/img/p022-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.16 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.16</span>
+</button>
+</figure><p>金色可能在说“昂贵”和“精致”：</p><figure class="fig" id="fig-01-17">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="17" data-caption="图 1.17" aria-label="放大查看插图 17">
+<img src="../assets/img/p023-01-740.webp" srcset="../assets/img/p023-01-740.webp 740w, ../assets/img/p023-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.17 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.17</span>
+</button>
+</figure><p>粉色更有趣一点，没那么严肃：</p><figure class="fig" id="fig-01-18">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="18" data-caption="图 1.18" aria-label="放大查看插图 18">
+<img src="../assets/img/p023-02-740.webp" srcset="../assets/img/p023-02-740.webp 740w, ../assets/img/p023-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.18 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.18</span>
+</button>
+</figure><p>仅仅<em>依靠</em>心理学来选颜色并不太实际——很多时候就是看你自己的眼睛觉得好不好看——但当你想要弄明白<em>为什么</em>自己觉得某个颜色合适时，想一想色彩心理学还是有帮助的。</p><h3 class="sub" id="s4-3"><a class="sub__anchor" href="#s4-3" aria-hidden="true">#</a>圆角</h3><p>听起来是个很小的细节，但你要不要做圆角、圆角做多大，会对整体感觉产生很大影响。</p><p>小圆角相当中性，本身传达不出多少个性：</p><figure class="fig fig--live" id="fig-01-19">
+<div class="livefig" data-live="01-19">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="01" data-fig="19" data-caption="图 1.19" aria-label="放大查看原书插图 19">
+<img src="../assets/img/p024-01-740.webp" srcset="../assets/img/p024-01-740.webp 740w, ../assets/img/p024-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.19 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 1.19</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">圆角决定个性</span>
+<span class="livefig__hint">拖动圆角，观察卡片和按钮的气质变化</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>大圆角开始显得更活泼：</p><figure class="fig" id="fig-01-20">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="20" data-caption="图 1.20" aria-label="放大查看插图 20">
+<img src="../assets/img/p024-02-740.webp" srcset="../assets/img/p024-02-740.webp 740w, ../assets/img/p024-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="从零开始 · 图 1.20 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.20</span>
+</button>
+</figure><p>……而完全不用圆角，则显得严肃、正式得多：</p><figure class="fig" id="fig-01-21">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="21" data-caption="图 1.21" aria-label="放大查看插图 21">
+<img src="../assets/img/p025-01-740.webp" srcset="../assets/img/p025-01-740.webp 740w, ../assets/img/p025-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="295" alt="从零开始 · 图 1.21 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.21</span>
+</button>
+</figure><p>无论你选哪种，保持一致都很重要。在同一个界面里混用直角和圆角，几乎总是比坚持用其中一种更难看。</p><h3 class="sub" id="s4-4"><a class="sub__anchor" href="#s4-4" aria-hidden="true">#</a>语言</h3><p>这本身不算视觉设计手法，但界面里用的措辞对整体个性影响巨大。</p><p>用不那么亲切的语气，会显得更官方、更专业：</p><figure class="fig" id="fig-01-22">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="22" data-caption="图 1.22" aria-label="放大查看插图 22">
+<img src="../assets/img/p025-02-740.webp" srcset="../assets/img/p025-02-740.webp 740w, ../assets/img/p025-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="240" alt="从零开始 · 图 1.22 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.22</span>
+</button>
+</figure><p>……而更友好、更随意的措辞，会让网站感觉……嗯，更友好：</p><figure class="fig" id="fig-01-23">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="23" data-caption="图 1.23" aria-label="放大查看插图 23">
+<img src="../assets/img/p026-01-740.webp" srcset="../assets/img/p026-01-740.webp 740w, ../assets/img/p026-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="240" alt="从零开始 · 图 1.23 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.23</span>
+</button>
+</figure><p>用户界面里到处都是文字，选对措辞的重要程度不亚于（甚至高于）选对颜色或字体。</p><h3 class="sub" id="s4-5"><a class="sub__anchor" href="#s4-5" aria-hidden="true">#</a>想清楚你到底要什么</h3><p>大多数时候，你对想要的个性会有直觉。但如果没有，一个简单的办法是去看看你想触达的那群人还在用哪些网站。</p><p>如果他们大多是那种“正经生意”的样子，那你的网站也许就该长这样。如果他们更活泼、带点幽默感，也许那才是更好的方向。</p><p>只是别从直接竞争对手那里借鉴太多，你总不想看起来像别人的低配版。</p>
+<div class="demo-slot" data-demo="personality"></div>
+</div>
+</section><section class="sec" id="s5">
+<h2 class="sec__h"><a class="sec__no" href="#s5">1.5</a><span>限制你的选项</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>有几百万种颜色和几千款字体可选，理论上听起来不错，但实践中这通常是个让人动弹不得的诅咒。</p><p>而且不只是字体和颜色——几乎任何一个小设计决定，都能让你白白纠结半天。</p><p><em>这段文字该是 12px 还是 13px？</em></p><p><em>这个阴影的不透明度该是 10% 还是 15%？</em></p><p><em>这个头像该是 24px 还是 25px 高？</em></p><p><em>这个按钮的字重用 medium 还是 semibold？</em></p><p><em>这个标题的下外边距该是 18px 还是 20px？</em></p><p>没有约束地做设计时，做决定是一种折磨，因为正确的选择永远不止一个。</p><p>比如这几个按钮的背景色各不相同，但光靠看，你几乎分辨不出它们的差别。</p><figure class="fig" id="fig-01-24">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="24" data-caption="图 1.24" aria-label="放大查看插图 24">
+<img src="../assets/img/p028-01-740.webp" srcset="../assets/img/p028-01-740.webp 740w, ../assets/img/p028-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="120" alt="从零开始 · 图 1.24 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.24</span>
+</button>
+</figure><p>如果这些选项其实都不算差，你凭什么能果断做出决定？</p><h3 class="sub" id="s5-1"><a class="sub__anchor" href="#s5-1" aria-hidden="true">#</a>提前定好体系</h3><p>别每次做决定都从一个无限大的池子里手动挑值，而是<em>先准备好一组较小的选项</em>。</p><p>别每次要挑一个新的蓝色色阶就去打开取色器——从提前选好的 8 到 10 个色阶里挑。</p><figure class="fig" id="fig-01-25">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="25" data-caption="图 1.25" aria-label="放大查看插图 25">
+<img src="../assets/img/p029-01-740.webp" srcset="../assets/img/p029-01-740.webp 740w, ../assets/img/p029-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="120" alt="从零开始 · 图 1.25 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.25</span>
+</button>
+</figure><p>同理，别一像素一像素地调字号，直到看着完美为止。提前定好一套受限的字号阶梯，以后所有字号决定都从它里面选。</p><figure class="fig" id="fig-01-26">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="26" data-caption="图 1.26" aria-label="放大查看插图 26">
+<img src="../assets/img/p029-02-740.webp" srcset="../assets/img/p029-02-740.webp 740w, ../assets/img/p029-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="433" alt="从零开始 · 图 1.26 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.26</span>
+</button>
+</figure><p>建好这样的体系之后，那些挑初始值的苦活你只需要做<em>一次</em>，而不是每设计一个新界面都重来一遍。前期是多花点工夫，但很值——它会在之后为你省下大量的决策疲劳。</p><h3 class="sub" id="s5-2"><a class="sub__anchor" href="#s5-2" aria-hidden="true">#</a>用排除法做设计</h3><p>用受限的一组值做设计时，做决定会容易得多，因为“正确”的选项少了很多。</p><p>比如你要给一个图标选尺寸。你提前定好了一套尺寸阶梯，中小号只有 12px、16px、24px 和 32px 四个选项。</p><figure class="fig fig--live" id="fig-01-27">
+<div class="livefig" data-live="01-27">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="01" data-fig="27" data-caption="图 1.27" aria-label="放大查看原书插图 27">
+<img src="../assets/img/p030-01-740.webp" srcset="../assets/img/p030-01-740.webp 740w, ../assets/img/p030-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="92" alt="从零开始 · 图 1.27 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 1.27</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">图标也要有尺寸阶梯</span>
+<span class="livefig__hint">切换「随手定」，看工具栏和列表怎么乱掉</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>想挑出最好的那个，先猜一个你觉得最合适的，比如 16px。然后把它两侧的值（12px 和 24px）也摆出来对比。</p><figure class="fig" id="fig-01-28">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="28" data-caption="图 1.28" aria-label="放大查看插图 28">
+<img src="../assets/img/p030-02-740.webp" srcset="../assets/img/p030-02-740.webp 740w, ../assets/img/p030-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="120" alt="从零开始 · 图 1.28 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.28</span>
+</button>
+</figure><p>很可能其中两个选项<em>一眼</em>就不行。如果出局的是两侧的那两个，那你就选完了——中间那个是唯一的好选择。</p><p>如果某一侧的那个反而最好，就把它当作“中间值”再做一轮对比，确认没有更好的选择。</p><figure class="fig" id="fig-01-29">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="01" data-fig="29" data-caption="图 1.29" aria-label="放大查看插图 29">
+<img src="../assets/img/p031-01-740.webp" srcset="../assets/img/p031-01-740.webp 740w, ../assets/img/p031-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="120" alt="从零开始 · 图 1.29 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 1.29</span>
+</button>
+</figure><p>只要你有体系，这个方法对任何东西都适用。当选项被限制在一组彼此差异明显的值里，挑出最好的那个轻而易举。</p><h3 class="sub" id="s5-3"><a class="sub__anchor" href="#s5-3" aria-hidden="true">#</a>把一切体系化</h3><p>你建立的体系越多，工作速度就越快，对自己的决定也越少反复怀疑。</p><p>你需要给这些东西建立体系：</p><ul><li>字号</li><li>字重</li><li>行高</li><li>颜色</li><li>外边距</li><li>内边距</li><li>宽度</li><li>高度</li><li>盒阴影</li></ul><ul><li>圆角</li><li>边框宽度</li><li>不透明度</li></ul><p>……以及任何其他让你觉得在底层设计决定上费劲的东西。</p><p>你不必提前把所有这些都定好，只要确保自己做设计时始终带着体系化的思路。每做一个新决定，都留意有没有机会引入新体系，并且尽量避免同一个小事决定做两次。</p><p>用体系做设计会是贯穿本书的主题，后面的章节里我们会更细致地讲怎么搭建这些体系。</p>
+</div>
+</section>
+  </div>
+  <footer class="chapter__foot">
+    <div class="readmark">
+      <button class="btn btn--mark" type="button" data-mark-read="01">标记本章已读</button>
+      <p class="readmark__hint" data-read-hint>读完点一下，首页会记住你的进度。</p>
+    </div>
+    <nav class="pager" aria-label="章节翻页">
+      <span class="pager__link pager__link--ghost"></span><a class="pager__link pager__link--next" href="02.html"><span>下一章 →</span><strong>02 层级就是一切</strong></a>
+    </nav>
+    <p class="chapter__copyright">非官方中文翻译 · 译文与插图版权归 Adam Wathan &amp; Steve Schoger 所有 · <a href="../notice.html">版权与授权说明</a></p>
+  </footer>
+</article>
+</main>
+<aside class="toc" aria-label="本页目录">
+  <div class="toc__inner">
+    <p class="kicker">ON THIS PAGE</p>
+    <ol class="toc__list"><li><a href="#s1" data-spy="s1">1.1</a></li><li><a href="#s2" data-spy="s2">1.2</a></li><li><a href="#s3" data-spy="s3">1.3</a></li><li><a href="#s4" data-spy="s4">1.4</a></li><li><a href="#s5" data-spy="s5">1.5</a></li></ol>
+    <div class="toc__progress">
+      <div class="toc__progress-row"><span>本章已读</span><b data-chapter-percent>0%</b></div>
+      <div class="toc__bar"><i data-chapter-progress></i></div>
+    </div>
+    <p class="toc__hint">快捷键：<kbd>Ctrl K</kbd> 搜索 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 字体 · <kbd>Esc</kbd> 关闭</p>
+  </div>
+</aside>
+</div>
+<script>window.RUI_PAGE = {kind:'chapter', chapter:'01', title:'从零开始'};window.RUI_DEMOS = {"fidelity": {"chapter": "01", "title": "低保真 → 高保真", "desc": "同一个界面，从灰度线框到成品。拖动滑块，看层级、色彩与细节如何一步步到位。", "hint": "拖动滑块，观察界面如何「长大」"}, "personality": {"chapter": "01", "title": "风格个性实验室", "desc": "同一张卡片，四种性格。切换字体、圆角、配色与语气，感受「个性」是怎样被选择出来的。", "hint": "点击风格卡片，比较四种个性"}};</script>
+<script src="../assets/js/book.js"></script>
+<script src="../assets/js/demo-runtime.js"></script>
+<script src="../assets/js/demos/fidelity.js"></script>
+<script src="../assets/js/demos/personality.js"></script>
+<script src="../assets/js/live-runtime.js"></script>
+<script src="../assets/js/live/01.js"></script>
+<a id="backhome" href="../../index.html">← 返回选书</a>
+</body>
+</html>

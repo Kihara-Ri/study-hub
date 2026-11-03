@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>互动实验室 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/book.css">
+<link rel="stylesheet" href="assets/css/demos.css">
+<link rel="stylesheet" href="assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--lab">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">互动实验室</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<main class="main main--lab" id="main">
+  <header class="lab__head">
+    <p class="kicker">INTERACTIVE LAB · 13 EXPERIMENTS · 32 LIVE FIGURES</p>
+    <h1>互动实验室</h1>
+    <p class="lab__lede">把书里的原则变成可以拖、可以点的东西。上面是 13 个专题实验，下面是把原书关键截图逐章重建出来的 32 个可玩界面 —— 每个都直接嵌在对应章节的正文里。</p>
+    <nav class="lab__jump" aria-label="按章跳转"><a href="ch/01.html">01 从零开始</a><a href="ch/02.html">02 层级就是一切</a><a href="ch/03.html">03 布局与间距</a><a href="ch/04.html">04 文字设计</a><a href="ch/05.html">05 色彩的运用</a><a href="ch/06.html">06 营造层次感</a><a href="ch/07.html">07 图片的运用</a><a href="ch/08.html">08 收尾打磨</a><a href="ch/09.html">09 持续进阶</a></nav>
+  </header>
+  <section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/01.html">01</a>
+    <div><h2>从零开始</h2><p class="labgroup__latin">STARTING FROM SCRATCH</p></div>
+    <a class="labgroup__read" href="ch/01.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="fidelity" data-lab="1"></div><div class="demo-slot" data-demo="personality" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/02.html">02</a>
+    <div><h2>层级就是一切</h2><p class="labgroup__latin">HIERARCHY IS EVERYTHING</p></div>
+    <a class="labgroup__read" href="ch/02.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="hierarchy" data-lab="1"></div><div class="demo-slot" data-demo="emphasis" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/03.html">03</a>
+    <div><h2>布局与间距</h2><p class="labgroup__latin">LAYOUT AND SPACING</p></div>
+    <a class="labgroup__read" href="ch/03.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="spacing" data-lab="1"></div><div class="demo-slot" data-demo="layout" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/04.html">04</a>
+    <div><h2>文字设计</h2><p class="labgroup__latin">DESIGNING TEXT</p></div>
+    <a class="labgroup__read" href="ch/04.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="type-scale" data-lab="1"></div><div class="demo-slot" data-demo="line-length" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/05.html">05</a>
+    <div><h2>色彩的运用</h2><p class="labgroup__latin">WORKING WITH COLOR</p></div>
+    <a class="labgroup__read" href="ch/05.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="color-scale" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/06.html">06</a>
+    <div><h2>营造层次感</h2><p class="labgroup__latin">CREATING DEPTH</p></div>
+    <a class="labgroup__read" href="ch/06.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="shadow" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/07.html">07</a>
+    <div><h2>图片的运用</h2><p class="labgroup__latin">WORKING WITH IMAGES</p></div>
+    <a class="labgroup__read" href="ch/07.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="image-overlay" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/08.html">08</a>
+    <div><h2>收尾打磨</h2><p class="labgroup__latin">FINISHING TOUCHES</p></div>
+    <a class="labgroup__read" href="ch/08.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="polish" data-lab="1"></div></div>
+</section><section class="labgroup">
+  <header class="labgroup__head">
+    <a class="labgroup__no" href="ch/09.html">09</a>
+    <div><h2>持续进阶</h2><p class="labgroup__latin">LEVELING UP</p></div>
+    <a class="labgroup__read" href="ch/09.html">读这一章 →</a>
+  </header>
+  <div class="labgroup__demos"><div class="demo-slot" data-demo="quiz" data-lab="1"></div></div>
+</section>
+  <section class="livewall livewall--lab" id="live-figures">
+    <header class="livewall__head">
+      <div><p class="kicker">LIVE FIGURES</p><h2>把截图换成真界面 · 按章浏览</h2></div>
+      <p class="livewall__note">这些不是视频，也不是截图：是能在页面里直接操作的 HTML 界面。点进章节，改字号、拖间距、换配色、切状态；每张图都保留「原书截图」一键对照。</p>
+    </header>
+    <section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">01</span>
+    <div><h2>第 1 章 · 5 个可玩示例</h2><p class="labgroup__latin">STARTING FROM SCRATCH</p></div>
+    <a class="labgroup__read" href="ch/01.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/01.html#fig-01-2"><span class="livewall__ch">01</span><span class="livewall__body"><span class="livewall__title">搜索航班：从一个功能开始</span><span class="livewall__hint">改字段、切外壳，看它怎么长成完整应用</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/01.html#fig-01-5"><span class="livewall__ch">01</span><span class="livewall__body"><span class="livewall__title">先别上色，先把层级做对</span><span class="livewall__hint">在灰度里切换选中方案，再上色看品牌色落在哪</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/01.html#fig-01-13"><span class="livewall__ch">01</span><span class="livewall__body"><span class="livewall__title">字体决定个性</span><span class="livewall__hint">切换衬线 / 无衬线 / 等宽，感受气质差异</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/01.html#fig-01-19"><span class="livewall__ch">01</span><span class="livewall__body"><span class="livewall__title">圆角决定个性</span><span class="livewall__hint">拖动圆角，观察卡片和按钮的气质变化</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/01.html#fig-01-27"><span class="livewall__ch">01</span><span class="livewall__body"><span class="livewall__title">图标也要有尺寸阶梯</span><span class="livewall__hint">切换「随手定」，看工具栏和列表怎么乱掉</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">02</span>
+    <div><h2>第 2 章 · 3 个可玩示例</h2><p class="labgroup__latin">HIERARCHY IS EVERYTHING</p></div>
+    <a class="labgroup__read" href="ch/02.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/02.html#fig-02-2"><span class="livewall__ch">02</span><span class="livewall__body"><span class="livewall__title">同一张仪表盘，两种层级</span><span class="livewall__hint">切「全部同级」，看信息怎么糊成一片</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/02.html#fig-02-5"><span class="livewall__ch">02</span><span class="livewall__body"><span class="livewall__title">字号不是唯一的层级工具</span><span class="livewall__hint">改标题字号和字重，再把辅助文字调灰</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/02.html#fig-02-29"><span class="livewall__ch">02</span><span class="livewall__body"><span class="livewall__title">三个操作，只有一个该实心</span><span class="livewall__hint">在「按语义」和「按层级」之间切换，再点删除</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">03</span>
+    <div><h2>第 3 章 · 3 个可玩示例</h2><p class="labgroup__latin">LAYOUT AND SPACING</p></div>
+    <a class="labgroup__read" href="ch/03.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/03.html#fig-03-3"><span class="livewall__ch">03</span><span class="livewall__body"><span class="livewall__title">留白：先给足再减</span><span class="livewall__hint">拖内边距和条目间距，把卡片从拥挤调回呼吸</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/03.html#fig-03-22"><span class="livewall__ch">03</span><span class="livewall__body"><span class="livewall__title">侧栏该固定，主区该弹性</span><span class="livewall__hint">拖屏幕宽度，对比百分比侧栏和固定侧栏</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/03.html#fig-03-36"><span class="livewall__ch">03</span><span class="livewall__body"><span class="livewall__title">组内紧、组间松</span><span class="livewall__hint">把组间距拖到和组内一样，看表单怎么变含糊</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">04</span>
+    <div><h2>第 4 章 · 4 个可玩示例</h2><p class="labgroup__latin">DESIGNING TEXT</p></div>
+    <a class="labgroup__read" href="ch/04.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/04.html#fig-04-1"><span class="livewall__ch">04</span><span class="livewall__body"><span class="livewall__title">字号阶梯：8 种变 5 种</span><span class="livewall__hint">切换两套字号体系，看页面怎么安静下来</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/04.html#fig-04-18"><span class="livewall__ch">04</span><span class="livewall__body"><span class="livewall__title">小字对齐大字基线</span><span class="livewall__hint">切换对齐方式，盯住两条红蓝虚线</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/04.html#fig-04-22"><span class="livewall__ch">04</span><span class="livewall__body"><span class="livewall__title">行长和行高要一起调</span><span class="livewall__hint">拖宽窄和行高，看每行字数和实际行数</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/04.html#fig-04-40"><span class="livewall__ch">04</span><span class="livewall__body"><span class="livewall__title">全大写要放开字距</span><span class="livewall__hint">切大小写、拖字距和字号，找大标题的呼吸感</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">05</span>
+    <div><h2>第 5 章 · 4 个可玩示例</h2><p class="labgroup__latin">WORKING WITH COLOR</p></div>
+    <a class="labgroup__read" href="ch/05.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/05.html#fig-05-6"><span class="livewall__ch">05</span><span class="livewall__body"><span class="livewall__title">HSL：三个数各管一件事</span><span class="livewall__hint">拖动色相、饱和度、明度，看同一套界面怎么变</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/05.html#fig-05-23"><span class="livewall__ch">05</span><span class="livewall__body"><span class="livewall__title">九级色阶，从 100 到 900</span><span class="livewall__hint">定好色相和饱和度，看色阶怎么铺满整条明度</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/05.html#fig-05-42"><span class="livewall__ch">05</span><span class="livewall__body"><span class="livewall__title">深底白字不行，就反过来</span><span class="livewall__hint">调背景明度和文字颜色，看对比度能不能过 4.5:1</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/05.html#fig-05-48"><span class="livewall__ch">05</span><span class="livewall__body"><span class="livewall__title">别只靠颜色说话</span><span class="livewall__hint">切到色盲视角，看颜色失效以后还剩下什么</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">06</span>
+    <div><h2>第 6 章 · 4 个可玩示例</h2><p class="labgroup__latin">CREATING DEPTH</p></div>
+    <a class="labgroup__read" href="ch/06.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/06.html#fig-06-12"><span class="livewall__ch">06</span><span class="livewall__body"><span class="livewall__title">光从上方来：凸起与内凹</span><span class="livewall__hint">切剖面、调光强，看边框和阴影往哪边跑</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/06.html#fig-06-23"><span class="livewall__ch">06</span><span class="livewall__body"><span class="livewall__title">双层阴影：一层离地，一层贴地</span><span class="livewall__hint">分别调大阴影和小阴影，再对比单层与双层</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/06.html#fig-06-26"><span class="livewall__ch">06</span><span class="livewall__body"><span class="livewall__title">扁平设计也能分出远近</span><span class="livewall__hint">让卡片比背景浅或深，再加一条实心阴影</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/06.html#fig-06-28"><span class="livewall__ch">06</span><span class="livewall__body"><span class="livewall__title">让卡片跨在两种背景的交界上</span><span class="livewall__hint">拖动上移量，看卡片从「装在区块里」变成「浮在交界处」</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">07</span>
+    <div><h2>第 7 章 · 4 个可玩示例</h2><p class="labgroup__latin">WORKING WITH IMAGES</p></div>
+    <a class="labgroup__read" href="ch/07.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/07.html#fig-07-4"><span class="livewall__ch">07</span><span class="livewall__body"><span class="livewall__title">背景图上的文字，加一层蒙版</span><span class="livewall__hint">换蒙版颜色和浓度，看白字在亮处还看得清吗</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/07.html#fig-07-11"><span class="livewall__ch">07</span><span class="livewall__body"><span class="livewall__title">小图标别放大，装进形状里</span><span class="livewall__hint">同一尺寸拖一下，对比直接放大与装进圆形状</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/07.html#fig-07-20"><span class="livewall__ch">07</span><span class="livewall__body"><span class="livewall__title">用户上传的图，裁进固定尺寸</span><span class="livewall__hint">切填充方式和焦点，看网格什么时候被撑乱</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/07.html#fig-07-22"><span class="livewall__ch">07</span><span class="livewall__body"><span class="livewall__title">背景色渗过来时，别急着加边框</span><span class="livewall__hint">把照片背景调得跟界面一样，再试三种补救</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">08</span>
+    <div><h2>第 8 章 · 3 个可玩示例</h2><p class="labgroup__latin">FINISHING TOUCHES</p></div>
+    <a class="labgroup__read" href="ch/08.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/08.html#fig-08-5"><span class="livewall__ch">08</span><span class="livewall__body"><span class="livewall__title">把表单控件换成品牌色</span><span class="livewall__hint">切控件样式、换色相与尺寸，看差异</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/08.html#fig-08-22"><span class="livewall__ch">08</span><span class="livewall__body"><span class="livewall__title">空状态要主动设计</span><span class="livewall__hint">切三种空状态，藏起没用的按钮</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/08.html#fig-08-28"><span class="livewall__ch">08</span><span class="livewall__body"><span class="livewall__title">下拉菜单不必是链接列表</span><span class="livewall__hint">打开分组、图标与说明，菜单变富</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section><section class="labgroup labgroup--live">
+  <header class="labgroup__head">
+    <span class="labgroup__no">09</span>
+    <div><h2>第 9 章 · 2 个可玩示例</h2><p class="labgroup__latin">LEVELING UP</p></div>
+    <a class="labgroup__read" href="ch/09.html">读这一章 →</a>
+  </header>
+  <ul class="livewall__grid livewall__grid--inlab"><li class="livewall__item"><a href="ch/09.html#fig-09-1"><span class="livewall__ch">09</span><span class="livewall__body"><span class="livewall__title">把日期选择器反转过来</span><span class="livewall__hint">反转配色，换强调色与选中范围</span></span><span class="livewall__arrow">→</span></a></li><li class="livewall__item"><a href="ch/09.html#fig-09-4"><span class="livewall__ch">09</span><span class="livewall__body"><span class="livewall__title">重建练习：复刻这张卡片</span><span class="livewall__hint">调行高、字距与阴影，复刻得一模一样</span></span><span class="livewall__arrow">→</span></a></li></ul>
+</section>
+  </section>
+  <footer class="sitefoot">
+    <p class="sitefoot__note">实验里的界面均为本站原创演示，不使用原书插图。原书插图版权归原作者所有。</p>
+    <nav class="sitefoot__links"><a href="index.html">← 返回封面</a><a href="notice.html">版权与授权</a></nav>
+  </footer>
+</main>
+<script>window.RUI_PAGE = {kind:'lab'};window.RUI_DEMOS = {"fidelity": {"chapter": "01", "title": "低保真 → 高保真", "desc": "同一个界面，从灰度线框到成品。拖动滑块，看层级、色彩与细节如何一步步到位。", "hint": "拖动滑块，观察界面如何「长大」"}, "personality": {"chapter": "01", "title": "风格个性实验室", "desc": "同一张卡片，四种性格。切换字体、圆角、配色与语气，感受「个性」是怎样被选择出来的。", "hint": "点击风格卡片，比较四种个性"}, "hierarchy": {"chapter": "02", "title": "层级三要素", "desc": "尺寸、字重、颜色——拖动三个变量，观察视线如何被重新排序。", "hint": "拖动三个变量，再用「眯眼测试」验证"}, "emphasis": {"chapter": "02", "title": "强调与弱化", "desc": "想突出一个按钮，不一定要让它更亮。试试用弱化周围元素来建立强调。", "hint": "切换策略，比较两种强调方式"}, "spacing": {"chapter": "03", "title": "间距系统", "desc": "拖动密度滑块，让一张卡片在「拥挤」与「呼吸」之间移动，并观察 4/8pt 网格如何约束节奏。", "hint": "拖动滑块，并打开网格参考线"}, "layout": {"chapter": "03", "title": "布局与断点", "desc": "在手机、平板、桌面三个断点间切换，观察导航、网格与留白如何重排，以及为什么「别硬填满屏幕」。", "hint": "切换断点与栏距，观察重排"}, "type-scale": {"chapter": "04", "title": "字号阶梯", "desc": "选一个基准字号与比例，实时生成标题阶梯，并检查层级是否清晰。", "hint": "换一种比例，比较阶梯的手感"}, "line-length": {"chapter": "04", "title": "行长与行高", "desc": "拖动行长与行高，找到中文正文最舒服的阅读区间。", "hint": "调到你觉得舒服，再看看推荐区间"}, "color-scale": {"chapter": "05", "title": "色阶与对比度", "desc": "从 HSL 出发生成 9 级色阶，并实时检查文字对比度是否达到 WCAG AA。", "hint": "选一个基色，检查浅色与深色两端"}, "shadow": {"chapter": "06", "title": "阴影与高度", "desc": "调整光源、模糊与层数，让卡片「浮」起来或「贴」下去。", "hint": "拖动参数，观察卡片与背景的关系"}, "image-overlay": {"chapter": "07", "title": "图上文字", "desc": "在照片上放文字，用遮罩、渐变或模糊找回可读性。", "hint": "切换方案，比较文字可读性"}, "polish": {"chapter": "08", "title": "收尾打磨开关", "desc": "同一张界面，逐项打开「打磨细节」，看专业感从哪里来。", "hint": "逐项打开开关，对比前后"}, "quiz": {"chapter": "09", "title": "全书测验", "desc": "6 道题，覆盖层级、间距、文字、颜色、深度与图片，检验你是否真的把这本书读进了手感里。", "hint": "选择答案，即时查看解析"}};</script>
+<script src="assets/js/book.js"></script>
+<script src="assets/js/demo-runtime.js"></script>
+<script src="assets/js/demos/fidelity.js"></script>
+<script src="assets/js/demos/personality.js"></script>
+<script src="assets/js/demos/hierarchy.js"></script>
+<script src="assets/js/demos/emphasis.js"></script>
+<script src="assets/js/demos/spacing.js"></script>
+<script src="assets/js/demos/layout.js"></script>
+<script src="assets/js/demos/type-scale.js"></script>
+<script src="assets/js/demos/line-length.js"></script>
+<script src="assets/js/demos/color-scale.js"></script>
+<script src="assets/js/demos/shadow.js"></script>
+<script src="assets/js/demos/image-overlay.js"></script>
+<script src="assets/js/demos/polish.js"></script>
+<script src="assets/js/demos/quiz.js"></script>
+<a id="backhome" href="../index.html">← 返回选书</a>
+</body>
+</html>

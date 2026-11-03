@@ -1,0 +1,186 @@
+/* ==========================================================================
+   live.css — figures that were rebuilt as playable interfaces
+   A "live figure" replaces one original screenshot in the reading flow.
+   The original screenshot is always one tap away (原书截图 toggle).
+   ========================================================================== */
+
+.fig--live { margin: 2.2em 0 2.4em; }
+
+.livefig {
+  position: relative;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* no-JS / before mount: show the original screenshot, never a blank box */
+.livefig__stage { display: none; }
+.livefig[data-mode="live"] .livefig__stage { display: block; }
+.livefig[data-mode="live"] .livefig__orig { display: none; }
+
+.livefig__orig {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.livefig__orig img { display: block; width: 100%; height: auto; }
+
+/* the toolbar under the figure */
+.livefig__bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 9px 12px;
+  border-top: 1px solid var(--rule);
+  background: var(--surface-2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.livefig__no {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.livefig__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.livefig__tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.livefig__title { font-weight: 700; color: var(--ink); }
+.livefig__hint { color: var(--ink-3); flex: 1 1 180px; min-width: 0; }
+
+.livefig__modes {
+  display: inline-flex;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.livefig__modes button {
+  border: 0;
+  background: transparent;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-2);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.livefig__modes button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.livefig__modes button:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+
+.livefig__reset {
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-2);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.livefig__reset:hover { border-color: var(--ink-3); color: var(--ink); }
+.livefig__reset:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.livefig__error {
+  padding: 28px 22px;
+  color: var(--ink-2);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* stage canvas: a soft workspace behind the rebuilt UI */
+.livefig__stage { background: var(--surface-2); }
+.livefig__stage > .lv {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+}
+.livefig[data-live-missing="1"] .livefig__stage { display: none !important; }
+
+/* small shared helpers used by the live renderers */
+.lv-note { margin: 0; font-size: 12px; line-height: 1.7; color: var(--ink-3); }
+.lv-note b { color: var(--ink-2); }
+.lv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--code-bg);
+  color: var(--ink-2);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.lv-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.lv-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lv-spread { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.lv-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.lv-canvas {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  padding: 22px 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.lv-canvas--grid {
+  background-color: var(--surface);
+  background-image: linear-gradient(to right, rgba(47, 93, 138, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(47, 93, 138, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  .livefig__bar { padding: 8px 10px; gap: 6px 10px; }
+  .livefig__hint { flex: 1 1 100%; order: 6; }
+  .livefig__modes { order: 4; }
+  .livefig__reset { order: 5; }
+  .livefig__stage > .lv { padding: 12px; gap: 10px; }
+  .lv-canvas { padding: 16px 12px; }
+}
+
+/* print: fall back to the original screenshot, hide controls */
+@media print {
+  .livefig__stage { display: none !important; }
+  .livefig__orig { display: block !important; }
+  .livefig__bar { display: none !important; }
+}

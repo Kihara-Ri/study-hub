@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>收尾打磨 · 第 8 章 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/book.css">
+<link rel="stylesheet" href="../assets/css/demos.css">
+<link rel="stylesheet" href="../assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--chapter" data-chapter="08">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">第 8 章 / 共 9 章</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<div class="shell">
+<aside class="rail" id="rail" aria-label="章节目录">
+  <div class="rail__head">
+    <p class="kicker">CONTENTS</p>
+    <p class="rail__count">9 章 · 284 幅插图</p>
+  </div>
+  <a class="rail__home" href="../index.html">← 封面与目录</a>
+  <ol class="chapnav"><li class="chapnav__item">
+<a class="chapnav__link" href="01.html">
+  <span class="chapnav__no">01</span>
+  <span class="chapnav__title">从零开始</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="01"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="02.html">
+  <span class="chapnav__no">02</span>
+  <span class="chapnav__title">层级就是一切</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="02"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="03.html">
+  <span class="chapnav__no">03</span>
+  <span class="chapnav__title">布局与间距</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="03"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="04.html">
+  <span class="chapnav__no">04</span>
+  <span class="chapnav__title">文字设计</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="04"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="05.html">
+  <span class="chapnav__no">05</span>
+  <span class="chapnav__title">色彩的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="05"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="06.html">
+  <span class="chapnav__no">06</span>
+  <span class="chapnav__title">营造层次感</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="06"></b></span>
+</a></li><li class="chapnav__item">
+<a class="chapnav__link" href="07.html">
+  <span class="chapnav__no">07</span>
+  <span class="chapnav__title">图片的运用</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="07"></b></span>
+</a></li><li class="chapnav__item is-current">
+<a class="chapnav__link" href="08.html" aria-current="page">
+  <span class="chapnav__no">08</span>
+  <span class="chapnav__title">收尾打磨</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="08"></b></span>
+</a><ol class="secnav"><li><a href="#s1" data-spy="s1"><span>8.1</span>把默认样式做到极致<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s2" data-spy="s2"><span>8.2</span>用强调色边框加点颜色</a></li><li><a href="#s3" data-spy="s3"><span>8.3</span>装饰你的背景</a></li><li><a href="#s4" data-spy="s4"><span>8.4</span>别忽视空状态<em class="secnav__live" aria-label="可玩"></em></a></li><li><a href="#s5" data-spy="s5"><span>8.5</span>少用边框</a></li><li><a href="#s6" data-spy="s6"><span>8.6</span>跳出框框去想<em class="secnav__live" aria-label="可玩"></em></a></li></ol></li><li class="chapnav__item">
+<a class="chapnav__link" href="09.html">
+  <span class="chapnav__no">09</span>
+  <span class="chapnav__title">持续进阶</span>
+  <span class="chapnav__bar" aria-hidden="true"><b data-chap-progress="09"></b></span>
+</a></li></ol>
+  <div class="rail__foot">
+    <a href="../lab.html">互动实验室</a>
+    <a href="../style.html">设计说明</a>
+    <a href="../notice.html">版权</a>
+  </div>
+</aside>
+<main class="main" id="main">
+<article class="chapter">
+  <header class="chapter__head">
+    <p class="kicker">CHAPTER 08 · FINISHING TOUCHES</p>
+    <h1 class="chapter__title">收尾打磨</h1>
+    <p class="chapter__lede">让界面「看起来做完了」的那些细节：边框、阴影、圆角、空状态与文案。</p>
+    <ul class="chapter__meta">
+      <li><b>6</b> 节</li>
+      <li><b>33</b> 幅插图</li>
+      <li><b>6</b> 分钟</li>
+      <li><b>1</b> 个互动实验</li><li><b>3</b> 个可玩示例</li>
+    </ul>
+  </header>
+  <nav class="chapter__play" aria-label="本章可玩示例"><span class="chapter__play-label">本章可玩</span><a href="#fig-08-5">把表单控件换成品牌色</a><a href="#fig-08-22">空状态要主动设计</a><a href="#fig-08-28">下拉菜单不必是链接列表</a></nav>
+  <div class="chapter__body">
+<section class="sec" id="s1">
+<h2 class="sec__h"><a class="sec__no" href="#s1">8.1</a><span>把默认样式做到极致</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>想给设计增添亮点，不一定非要加新元素——有很多办法能让页面上已有的东西“超常发挥”。</p><p>比如，如果你的设计里有个项目符号列表，试试把项目符号换成图标：</p><figure class="fig" id="fig-08-1">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="1" data-caption="图 8.1" aria-label="放大查看插图 1">
+<img src="../assets/img/p220-01-740.webp" srcset="../assets/img/p220-01-740.webp 740w, ../assets/img/p220-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="249" alt="收尾打磨 · 图 8.1 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.1</span>
+</button>
+</figure><p>对勾和箭头在很多场景下都是很好用的通用选择，你也可以用更贴合内容的东西，比如给一串安全相关的功能配上挂锁图标：</p><figure class="fig" id="fig-08-2">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="2" data-caption="图 8.2" aria-label="放大查看插图 2">
+<img src="../assets/img/p220-02-740.webp" srcset="../assets/img/p220-02-740.webp 740w, ../assets/img/p220-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="256" alt="收尾打磨 · 图 8.2 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.2</span>
+</button>
+</figure><p>同样，如果你在做用户评价，试试把引号“提拔”成视觉元素，放大它们，再换个颜色：</p><figure class="fig" id="fig-08-3">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="3" data-caption="图 8.3" aria-label="放大查看插图 3">
+<img src="../assets/img/p221-01-740.webp" srcset="../assets/img/p221-01-740.webp 740w, ../assets/img/p221-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="收尾打磨 · 图 8.3 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.3</span>
+</button>
+</figure><p>链接也是很值得特殊处理的对象。简单的做法是换个颜色和字重，花哨的做法是加一条粗的彩色自定义下划线，让它和文字有一点点重叠：</p><figure class="fig" id="fig-08-4">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="4" data-caption="图 8.4" aria-label="放大查看插图 4">
+<img src="../assets/img/p221-02-740.webp" srcset="../assets/img/p221-02-740.webp 740w, ../assets/img/p221-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="422" alt="收尾打磨 · 图 8.4 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.4</span>
+</button>
+</figure><p>如果你在做表单，用自定义的复选框和单选按钮，是给设计加点颜色最省事的办法：</p><figure class="fig fig--live" id="fig-08-5">
+<div class="livefig" data-live="08-5">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="08" data-fig="5" data-caption="图 8.5" aria-label="放大查看原书插图 5">
+<img src="../assets/img/p222-01-740.webp" srcset="../assets/img/p222-01-740.webp 740w, ../assets/img/p222-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="472" alt="收尾打磨 · 图 8.5 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 8.5</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">把表单控件换成品牌色</span>
+<span class="livefig__hint">切控件样式、换色相与尺寸，看差异</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>选中状态不用浏览器默认样式，直接从你的品牌色里挑一个，往往就足够让东西从乏味变得精致、有设计感。</p>
+</div>
+</section><section class="sec" id="s2">
+<h2 class="sec__h"><a class="sec__no" href="#s2">8.2</a><span>用强调色边框加点颜色</span></h2>
+<div class="sec__body">
+<p>如果你不是平面设计师，怎么才能给界面添上那么一点视觉亮点，达到别人的漂亮摄影图片或者彩色插画的效果？</p><p>有个简单的小技巧效果特别明显：给界面上那些本来有点平淡的部分加上彩色的强调色边框。</p><p>比如，沿着卡片顶部：</p><figure class="fig" id="fig-08-6">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="6" data-caption="图 8.6" aria-label="放大查看插图 6">
+<img src="../assets/img/p224-01-740.webp" srcset="../assets/img/p224-01-740.webp 740w, ../assets/img/p224-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="596" alt="收尾打磨 · 图 8.6 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.6</span>
+</button>
+</figure><p>……或者用来突出当前的导航项：</p><figure class="fig" id="fig-08-7">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="7" data-caption="图 8.7" aria-label="放大查看插图 7">
+<img src="../assets/img/p225-01-740.webp" srcset="../assets/img/p225-01-740.webp 740w, ../assets/img/p225-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="230" alt="收尾打磨 · 图 8.7 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.7</span>
+</button>
+</figure><p>……或者沿着提示消息的侧边：</p><figure class="fig" id="fig-08-8">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="8" data-caption="图 8.8" aria-label="放大查看插图 8">
+<img src="../assets/img/p225-02-740.webp" srcset="../assets/img/p225-02-740.webp 740w, ../assets/img/p225-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="232" alt="收尾打磨 · 图 8.8 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.8</span>
+</button>
+</figure><p>……或者在大标题下方加一小段：</p><figure class="fig" id="fig-08-9">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="9" data-caption="图 8.9" aria-label="放大查看插图 9">
+<img src="../assets/img/p225-03-740.webp" srcset="../assets/img/p225-03-740.webp 740w, ../assets/img/p225-03-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="261" alt="收尾打磨 · 图 8.9 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.9</span>
+</button>
+</figure><p>……甚至铺满整个布局的顶部：</p><figure class="fig" id="fig-08-10">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="10" data-caption="图 8.10" aria-label="放大查看插图 10">
+<img src="../assets/img/p226-01-740.webp" srcset="../assets/img/p226-01-740.webp 740w, ../assets/img/p226-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="730" alt="收尾打磨 · 图 8.10 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.10</span>
+</button>
+</figure><p>给界面加个彩色矩形不需要什么平面设计天赋，却能让东西看起来“有设计过”得多。</p>
+</div>
+</section><section class="sec" id="s3">
+<h2 class="sec__h"><a class="sec__no" href="#s3">8.3</a><span>装饰你的背景</span></h2>
+<div class="sec__body">
+<p>即便你在层级、间距和字体上都做得很好，有时设计还是会显得有点平淡。</p><p>想打破这种单调又不想大动设计，给几处背景加点料就是个好办法。</p><h3 class="sub" id="s3-1"><a class="sub__anchor" href="#s3-1" aria-hidden="true">#</a>换掉背景色</h3><p>给背景加点料，最直接的办法就是换个颜色。</p><figure class="fig" id="fig-08-11">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="11" data-caption="图 8.11" aria-label="放大查看插图 11">
+<img src="../assets/img/p228-01-740.webp" srcset="../assets/img/p228-01-740.webp 740w, ../assets/img/p228-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="511" alt="收尾打磨 · 图 8.11 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.11</span>
+</button>
+</figure><p>这既能用来强调某个单独的面板，也能用来区分整块页面区域。</p><figure class="fig" id="fig-08-12">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="12" data-caption="图 8.12" aria-label="放大查看插图 12">
+<img src="../assets/img/p229-01-740.webp" srcset="../assets/img/p229-01-740.webp 740w, ../assets/img/p229-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="448" alt="收尾打磨 · 图 8.12 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.12</span>
+</button>
+</figure><p>想要更有活力的效果，还可以用一点渐变：</p><figure class="fig" id="fig-08-13">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="13" data-caption="图 8.13" aria-label="放大查看插图 13">
+<img src="../assets/img/p229-02-740.webp" srcset="../assets/img/p229-02-740.webp 740w, ../assets/img/p229-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="290" alt="收尾打磨 · 图 8.13 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.13</span>
+</button>
+</figure><p>效果最好的做法是选两个色相差不超过 30° 的色相。</p><h3 class="sub" id="s3-2"><a class="sub__anchor" href="#s3-2" aria-hidden="true">#</a>用重复图案</h3><p>另一个办法是加一层低调的可重复图案，比如 Hero Patterns 里的这个：</p><figure class="fig" id="fig-08-14">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="14" data-caption="图 8.14" aria-label="放大查看插图 14">
+<img src="../assets/img/p230-01-740.webp" srcset="../assets/img/p230-01-740.webp 740w, ../assets/img/p230-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="324" alt="收尾打磨 · 图 8.14 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.14</span>
+</button>
+</figure><p>你也不一定非要让图案铺满整个背景——只沿一条边重复的图案也很好看。</p><figure class="fig" id="fig-08-15">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="15" data-caption="图 8.15" aria-label="放大查看插图 15">
+<img src="../assets/img/p230-02-740.webp" srcset="../assets/img/p230-02-740.webp 740w, ../assets/img/p230-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="290" alt="收尾打磨 · 图 8.15 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.15</span>
+</button>
+</figure><p>背景和图案之间的对比度要压得比较低，保证可读性。</p><h3 class="sub" id="s3-3"><a class="sub__anchor" href="#s3-3" aria-hidden="true">#</a>加个简单的形状或插画</h3><p>除了装饰整个背景，你也可以在特定位置放一两个单独的图形。</p><p>简单的几何形状就很合适：</p><figure class="fig" id="fig-08-16">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="16" data-caption="图 8.16" aria-label="放大查看插图 16">
+<img src="../assets/img/p231-01-740.webp" srcset="../assets/img/p231-01-740.webp 740w, ../assets/img/p231-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="330" alt="收尾打磨 · 图 8.16 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.16</span>
+</button>
+</figure><p>……从重复图案里取一小块也行：</p><figure class="fig" id="fig-08-17">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="17" data-caption="图 8.17" aria-label="放大查看插图 17">
+<img src="../assets/img/p231-02-740.webp" srcset="../assets/img/p231-02-740.webp 740w, ../assets/img/p231-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="360" alt="收尾打磨 · 图 8.17 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.17</span>
+</button>
+</figure><p>还可以做更复杂一点的东西，比如一张简化的世界地图：</p><figure class="fig" id="fig-08-18">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="18" data-caption="图 8.18" aria-label="放大查看插图 18">
+<img src="../assets/img/p232-01-740.webp" srcset="../assets/img/p232-01-740.webp 740w, ../assets/img/p232-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="280" alt="收尾打磨 · 图 8.18 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.18</span>
+</button>
+</figure><p>跟铺满整个背景的图案一样，对比度最好压低，别让它们干扰内容。</p>
+</div>
+</section><section class="sec" id="s4">
+<h2 class="sec__h"><a class="sec__no" href="#s4">8.4</a><span>别忽视空状态</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>想象你正在给手上的应用设计一个新功能。</p><p>你花了大把时间，精心编造出逼真的示例数据，挑好用户名和头像，拼出一个漂亮又抓人的页面。</p><figure class="fig" id="fig-08-19">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="19" data-caption="图 8.19" aria-label="放大查看插图 19">
+<img src="../assets/img/p234-01-740.webp" srcset="../assets/img/p234-01-740.webp 740w, ../assets/img/p234-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="688" alt="收尾打磨 · 图 8.19 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.19</span>
+</button>
+</figure><p>你把功能写完，部署上线。可一位用户兴冲冲地点了导航里的新条目，看到的却是这个：</p><figure class="fig" id="fig-08-20">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="20" data-caption="图 8.20" aria-label="放大查看插图 20">
+<img src="../assets/img/p235-01-740.webp" srcset="../assets/img/p235-01-740.webp 740w, ../assets/img/p235-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="343" alt="收尾打磨 · 图 8.20 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.20</span>
+</button>
+</figure><p>如果你做的东西依赖用户生成的内容，空状态应该是优先事项，而不是事后补的。</p><p>试着放一张图片或插画吸引用户的注意力，并把行动号召做得更突出，鼓励他们迈出下一步：</p><figure class="fig" id="fig-08-21">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="21" data-caption="图 8.21" aria-label="放大查看插图 21">
+<img src="../assets/img/p235-02-740.webp" srcset="../assets/img/p235-02-740.webp 740w, ../assets/img/p235-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="346" alt="收尾打磨 · 图 8.21 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.21</span>
+</button>
+</figure><p>如果你做的东西带一堆辅助界面，比如标签页或筛选器，可以考虑把它们全藏起来。用户还没创建任何内容之前，摆出一堆点了也没用的操作没有任何意义。</p><figure class="fig fig--live" id="fig-08-22">
+<div class="livefig" data-live="08-22">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="08" data-fig="22" data-caption="图 8.22" aria-label="放大查看原书插图 22">
+<img src="../assets/img/p236-01-740.webp" srcset="../assets/img/p236-01-740.webp 740w, ../assets/img/p236-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="720" alt="收尾打磨 · 图 8.22 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 8.22</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">空状态要主动设计</span>
+<span class="livefig__hint">切三种空状态，藏起没用的按钮</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>空状态是用户与新产品或新功能的第一次接触。用它来展示有意思、让人兴奋的一面——别满足于平淡无聊。</p>
+</div>
+</section><section class="sec" id="s5">
+<h2 class="sec__h"><a class="sec__no" href="#s5">8.5</a><span>少用边框</span></h2>
+<div class="sec__body">
+<p>当你需要在两个元素之间做出区隔时，先别急着伸手去加边框。</p><figure class="fig" id="fig-08-23">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="23" data-caption="图 8.23" aria-label="放大查看插图 23">
+<img src="../assets/img/p238-01-740.webp" srcset="../assets/img/p238-01-740.webp 740w, ../assets/img/p238-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="635" alt="收尾打磨 · 图 8.23 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.23</span>
+</button>
+</figure><p>边框确实是区分两个元素的好办法，但它不是唯一的办法，用得太多会让设计显得杂乱拥挤。</p><h3 class="sub" id="s5-1"><a class="sub__anchor" href="#s5-1" aria-hidden="true">#</a>用阴影</h3><p>阴影像边框一样能勾勒出元素的轮廓，却更轻，能达到同样的目的，又没那么抢眼。</p><figure class="fig" id="fig-08-24">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="24" data-caption="图 8.24" aria-label="放大查看插图 24">
+<img src="../assets/img/p239-01-740.webp" srcset="../assets/img/p239-01-740.webp 740w, ../assets/img/p239-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="675" alt="收尾打磨 · 图 8.24 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.24</span>
+</button>
+</figure><p>这招在你加阴影的元素和背景颜色不同时效果最好。</p><h3 class="sub" id="s5-2"><a class="sub__anchor" href="#s5-2" aria-hidden="true">#</a>用两种不同的背景色</h3><p>让相邻元素用稍有区别的背景色，通常就足够区分它们了。</p><figure class="fig" id="fig-08-25">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="25" data-caption="图 8.25" aria-label="放大查看插图 25">
+<img src="../assets/img/p240-01-740.webp" srcset="../assets/img/p240-01-740.webp 740w, ../assets/img/p240-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="675" alt="收尾打磨 · 图 8.25 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.25</span>
+</button>
+</figure><p>如果你已经在用不同背景色，同时还加了边框，试着把边框去掉——可能根本不需要。</p><h3 class="sub" id="s5-3"><a class="sub__anchor" href="#s5-3" aria-hidden="true">#</a>多留点间距</h3><p>想在元素之间做出区隔，还有什么办法比直接把距离拉开更合适？</p><figure class="fig" id="fig-08-26">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="26" data-caption="图 8.26" aria-label="放大查看插图 26">
+<img src="../assets/img/p241-01-740.webp" srcset="../assets/img/p241-01-740.webp 740w, ../assets/img/p241-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="675" alt="收尾打磨 · 图 8.26 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.26</span>
+</button>
+</figure><p>把东西分得更开，是区分元素分组的好办法，而且完全不用引入任何新的界面元素。</p>
+<div class="demo-slot" data-demo="polish"></div>
+</div>
+</section><section class="sec" id="s6">
+<h2 class="sec__h"><a class="sec__no" href="#s6">8.6</a><span>跳出框框去想</span><span class="sec__live" title="本节有可玩的实时界面">可玩</span></h2>
+<div class="sec__body">
+<p>大多数人对某些组件该长什么样都有成见。但我们已经习惯相信某个组件只有一种设计方式，并不意味着这就是真的。</p><p>比如，想象一个下拉菜单。你脑海里浮现的，多半是个白色盒子，带一点投影，里面堆着一串链接：</p><figure class="fig" id="fig-08-27">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="27" data-caption="图 8.27" aria-label="放大查看插图 27">
+<img src="../assets/img/p242-01-740.webp" srcset="../assets/img/p242-01-740.webp 740w, ../assets/img/p242-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="616" alt="收尾打磨 · 图 8.27 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.27</span>
+</button>
+</figure><p>可谁说下拉菜单就得是一串无聊的链接？它不过是屏幕上悬浮着的一个盒子，你想怎么用都行。</p><p>把它拆成几个区块、用多列布局、加上辅助文字或彩色图标——做点好玩的东西出来！</p><figure class="fig fig--live" id="fig-08-28">
+<div class="livefig" data-live="08-28">
+<div class="livefig__stage" data-live-stage></div>
+<button class="fig__zoom livefig__orig" type="button" data-lightbox data-chapter="08" data-fig="28" data-caption="图 8.28" aria-label="放大查看原书插图 28">
+<img src="../assets/img/p243-01-740.webp" srcset="../assets/img/p243-01-740.webp 740w, ../assets/img/p243-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="758" alt="收尾打磨 · 图 8.28 界面示例" loading="lazy" decoding="async">
+</button>
+</div>
+<div class="livefig__bar">
+<span class="livefig__no">图 8.28</span>
+<span class="livefig__tag">实时重制</span>
+<span class="livefig__title">下拉菜单不必是链接列表</span>
+<span class="livefig__hint">打开分组、图标与说明，菜单变富</span>
+<div class="livefig__modes" role="group" aria-label="显示模式">
+<button type="button" data-live-mode="live" aria-pressed="true">实时界面</button>
+<button type="button" data-live-mode="orig" aria-pressed="false">原书截图</button>
+</div>
+<button type="button" class="livefig__reset" data-live-reset>重置</button>
+</div>
+</figure><p>也别只盯着下拉菜单；表格之类的呢？</p><p>想到表格，你多半会想到每一列放一项特定的数据：</p><figure class="fig" id="fig-08-29">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="29" data-caption="图 8.29" aria-label="放大查看插图 29">
+<img src="../assets/img/p244-01-740.webp" srcset="../assets/img/p244-01-740.webp 740w, ../assets/img/p244-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="350" alt="收尾打磨 · 图 8.29 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.29</span>
+</button>
+</figure><p>但表格不<em>一定</em>要这么做——如果某一列不需要排序，你完全可以把它和相关的列合并，做出有意思的层级：</p><figure class="fig" id="fig-08-30">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="30" data-caption="图 8.30" aria-label="放大查看插图 30">
+<img src="../assets/img/p244-02-740.webp" srcset="../assets/img/p244-02-740.webp 740w, ../assets/img/p244-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="350" alt="收尾打磨 · 图 8.30 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.30</span>
+</button>
+</figure><p>表格内容也不一定非得是纯文本。合适的话就加图片，或者引入一些颜色来丰富已有的数据：</p><figure class="fig" id="fig-08-31">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="31" data-caption="图 8.31" aria-label="放大查看插图 31">
+<img src="../assets/img/p245-01-740.webp" srcset="../assets/img/p245-01-740.webp 740w, ../assets/img/p245-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="350" alt="收尾打磨 · 图 8.31 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.31</span>
+</button>
+</figure><p>单选按钮呢？一排标签后面跟着几个小圆圈，没有比这更无聊的了。</p><figure class="fig" id="fig-08-32">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="32" data-caption="图 8.32" aria-label="放大查看插图 32">
+<img src="../assets/img/p245-02-740.webp" srcset="../assets/img/p245-02-740.webp 740w, ../assets/img/p245-02-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="396" alt="收尾打磨 · 图 8.32 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.32</span>
+</button>
+</figure><p>如果一组单选按钮在你的界面里很重要，试试换成可选择卡片这样的形式：</p><figure class="fig" id="fig-08-33">
+<button class="fig__zoom" type="button" data-lightbox data-chapter="08" data-fig="33" data-caption="图 8.33" aria-label="放大查看插图 33">
+<img src="../assets/img/p246-01-740.webp" srcset="../assets/img/p246-01-740.webp 740w, ../assets/img/p246-01-1480.webp 1480w" sizes="(max-width: 900px) calc(100vw - 44px), 680px" width="740" height="350" alt="收尾打磨 · 图 8.33 界面示例" loading="lazy" decoding="async">
+<span class="fig__badge">图 8.33</span>
+</button>
+</figure><p>别让你固有的想法限制你的设计——约束很有力量，但有时候你需要的恰恰是一点自由，把界面提升到另一个档次。</p>
+</div>
+</section>
+  </div>
+  <footer class="chapter__foot">
+    <div class="readmark">
+      <button class="btn btn--mark" type="button" data-mark-read="08">标记本章已读</button>
+      <p class="readmark__hint" data-read-hint>读完点一下，首页会记住你的进度。</p>
+    </div>
+    <nav class="pager" aria-label="章节翻页">
+      <a class="pager__link pager__link--prev" href="07.html"><span>← 上一章</span><strong>07 图片的运用</strong></a><a class="pager__link pager__link--next" href="09.html"><span>下一章 →</span><strong>09 持续进阶</strong></a>
+    </nav>
+    <p class="chapter__copyright">非官方中文翻译 · 译文与插图版权归 Adam Wathan &amp; Steve Schoger 所有 · <a href="../notice.html">版权与授权说明</a></p>
+  </footer>
+</article>
+</main>
+<aside class="toc" aria-label="本页目录">
+  <div class="toc__inner">
+    <p class="kicker">ON THIS PAGE</p>
+    <ol class="toc__list"><li><a href="#s1" data-spy="s1">8.1</a></li><li><a href="#s2" data-spy="s2">8.2</a></li><li><a href="#s3" data-spy="s3">8.3</a></li><li><a href="#s4" data-spy="s4">8.4</a></li><li><a href="#s5" data-spy="s5">8.5</a></li><li><a href="#s6" data-spy="s6">8.6</a></li></ol>
+    <div class="toc__progress">
+      <div class="toc__progress-row"><span>本章已读</span><b data-chapter-percent>0%</b></div>
+      <div class="toc__bar"><i data-chapter-progress></i></div>
+    </div>
+    <p class="toc__hint">快捷键：<kbd>Ctrl K</kbd> 搜索 · <kbd>T</kbd> 主题 · <kbd>F</kbd> 字体 · <kbd>Esc</kbd> 关闭</p>
+  </div>
+</aside>
+</div>
+<script>window.RUI_PAGE = {kind:'chapter', chapter:'08', title:'收尾打磨'};window.RUI_DEMOS = {"polish": {"chapter": "08", "title": "收尾打磨开关", "desc": "同一张界面，逐项打开「打磨细节」，看专业感从哪里来。", "hint": "逐项打开开关，对比前后"}};</script>
+<script src="../assets/js/book.js"></script>
+<script src="../assets/js/demo-runtime.js"></script>
+<script src="../assets/js/demos/polish.js"></script>
+<script src="../assets/js/live-runtime.js"></script>
+<script src="../assets/js/live/08.js"></script>
+<a id="backhome" href="../../index.html">← 返回选书</a>
+</body>
+</html>

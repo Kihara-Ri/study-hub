@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>版权与授权 · Refactoring UI 中文版</title>
+<meta name="description" content="《Refactoring UI》非官方中文翻译互动版：9 章、284 张插图、13 个互动实验，以及 32 个把原书截图重建成可玩真实界面的实时示例。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/book.css">
+<link rel="stylesheet" href="assets/css/demos.css">
+<link rel="stylesheet" href="assets/css/live.css">
+<script>(function(){try{var s=JSON.parse(localStorage.getItem('rui:settings')||'{}');var t=s.theme||'paper';document.documentElement.dataset.theme=t;if(s.font)document.documentElement.dataset.font=s.font;if(s.size)document.documentElement.style.setProperty('--reading-size',s.size+'px');if(s.leading)document.documentElement.style.setProperty('--reading-leading',s.leading);if(s.width)document.documentElement.style.setProperty('--reading-width',s.width+'px');}catch(e){}})();</script>
+<style>
+#backhome{position:fixed;right:18px;bottom:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.94);border:1px solid #e6ded2;
+  color:#6b6157;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(120,90,60,.16);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;line-height:1}
+#backhome:hover{border-color:#e0457b;color:#c93a6b}
+@media print{#backhome{display:none}}
+</style>
+</head>
+<body class="page page--doc">
+<a class="skip-link" href="#main">跳到正文</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
+<header class="topbar" data-topbar>
+  <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="打开章节目录" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="index.html" aria-label="Refactoring UI 中文互动版 · 返回首页">
+    <span class="brand__mark">RUI</span>
+    <span class="brand__text">Refactoring UI <em>中文互动版</em></span>
+  </a>
+  <p class="topbar__where">版权与授权</p>
+  <div class="topbar__tools">
+    <button class="toolbtn" type="button" data-search-open aria-label="搜索全书">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"></circle><path d="M10.4 10.4 14 14"></path></svg>
+      <span class="toolbtn__label">搜索</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="toolbtn toolbtn--icon" type="button" data-settings-toggle aria-label="阅读设置" aria-expanded="false">Aa</button>
+    <button class="toolbtn toolbtn--icon" type="button" data-theme-cycle aria-label="切换主题"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.6"></circle><path d="M8 2.4a5.6 5.6 0 0 0 0 11.2z" fill="currentColor" stroke="none"></path></svg></button>
+  </div>
+</header>
+<div class="rail-scrim" data-rail-scrim hidden></div>
+<main class="main main--doc" id="main">
+  <article class="doc">
+    <p class="kicker">NOTICE</p>
+    <div class="doc__body"><h1>版权与授权说明</h1>
+<p>本仓库包含两类来源完全不同的材料，授权状态也完全不同。</p>
+<h2>一、译文与插图</h2>
+<p><strong>版权归原作者所有：© Adam Wathan &amp; Steve Schoger。保留所有权利。</strong></p>
+<p>本仓库中的中文译文是个人学习用途的非官方翻译，<code>assets/</code> 里的 284 张图片提取自原书。 翻译作品属于原作的演绎作品，插图是原作的组成部分，因此：</p>
+<ul><li>原作者保留全部权利，本仓库<strong>不授予任何许可</strong>，也不主张任何权利（Neither the translation nor the images are licensed to anyone by this repository）。</li><li>本仓库不对此翻译与插图授予再许可；商用、再分发或正式授权请联系原作者。</li><li>译文中出现的人名、产品名、字体名等仍归各自权利人所有。</li><li>原文由 Adam Wathan 与 Steve Schoger 撰写并发行，请通过 &lt;https://www.refactoringui.com/&gt; 购买正版。</li></ul>
+<p>本仓库公开在 GitHub 上，是为了方便阅读、学习与交流。原作者或权利人若提出移除请求， 我们会立即照办。</p>
+<h2>二、工具链与文档</h2>
+<p><code>tools/</code> 下的全部脚本、<code>docs/</code> 下的文档，以及 <code>README.md</code>，都是为本仓库原创的内容， 与上述书籍内容无关，采用 <a href="LICENSE" rel="noopener">MIT 许可证</a>：</p>
+<p><strong>Copyright (c) 2026 Jeffrey Chen</strong></p>
+<p><code>LICENSE</code> 文件开头也写明了它的适用范围——MIT 授权<strong>只覆盖这部分原创代码</strong>， 不覆盖译文和插图。</p>
+<h2>为什么不给整个仓库一个统一许可证</h2>
+<p>许可证只能由权利人来授。译文和插图的版权在原作者手里，本仓库的所有者没有资格对它们 授予任何许可，因此这两类内容必须分开声明，而不能用一份 MIT 覆盖全部。</p>
+<p>如果你只想使用工具链，可以直接取用 <code>tools/</code> 与 <code>docs/</code>，那部分按 MIT 授权， 与书籍内容无关。</p></div>
+    <p class="doc__back"><a href="index.html">← 返回封面</a></p>
+  </article>
+</main>
+<script>window.RUI_PAGE = {kind:'doc'};</script>
+<script src="assets/js/book.js"></script>
+<a id="backhome" href="../index.html">← 返回选书</a>
+</body>
+</html>
