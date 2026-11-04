@@ -104,14 +104,17 @@ def parse_data_js(path: Path) -> dict:
     return out
 
 
-def build_lang(outdir: Path, src: Path, docs=("讲义.html", "学习计划.html", "速查表.html"), password=None):
+def build_lang(outdir: Path, src: Path, docs=("讲义.html", "学习计划.html", "速查表.html"), password=None, keep=None):
     """法/阿/韩：数据转 JSON（有密码则 AES-GCM 加密成 course.enc）、音频照搬、可打印讲义页保留；
-    index.html 换成跳转页。加密的书，讲义页也加密（沿用旧站的门页）。"""
+    index.html 换成跳转页。加密的书，讲义页也加密（沿用旧站的门页）。
+    keep：{相对路径: 字节}，没给密码时原样沿用上次构建的密文（data.enc / handout.enc / 讲义.html），密文不用重新生成。"""
     if outdir.exists():
         shutil.rmtree(outdir)
     (outdir / "data").mkdir(parents=True)
     data = json.dumps(parse_data_js(src / "assets" / "data.js"), ensure_ascii=False, separators=(",", ":")).encode("utf-8")
-    if password:
+    if keep:
+        (outdir / "data" / "course.enc").write_bytes(keep["assets/data.enc"])
+    elif password:
         (outdir / "data" / "course.enc").write_text(json.dumps(wb.encrypt(data, password), separators=(",", ":")), encoding="utf-8")
     else:
         (outdir / "data" / "course.json").write_bytes(data)
@@ -121,6 +124,11 @@ def build_lang(outdir: Path, src: Path, docs=("讲义.html", "学习计划.html"
     back = '<p style="text-align:center;margin:30px"><a href="../#/b/%s">← 回到学习台</a></p>' % outdir.name
     for name in docs:
         if not (src / name).is_file():
+            continue
+        if keep and name == "讲义.html":
+            (outdir / "assets").mkdir(exist_ok=True)
+            (outdir / "assets" / "handout.enc").write_bytes(keep["assets/handout.enc"])
+            (outdir / name).write_bytes(keep["讲义.html"])
             continue
         if password and name == "讲义.html":                              # 讲义含全书正文：加密，门页解密后再显示
             (outdir / "assets").mkdir(exist_ok=True)
@@ -204,10 +212,18 @@ def main():
     ap.add_argument("--password", default=os.environ.get("HUB_PASSWORD"))
     ap.add_argument("--out", default=str(OUT))
     a = ap.parse_args()
-    if not a.password:
-        sys.exit("缺少密码：设置环境变量 HUB_PASSWORD 或传 --password")
     out = Path(a.out)
     OUT = out
+    # 没给密码时，沿用上次构建里韩语的密文（旧布局 assets/data.enc，或新布局 data/course.enc）
+    keep = None
+    if not a.password:
+        kr = out / "korean"
+        data_enc = next((kr / c for c in ("assets/data.enc", "data/course.enc") if (kr / c).is_file()), None)
+        if data_enc and (kr / "assets/handout.enc").is_file() and (kr / "讲义.html").is_file():
+            keep = {"assets/data.enc": data_enc.read_bytes(), "assets/handout.enc": (kr / "assets/handout.enc").read_bytes(),
+                    "讲义.html": (kr / "讲义.html").read_bytes()}
+        else:
+            sys.exit("缺少密码：设置环境变量 HUB_PASSWORD 或传 --password（找不到上次构建的韩语密文可沿用）")
     if out.exists():
         for p in out.iterdir():
             shutil.rmtree(p) if p.is_dir() else p.unlink()
@@ -215,8 +231,8 @@ def main():
 
     print("→ 日语跟读…")
     build_jp(out / "jp-shadowing")
-    print("→ 韩语（加密）…")
-    build_lang(out / "korean", SRC["korean"], docs=("讲义.html", "学习计划.html"), password=a.password)
+    print("→ 韩语（" + ("沿用上次的密文" if keep else "重新加密") + "）…")
+    build_lang(out / "korean", SRC["korean"], docs=("讲义.html", "学习计划.html"), password=a.password, keep=keep)
     print("→ 阿拉伯语 / 法语 / 阿拉伯文化…")
     build_lang(out / "arabic", SRC["arabic"])
     build_lang(out / "french", SRC["french"])

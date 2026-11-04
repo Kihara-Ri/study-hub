@@ -1,0 +1,171 @@
+{
+ "groups": [
+  {
+   "id": "ja",
+   "name": "日语"
+  },
+  {
+   "id": "lang",
+   "name": "语言课程"
+  },
+  {
+   "id": "design",
+   "name": "设计"
+  },
+  {
+   "id": "culture",
+   "name": "文化"
+  }
+ ],
+ "books": [
+  {
+   "slug": "jp-shadowing",
+   "group": "ja",
+   "type": "course",
+   "title": "影子跟读 · 中级日语口语",
+   "short": "影子跟读",
+   "glyph": "耳",
+   "accent": "#b4531a",
+   "meta": "74 课 · 1625 句对话 · 448 条地道表达 · 约 153 分钟音频",
+   "desc": "74 课生活对话，逐句点播、变速、单句循环、停顿跟读；每句带注音与中文，每课挑出可迁移的地道表达，并有跨课表达库。",
+   "keywords": "日语 日本語 shadowing 跟读 听力 口语 表达",
+   "storeKey": "jps"
+  },
+  {
+   "slug": "korean",
+   "group": "lang",
+   "type": "course",
+   "title": "零起点韩语",
+   "short": "韩语",
+   "glyph": "가",
+   "accent": "#b8456b",
+   "meta": "5 章 · 22 节 · 953 词条 · 605 例句",
+   "locked": true,
+   "desc": "从字母和发音起步，到陈述、疑问、敬语、时态和句子连接。每个词、每个例句都能点读。",
+   "keywords": "韩语 한국어 korean 入门 字母 发音",
+   "engine": "lang",
+   "lang": {
+    "id": "kr",
+    "term": "kr",
+    "pron": "rom",
+    "name": "韩语",
+    "pronName": "罗马音",
+    "srsKey": "kr-course-v1",
+    "cardPrefix": "vk",
+    "lettersLabel": "发音表"
+   },
+   "docs": [
+    {
+     "label": "讲义（可打印，需密码）",
+     "href": "讲义.html"
+    },
+    {
+     "label": "12 周计划（可打印）",
+     "href": "学习计划.html"
+    }
+   ]
+  },
+  {
+   "slug": "arabic",
+   "group": "lang",
+   "type": "course",
+   "title": "零起点阿拉伯语",
+   "short": "阿拉伯语",
+   "glyph": "ع",
+   "accent": "#2f7f8f",
+   "meta": "5 章 · 26 节 · 889 词条 · 655 例句",
+   "desc": "现代标准阿拉伯语：字母四种形态、名词句、三个格、动词变位，最后是数字时间与阅读短文。",
+   "keywords": "阿拉伯语 عربي arabic 入门 字母",
+   "engine": "lang",
+   "lang": {
+    "id": "ar",
+    "term": "ar",
+    "pron": "rom",
+    "name": "阿拉伯语",
+    "pronName": "转写",
+    "srsKey": "ar-course-v1",
+    "cardPrefix": "vk",
+    "lettersLabel": "字母与发音",
+    "font": "assets/fonts/NotoNaskhArabic.woff2"
+   },
+   "docs": [
+    {
+     "label": "讲义（可打印）",
+     "href": "讲义.html"
+    },
+    {
+     "label": "12 周计划（可打印）",
+     "href": "学习计划.html"
+    },
+    {
+     "label": "速查表",
+     "href": "速查表.html"
+    }
+   ]
+  },
+  {
+   "slug": "french",
+   "group": "lang",
+   "type": "course",
+   "title": "零起点法语",
+   "short": "法语",
+   "glyph": "é",
+   "accent": "#3b5a9a",
+   "meta": "5 章 · 24 节 · 906 词条 · 562 例句",
+   "desc": "从字母、鼻化元音和连诵起步，到冠词、三组动词变位、复合过去时，最后是数字时间与阅读短文。",
+   "keywords": "法语 français french 入门 发音",
+   "engine": "lang",
+   "lang": {
+    "id": "fr",
+    "term": "fr",
+    "pron": "ipa",
+    "name": "法语",
+    "pronName": "音标",
+    "srsKey": "fr-course-v1",
+    "cardPrefix": "vf",
+    "lettersLabel": "字母与发音"
+   },
+   "docs": [
+    {
+     "label": "讲义（可打印）",
+     "href": "讲义.html"
+    },
+    {
+     "label": "12 周计划（可打印）",
+     "href": "学习计划.html"
+    },
+    {
+     "label": "速查表",
+     "href": "速查表.html"
+    }
+   ]
+  },
+  {
+   "slug": "refactoring-ui",
+   "group": "design",
+   "type": "legacy",
+   "title": "Refactoring UI 中文版",
+   "short": "Refactoring UI",
+   "glyph": "UI",
+   "accent": "#5b52d6",
+   "meta": "9 章 · 13 个互动实验 · 32 个实时重制界面",
+   "interactive": true,
+   "desc": "把界面设计的层级、间距、色彩、深度讲成可动手的例子：拖一拖滑块，看设计怎么变好。",
+   "keywords": "设计 界面 ui ux 排版 色彩 间距 refactoring"
+  },
+  {
+   "slug": "arabic-culture",
+   "group": "culture",
+   "type": "legacy",
+   "title": "阿拉伯文化背景知识基础教程",
+   "short": "阿拉伯文化",
+   "glyph": "书",
+   "accent": "#8a6b3f",
+   "meta": "6 编 · 46 章 · 144 节 · 52.3 万字",
+   "interactive": true,
+   "desc": "可交互阅读版：343 条术语注解、52 则小知识、互动字母表与词卡、百位名人卡片墙；全文搜索、阅读进度、深色模式。",
+   "keywords": "阿拉伯 文化 历史 伊斯兰 阅读 术语"
+  }
+ ],
+ "updated": "2026-11-04"
+}

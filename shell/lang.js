@@ -566,7 +566,15 @@ window.HubLang = function (ctx) {
     const meta = await fetch(base + "data/course.enc").then(r => r.json());
     const raw = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveKey"]);
     const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64(meta.salt), iterations: meta.iter, hash: "SHA-256" }, raw, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
-    return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(meta.iv) }, key, b64(meta.ct))));
+    return parsePayload(new TextDecoder().decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(meta.iv) }, key, b64(meta.ct))));
+  }
+  /* 密文里是 JSON，或旧站的 data.js 脚本（window.COURSE = …），两种都认 */
+  function parsePayload(text) {
+    if (!/^\s*window\./.test(text)) return JSON.parse(text);
+    const keep = {}, names = ["COURSE", "AUDIO_MAP", "SYL"];
+    names.forEach(n => { keep[n] = window[n]; });
+    try { new Function(text)(); const out = {}; names.forEach(n => { if (window[n] !== undefined) out[n] = window[n]; }); return out; }
+    finally { names.forEach(n => { if (keep[n] === undefined) delete window[n]; else window[n] = keep[n]; }); }
   }
   const ss = { get: k => { try { return sessionStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} } };
   async function loadData() {

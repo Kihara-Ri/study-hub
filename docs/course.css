@@ -1,0 +1,104 @@
+/* course 渲染器样式：全部限定在 .course（内容区）和 .dock .bar（播放条）下。
+   书自己的强调色用 --accent 等变量覆盖外壳的同名变量。 */
+.course{
+  --accent:#b4531a; --accent-soft:#f6e6d6; --hl:#fff3d6; --on-accent:#fff; --sp-a:#b4531a; --sp-b:#2f6f73;
+  --jp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,system-ui,sans-serif;
+  font-family:var(--jp);line-height:1.8;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .course,:root:not([data-theme="light"]) .dock{
+  --accent:#e58a4f; --accent-soft:#3a2a1c; --hl:#3b3118; --on-accent:#1a120a; --sp-a:#e58a4f; --sp-b:#6cc1c6}}
+:root[data-theme="dark"] .course,:root[data-theme="dark"] .dock{
+  --accent:#e58a4f; --accent-soft:#3a2a1c; --hl:#3b3118; --on-accent:#1a120a; --sp-a:#e58a4f; --sp-b:#6cc1c6}
+.dock{--accent:#b4531a; --accent-soft:#f6e6d6; --on-accent:#fff}
+
+.course a{color:var(--accent)}
+.course-in{max-width:880px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
+.course .switch{display:inline-flex;gap:4px;padding:4px;margin:2px 0 4px;background:var(--surface);border:1px solid var(--line);border-radius:999px}
+.course .switch a{min-height:36px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;color:var(--muted);font-size:14px}
+.course .switch a[aria-current=page]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+
+/* 首页 */
+.course .hero{padding:14px 0 6px}
+.course .hero h1{font-size:clamp(24px,5vw,34px);line-height:1.35;margin:0 0 8px}
+.course .hero p{margin:0;color:var(--muted);font-size:14px}
+.course .search{width:100%;margin:18px 0 10px;padding:12px 16px;min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px}
+.course .search:focus{outline:2px solid var(--accent);outline-offset:1px}
+.course .resume{display:flex;align-items:center;gap:10px;padding:12px 14px;margin:6px 0 4px;background:var(--accent-soft);border-radius:12px;font-size:14px;color:var(--ink)}
+.course .resume b{color:var(--accent)}
+.course .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:12px;margin-top:14px}
+.course .card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;color:var(--ink);transition:transform .12s,border-color .12s}
+.course .card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.course .card .no{font-size:11px;letter-spacing:.16em;color:var(--accent)}
+.course .card h3{margin:2px 0 8px;font-size:17px;line-height:1.4}
+.course .card h3 a{color:var(--ink)}
+.course .card ul{margin:0;padding:0;list-style:none;font-size:13px;color:var(--muted);line-height:1.6}
+.course .card li a{color:inherit;display:inline-block;padding:3px 0}
+.course .card li::before{content:"· "}
+.course .card .foot{margin-top:8px;font-size:12px;color:var(--muted);display:flex;gap:4px 12px;flex-wrap:wrap}
+.course .card.done{border-style:dashed}
+.course .empty{color:var(--muted);padding:40px 0;text-align:center}
+
+/* 课程页 */
+.course .crumb{font-size:13px;color:var(--muted);margin:2px 0 6px}
+.course .crumb a{display:inline-flex;align-items:center;min-height:36px}
+.course .lhead h1{font-size:clamp(22px,4.6vw,30px);line-height:1.4;margin:0 0 4px}
+.course .lhead .meta{font-size:13px;color:var(--muted)}
+.course .tools{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.course .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:0 14px;min-height:38px;font-size:13px;color:var(--muted)}
+.course .chip[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.course .scene{margin:30px 0 6px}
+.course .scene h2{font-size:16px;margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+.course .scno{font-size:11px;letter-spacing:.1em;background:var(--accent);color:var(--on-accent);border-radius:4px;padding:1px 8px}
+.course .line{display:block;width:100%;text-align:left;background:none;border:0;border-radius:12px;padding:8px 10px;margin:2px 0;scroll-margin:70px 0 40px}
+.course .line:hover{background:color-mix(in srgb,var(--accent-soft) 60%,transparent)}
+.course .line.active{background:var(--hl);box-shadow:inset 3px 0 0 var(--accent)}
+.course .line .ja{font-size:20px;line-height:2.15}
+.course .line .zh{font-size:14px;color:var(--muted);line-height:1.6;margin-top:1px}
+.course .sp{display:inline-block;min-width:1.5em;font-weight:700;font-size:15px;margin-right:.4em}
+.course .sp.A{color:var(--sp-a)} .course .sp.B{color:var(--sp-b)}
+.course rt{font-size:.5em;color:var(--muted)}
+.course.no-ruby rt,.course.no-ruby rp{display:none}
+.course.no-zh .line .zh{display:none}
+.course.blind .line:not(.peek) .ja{filter:blur(7px);user-select:none}
+.course .weak::after{content:" ·";color:var(--muted)}
+
+.course .sect{margin-top:40px}
+.course .sect>h2{font-size:18px;margin:0 0 12px}
+.course .ecards{display:grid;gap:12px}
+.course .ecard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.course .ecard .row{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.course .ecard .ex{font-size:20px;font-weight:700;line-height:1.5}
+.course .ecard .rd{font-size:13px;color:var(--muted)}
+.course .ecard .zh{margin-top:4px}
+.course .ecard .nu{font-size:13px;color:var(--muted);margin-top:2px}
+.course .ecard blockquote{margin:10px 0 0;padding:6px 12px;border-left:3px solid var(--line);font-size:15px}
+.course .ecard blockquote small{display:block;color:var(--muted)}
+.course .ecard blockquote button{all:unset;cursor:pointer;color:var(--accent);font-size:13px;margin-left:6px;padding:6px 4px}
+.course .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.course .tag{font-size:11px;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 9px}
+.course .star{background:none;border:0;font-size:24px;line-height:1;color:var(--muted);padding:8px;margin:-8px -8px 0 0}
+.course .star.on{color:#e0a100}
+.course .vocab{width:100%;border-collapse:collapse;font-size:15px}
+.course .vocab th,.course .vocab td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+.course .vocab th{font-size:12px;color:var(--muted);font-weight:500}
+.course .pn{display:flex;justify-content:space-between;gap:12px;margin-top:40px}
+.course .pn a{flex:1;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:14px;color:var(--ink)}
+.course .pn a:last-child{text-align:right}
+.course .pn small{display:block;color:var(--muted)}
+.course .filters{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.course .note{font-size:13px;color:var(--muted);margin:0 0 10px}
+.course h1{font-size:clamp(22px,4.6vw,30px);line-height:1.4;margin:14px 0 8px}
+
+/* 播放条（在外壳的 dock 里） */
+.dock .bar{background:var(--surface);border-top:1px solid var(--line);padding:8px max(14px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));box-shadow:0 -6px 20px rgba(0,0,0,.06)}
+.dock .bar-now{display:flex;align-items:baseline;gap:10px;font-size:13px;max-width:880px;margin:0 auto;white-space:nowrap;overflow:hidden}
+.dock .bar-now b{font-weight:500;overflow:hidden;text-overflow:ellipsis;flex:1}
+.dock .bar-now small{color:var(--muted);font-variant-numeric:tabular-nums}
+.dock .bar-ctl{display:flex;align-items:center;gap:8px;max-width:880px;margin:6px auto 0;flex-wrap:wrap}
+.dock .bar-ctl>button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);font-size:15px}
+.dock .bar-ctl>button.main{width:50px;height:50px;background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-size:18px}
+.dock .seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-left:auto}
+.dock .seg button{border:0;background:none;padding:0 12px;min-height:40px;font-size:13px;color:var(--muted)}
+.dock .seg button[aria-pressed=true]{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.dock select{border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);padding:0 10px;min-height:40px;font:inherit;font-size:13px}
+@media (max-width:520px){.dock .seg{margin-left:0;order:5;width:100%;justify-content:space-between}.dock .seg button{flex:1}}
